@@ -7,33 +7,7 @@
         //-----------------------------------> dibujar fondo negro <-----------------------------------
         let c = document.querySelector("#canvasOriginal");
         let ctx = c.getContext("2d");
-        //-----------------------------------> /////////////////// <-----------------------------------
-
-        //-------------------------------> subir una imagen al canvas <--------------------------------
-        document.querySelector('#inputFile').addEventListener('change', r => {
-            const ARCHIVO = document.querySelector('#inputFile').files[0];
-            const BLOP = new FileReader();
-            if (ARCHIVO) {
-                BLOP.readAsDataURL(ARCHIVO);
-            }
-            BLOP.addEventListener("load", function() {
-                let image = new Image();
-                image.src = BLOP.result;
-                image.onload = function() {
-                    myDrawImageMrthod(this);
-                };
-            }, false);
-        });
-        //-------------------------------> ////////////////////////// <--------------------------------
-
-        //-----------------------------> guardar una imagen del canvas <-------------------------------
-        let guardar = document.querySelector('#save');
-        guardar.addEventListener('click', (e) => {
-            let dir = c.toDataURL('image/jpg');
-            guardar.href = dir;
-        });
-        //-------------------------------> ////////////////////////// <--------------------------------
-
+        //-----------------------------------> /////////////////// <-----------------------------------git
 
         //---------> x, y, ancho, alto <---------
         // ctx.fillRect(220, 0, 100, 100); //automaticamente hace color negro
