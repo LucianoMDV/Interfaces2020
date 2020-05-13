@@ -45,6 +45,69 @@
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
 
+        document.querySelector("#btnBlur").addEventListener("click", e => {
+            // debugger;
+            let imageData = ctx.getImageData(0, 0, cWidth, cHeight);
+            let imageDataEditada = blur();
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+
+
+        function blur() {
+            console.log("llegue blur");
+            var matrizFiltro = [
+                [1, 1, 1],
+                [1, 1, 1],
+                [1, 1, 1]
+            ];
+            return apFiltro(matrizFiltro, 9);
+        }
+
+
+        function apFiltro(filtro, n) {
+            let obtener = ctx.getImageData(0, 0, c.width, c.height);
+            let copia = obtener;
+
+            for (let x = (0 + 1); x < (c.height - 1); x++) {
+                for (let y = (0 + 1); y < (c.width - 1); y++) {
+                    let pixel_RGBA_1_SupIzq = getPixel(copia, x - 1, y - 1); //superior izquirda 1
+                    let pixel_RGBA_2_Arriba = getPixel(copia, x - 1, y); //arriba 2
+                    let pixel_RGBA_3_SupDer = getPixel(copia, x - 1, y + 1); //superior derecha 3
+                    let pixel_RGBA_4_Izq = getPixel(copia, x, y - 1); //izquierda 4
+                    let pixel_RGBA_5_Centro = getPixel(copia, x, y); // pixel a cambiar del medio 5
+                    let pixel_RGBA_6_Der = getPixel(copia, x, y + 1); // derecha 6
+                    let pixel_RGBA_7_InfIzq = getPixel(copia, x + 1, y - 1); // inferior izquierda 7
+                    let pixel_RGBA_8_Abajo = getPixel(copia, x + 1, y); // abajo 8
+                    let pixel_RGBA_9_InfDer = getPixel(copia, x + 1, y + 1); // inferior derecha 9
+
+                    let r = Math.floor((
+                        (pixel_RGBA_1_SupIzq[0] * filtro[0][0]) + (pixel_RGBA_2_Arriba[0] * filtro[0][1]) + (pixel_RGBA_3_SupDer[0] * filtro[0][2]) +
+                        (pixel_RGBA_4_Izq[0] * filtro[1][0]) + (pixel_RGBA_5_Centro[0] * filtro[1][1]) + (pixel_RGBA_6_Der[0] * filtro[1][2]) +
+                        (pixel_RGBA_7_InfIzq[0] * filtro[2][0]) + (pixel_RGBA_8_Abajo[0] * filtro[2][1]) + (pixel_RGBA_9_InfDer[0] * filtro[2][2])
+                    ) / n);
+                    let g = Math.floor((
+                        (pixel_RGBA_1_SupIzq[1] * filtro[0][0]) + (pixel_RGBA_2_Arriba[1] * filtro[0][1]) + (pixel_RGBA_3_SupDer[1] * filtro[0][2]) +
+                        (pixel_RGBA_4_Izq[1] * filtro[1][0]) + (pixel_RGBA_5_Centro[1] * filtro[1][1]) + (pixel_RGBA_6_Der[1] * filtro[1][2]) +
+                        (pixel_RGBA_7_InfIzq[1] * filtro[2][0]) + (pixel_RGBA_8_Abajo[1] * filtro[2][1]) + (pixel_RGBA_9_InfDer[1] * filtro[2][2])
+                    ) / n);
+                    let b = Math.floor((
+                        (pixel_RGBA_1_SupIzq[2] * filtro[0][0]) + (pixel_RGBA_2_Arriba[2] * filtro[0][1]) + (pixel_RGBA_3_SupDer[2] * filtro[0][2]) +
+                        (pixel_RGBA_4_Izq[2] * filtro[1][0]) + (pixel_RGBA_5_Centro[2] * filtro[1][1]) + (pixel_RGBA_6_Der[2] * filtro[1][2]) +
+                        (pixel_RGBA_7_InfIzq[2] * filtro[2][0]) + (pixel_RGBA_8_Abajo[2] * filtro[2][1]) + (pixel_RGBA_9_InfDer[2] * filtro[2][2])
+                    ) / n);
+
+                    // console.log(r);
+                    // console.log(g);
+                    // console.log(b);
+
+                    debugger;
+
+                    setPixel(copia, x, y, r, g, b, 255);
+                }
+            }
+            // ctxEdicion.putImageData(copia, 0, 0);
+            return copia;
+        }
 
         // //-----------------------------------> dibujar un cubo rojo <----------------------------------
         // let imgData = ctx.createImageData(100, 100); //crea una imagen de 100px ancho por 100px alto
