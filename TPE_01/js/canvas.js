@@ -100,12 +100,12 @@
                     // console.log(g);
                     // console.log(b);
 
-                    debugger;
+                    // debugger;
 
                     setPixel(copia, x, y, r, g, b, 255);
                 }
             }
-            // ctxEdicion.putImageData(copia, 0, 0);
+            ctxEdicion.putImageData(copia, 0, 0);
             return copia;
         }
 
