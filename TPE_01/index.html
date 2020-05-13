@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TP_1 - Template</title>
+    <link rel="stylesheet" href="css/bootstrap-4.4.1/bootstrap.css">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>CANVAS</h3>
+            </div>
+            <div class="col-12">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Cargar Imagen</label>
+                        <input type="file" class="form-control-file" id="inputFile">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto mb-5">
+                <div class="col-auto">
+                    <h3>ORIGINAL</h3>
+                </div>
+                <div class="col-auto">
+                    <canvas id="canvasOriginal" width="500" height="500" style="border:1px solid black;"></canvas>
+                </div>
+            </div>
+            <div class="col-auto mb-5">
+                <div class="col-auto">
+                    <h3>EDICION</h3>
+                </div>
+                <div class="col-auto">
+                    <canvas id="canvasEdicion" width="500" height="500" style="border:1px solid black;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a name="" id="btnGrises" class="btn btn-primary" role="button">
+                    Grises
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery-3.4.1/jquery.js"></script>
+    <script src="js/bootstrap-4.4.1/bootstrap.js"></script>
+    <script src="js/canvas.js"></script>
+</body>
+
+</html>
