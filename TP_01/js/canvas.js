@@ -2,16 +2,49 @@
     'use strict';
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        //-----------------------------------------> CANVAS <------------------------------------------
 
-        //-----------------------------------> dibujar fondo negro <-----------------------------------
+        //-------------------------------------> CANVAS ORIGINAL <-------------------------------------
         let c = document.querySelector("#canvasOriginal");
         let ctx = c.getContext("2d");
-        //-----------------------------------> /////////////////// <-----------------------------------git
+        let cWidth = c.width;
+        let cHeight = c.height;
+        //-------------------------------> /////////////////////////// <-------------------------------
 
+        //-------------------------------------> CANVAS EDICION <-------------------------------------
+        let cEdicion = document.querySelector("#canvasEdicion");
+        let ctxEdicion = cEdicion.getContext("2d");
+        //-------------------------------> /////////////////////////// <-------------------------------
+
+        //---------------------------> subir una imagen al canvas ORIGINAL <---------------------------
+        document.querySelector('#inputFile').addEventListener('change', e => {
+            const ARCHIVO = document.querySelector('#inputFile').files[0];
+            const BLOP = new FileReader();
+            if (ARCHIVO) {
+                BLOP.readAsDataURL(ARCHIVO);
+            }
+            BLOP.addEventListener("load", e => {
+                let imagen = new Image();
+                imagen.src = BLOP.result;
+                imagen.onload = function() {
+                    myDrawImageMrthod(imagen);
+                };
+            }, false);
+        });
+        //---------------------------> ////////////////////////////////// <----------------------------
+
+        //2. Pintar una región rectangular de un color utilizando el Contexto de HTML5.
         //---------> x, y, ancho, alto <---------
-        // ctx.fillRect(220, 0, 100, 100); //automaticamente hace color negro
+        ctx.fillRect(220, 0, 100, 200); //automaticamente hace color negro
         //-----------------------------------> /////////////////// <-----------------------------------
+
+
+        document.querySelector("#btnGrises").addEventListener("click", e => {
+            // debugger;
+            let imageData = ctx.getImageData(0, 0, cWidth, cHeight);
+            let imageDataEditada = escalaGrises(imageData, cWidth, cHeight);
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+
 
         // //-----------------------------------> dibujar un cubo rojo <----------------------------------
         // let imgData = ctx.createImageData(100, 100); //crea una imagen de 100px ancho por 100px alto
@@ -125,71 +158,25 @@
 
         // }
 
-        //redimensiona en el eje Y
-        // function redimensionarEnY(imagen, imagen2, ancho, alto) {
-        //     // debugger;
-        //     let auxImagen = imagen2;
-        //     for (let x = 0; x < alto; x += 2) {
-        //         for (let y = 0; y < ancho; y++) {
-        //             if (((x + 1) < ancho) && ((y + 1) < alto)) {
-        //                 let array1 = getPixel(imagen, x, y);
-        //                 let array2 = getPixel(imagen, x + 1, y);
-        //                 // if ((y % 2) == 0) {
+        // redimensiona en el eje Y
 
-        //                 // }
-        //                 let promPixelR = verificarMaxyMin(Math.floor((array1[0] + array2[0]) / 2));
-        //                 let promPixelG = verificarMaxyMin(Math.floor((array1[1] + array2[1]) / 2));
-        //                 let promPixelB = verificarMaxyMin(Math.floor((array1[2] + array2[2]) / 2));
-        //                 let promPixelA = verificarMaxyMin(Math.floor((array1[3] + array2[3]) / 2));
+        function escalaGrises(imagen, ancho, alto) {
+            let algo = "";
+            for (let x = 0; x < alto; x++) {
+                for (let y = 0; y < ancho; y++) {
+                    let arrayPixel = getPixel(imagen, x, y);
+                    let promedioPixel = verificarMaxyMin(Math.floor((arrayPixel[0] + arrayPixel[1] + arrayPixel[2]) / 3));
+                    let promPixelR = promedioPixel;
+                    let promPixelG = promedioPixel;
+                    let promPixelB = promedioPixel;
+                    let promPixelA = 255;
 
-        //                 setPixel(auxImagen, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
-        //                 // }
-        //             }
+                    setPixel(imagen, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                }
 
-        //         }
-
-        //     }
-        // }
-
-        //     //redimensiona en el eje X
-        //     function redimensionarEnX(imagen, imagen2, ancho, alto) {
-        //         let auxImagen = imagen2;
-        //         for (let x = 0; x < alto; x++) {
-        //             for (let y = 0; y < ancho; y += 2) {
-        //                 if (((x + 1) < ancho) && ((y + 1) < alto)) {
-        //                     let array1 = getPixel(imagen, x, y); //0,0 ; 0,2
-        //                     let array2 = getPixel(imagen, x, y + 1); //0,1; 0,4
-
-        //                     // if (array1[0] != array2[0] && array1[1] != array2[1] && array1[2] != array2[2] && array1[3] != array2[3]) {
-        //                     //     console.log(array1);
-        //                     //     console.log(array2);
-        //                     // }
-        //                     // if ((y % 2) == 0) {
-
-        //                     // }
-        //                     let promPixelR = verificarMaxyMin(Math.floor((array1[0] + array2[0]) / 2));
-        //                     let promPixelG = verificarMaxyMin(Math.floor((array1[1] + array2[1]) / 2));
-        //                     let promPixelB = verificarMaxyMin(Math.floor((array1[2] + array2[2]) / 2));
-        //                     let promPixelA = verificarMaxyMin(Math.floor((array1[3] + array2[3]) / 2));
-
-        //                     setPixel(auxImagen, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
-        //                     // }
-        //                 }
-
-        //             }
-
-        //         }
-        //         console.log(getPixel(imagen, 0, 0));
-        //         // console.log(imagen);
-        //         return auxImagen;
-        //         // let image2 = new Image(200, 200);
-        //         // ctx.drawImage(image2, 0, 120);
-        //         // let imageData2 = ctx.getImageData(0, 0, 200, 200);
-        //         // console.log(imageData2);
-        //         // ctx.putImageData(imageData2, 0, 0);
-
-
-        //     }
+            }
+            return imagen;
+        }
 
         //----------------------------------------> ACA! <----------------------------------------
         // let imagen1 = new Image();
@@ -203,37 +190,36 @@
             let imagenWidth = imagen.width; //400px
             let imagenHeight = imagen.height; //400px
 
-            // debugger;
             let imagenData = ctx.getImageData(0, 0, imagenWidth, imagenHeight);
             ctx.putImageData(imagenData, 0, 0);
         }
 
-        // function verificarMaxyMin(promPixel) {
-        //     if (promPixel > 255) {
-        //         promPixel = 255;
-        //     }
-        //     if (promPixel < 0) {
-        //         promPixel = 0;
-        //     }
-        //     return promPixel;
-        // }
+        function getPixel(imageData, x, y) {
+            let index = (x + y * imageData.height) * 4;
+            let r = imageData.data[index + 0];
+            let g = imageData.data[index + 1];
+            let b = imageData.data[index + 2];
+            let a = imageData.data[index + 3];
+            return [r, g, b, a];
+        }
 
-        // function getPixel(imageData, x, y) {
-        //     let index = (x + y * imageData.height) * 4;
-        //     let r = imageData.data[index + 0];
-        //     let g = imageData.data[index + 1];
-        //     let b = imageData.data[index + 2];
-        //     let a = imageData.data[index + 3];
-        //     return [r, g, b, a];
-        // }
+        function setPixel(imageData, x, y, r, g, b, a) {
+            let index = (x + y * imageData.height) * 4;
+            imageData.data[index + 0] = r;
+            imageData.data[index + 1] = g;
+            imageData.data[index + 2] = b;
+            imageData.data[index + 3] = a;
+        }
 
-        // function setPixel(imageData, x, y, r, g, b, a) {
-        //     let index = (x + y * imageData.height) * 4;
-        //     imageData.data[index + 0] = r;
-        //     imageData.data[index + 1] = g;
-        //     imageData.data[index + 2] = b;
-        //     imageData.data[index + 3] = a;
-        // }
+        function verificarMaxyMin(promPixel) {
+            if (promPixel > 255) {
+                promPixel = 255;
+            }
+            if (promPixel < 0) {
+                promPixel = 0;
+            }
+            return promPixel;
+        }
 
     });
 }());

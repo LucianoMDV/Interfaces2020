@@ -64,13 +64,42 @@
                 </ul>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>CANVAS</h3>
+            </div>
+            <div class="col-12">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Cargar Imagen</label>
+                        <input type="file" class="form-control-file" id="inputFile">
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-auto mb-5">
-                <canvas id="canvasOriginal" width="500" height="500" style="border:1px solid black;"></canvas>
+                <div class="col-auto">
+                    <h3>ORIGINAL</h3>
+                </div>
+                <div class="col-auto">
+                    <canvas id="canvasOriginal" width="500" height="500" style="border:1px solid black;"></canvas>
+                </div>
             </div>
             <div class="col-auto mb-5">
-                <canvas id="canvasCopia" width="500" height="500" style="border:1px solid black;"></canvas>
+                <div class="col-auto">
+                    <h3>EDICION</h3>
+                </div>
+                <div class="col-auto">
+                    <canvas id="canvasEdicion" width="500" height="500" style="border:1px solid black;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a name="" id="btnGrises" class="btn btn-primary" role="button">
+                    Grises
+                </a>
             </div>
         </div>
     </div>
