@@ -8,12 +8,14 @@
         let ctx = c.getContext("2d");
         let cWidth = c.width;
         let cHeight = c.height;
-        //-------------------------------> /////////////////////////// <-------------------------------
+        //-------------------------------------> /////////////// <-------------------------------------
 
-        //-------------------------------------> CANVAS EDICION <-------------------------------------
+        //-------------------------------------> CANVAS EDICION <--------------------------------------
         let cEdicion = document.querySelector("#canvasEdicion");
         let ctxEdicion = cEdicion.getContext("2d");
-        //-------------------------------> /////////////////////////// <-------------------------------
+        let cWidthEdicion = cEdicion.width;
+        let cHeightEdicion = cEdicion.height;
+        //-------------------------------------> ////////////// <--------------------------------------
 
         //---------------------------> subir una imagen al canvas ORIGINAL <---------------------------
         document.querySelector('#inputFile').addEventListener('change', e => {
@@ -32,12 +34,7 @@
         });
         //---------------------------> ////////////////////////////////// <----------------------------
 
-        //2. Pintar una región rectangular de un color utilizando el Contexto de HTML5.
-        //---------> x, y, ancho, alto <---------
-        ctx.fillRect(220, 0, 100, 200); //automaticamente hace color negro
-        //-----------------------------------> /////////////////// <-----------------------------------
-
-
+        //-----------------------------------> BOTONES QUE EDITAN <------------------------------------
         document.querySelector("#btnGrises").addEventListener("click", e => {
             let imageDataEditada = escalaGrises();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
@@ -52,8 +49,9 @@
             let imageDataEditada = escalaSepia();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
+        //-----------------------------------> ////////////////// <------------------------------------
 
-
+        //--------------------------------------> FUNCION BLUR <---------------------------------------
         function blur() {
             var matrizFiltro = [
                 [1, 1, 1],
@@ -65,19 +63,19 @@
 
 
         function apFiltro(filtro, n) {
-            let copia = ctx.getImageData(0, 0, c.width, c.height);
+            let imagenDeOriginal = ctx.getImageData(0, 0, c.width, c.height); //capturo del CAMVAS ORIGINAL
 
             for (let x = (0 + 1); x < (c.height - 1); x++) {
                 for (let y = (0 + 1); y < (c.width - 1); y++) {
-                    let pixel_RGBA_1_SupIzq = getPixel(copia, x - 1, y - 1); //superior izquirda 1
-                    let pixel_RGBA_2_Arriba = getPixel(copia, x - 1, y); //arriba 2
-                    let pixel_RGBA_3_SupDer = getPixel(copia, x - 1, y + 1); //superior derecha 3
-                    let pixel_RGBA_4_Izq = getPixel(copia, x, y - 1); //izquierda 4
-                    let pixel_RGBA_5_Centro = getPixel(copia, x, y); // pixel a cambiar del medio 5
-                    let pixel_RGBA_6_Der = getPixel(copia, x, y + 1); // derecha 6
-                    let pixel_RGBA_7_InfIzq = getPixel(copia, x + 1, y - 1); // inferior izquierda 7
-                    let pixel_RGBA_8_Abajo = getPixel(copia, x + 1, y); // abajo 8
-                    let pixel_RGBA_9_InfDer = getPixel(copia, x + 1, y + 1); // inferior derecha 9
+                    let pixel_RGBA_1_SupIzq = getPixel(imagenDeOriginal, x - 1, y - 1); //superior izquirda 1
+                    let pixel_RGBA_2_Arriba = getPixel(imagenDeOriginal, x - 1, y); //arriba 2
+                    let pixel_RGBA_3_SupDer = getPixel(imagenDeOriginal, x - 1, y + 1); //superior derecha 3
+                    let pixel_RGBA_4_Izq = getPixel(imagenDeOriginal, x, y - 1); //izquierda 4
+                    let pixel_RGBA_5_Centro = getPixel(imagenDeOriginal, x, y); // pixel a cambiar del medio 5
+                    let pixel_RGBA_6_Der = getPixel(imagenDeOriginal, x, y + 1); // derecha 6
+                    let pixel_RGBA_7_InfIzq = getPixel(imagenDeOriginal, x + 1, y - 1); // inferior izquierda 7
+                    let pixel_RGBA_8_Abajo = getPixel(imagenDeOriginal, x + 1, y); // abajo 8
+                    let pixel_RGBA_9_InfDer = getPixel(imagenDeOriginal, x + 1, y + 1); // inferior derecha 9
 
                     let r = Math.floor((
                         (pixel_RGBA_1_SupIzq[0] * filtro[0][0]) + (pixel_RGBA_2_Arriba[0] * filtro[0][1]) + (pixel_RGBA_3_SupDer[0] * filtro[0][2]) +
@@ -95,178 +93,57 @@
                         (pixel_RGBA_7_InfIzq[2] * filtro[2][0]) + (pixel_RGBA_8_Abajo[2] * filtro[2][1]) + (pixel_RGBA_9_InfDer[2] * filtro[2][2])
                     ) / n);
 
-                    setPixel(copia, x, y, r, g, b, 255);
+                    setPixel(imagenDeOriginal, x, y, r, g, b, 255);
                 }
             }
-            ctxEdicion.putImageData(copia, 0, 0);
-            return copia;
+            ctxEdicion.putImageData(imagenDeOriginal, 0, 0);
+            return imagenDeOriginal;
         }
+        //--------------------------------------> //////////// <---------------------------------------
 
-        // //-----------------------------------> dibujar un cubo rojo <----------------------------------
-        // let imgData = ctx.createImageData(100, 100); //crea una imagen de 100px ancho por 100px alto
-        // for (let i = 0; i < imgData.data.length; i += 4) {
-        //     imgData.data[i + 0] = 255;
-        //     imgData.data[i + 1] = 0;
-        //     imgData.data[i + 2] = 0;
-        //     imgData.data[i + 3] = 255;
-        // }
-        // //-------------> imagen , x, y <---------
-        // ctx.putImageData(imgData, 0, 0); //inserta el cubo rojo y lo coloca en la posicion x=0 y=0;
-        // //-----------------------------------> //////////////////// <----------------------------------
-
-        // let width = c.width;
-        // let height = c.height;
-        // let width = 100;
-        // let height = 100;
-        // let imageData = ctx.createImageData(width, height);
-
-        // let imageData2 = ctx.createImageData(width, height);
-
-        // let x = 110;
-        // let y = 0;
-
-        // let r = 255;
-        // let g = 0;
-        // let b = 255;
-        // let a = 255;
-
-        // drawRect(imageData, r, g, b, a);
-        // ctx.putImageData(imageData, x, y);
-
-        // drawRect2(imageData2, 0, 0, 0, a);
-        // ctx.putImageData(imageData2, 330, y);
-
-        // function drawRect(imageData, r, g, b, a) {
-        //     for (let x = 0; x < imageData.width; x++) {
-        //         for (let y = 0; y < imageData.height; y++) {
-        //             let repartirColor = 255 / height;
-        //             r = repartirColor * y;
-        //             g = repartirColor * y;
-        //             b = repartirColor * y;
-        //             setPixel(imageData, x, y, r, g, b, a);
-        //         }
-        //     }
-        // }
-
-        // function drawRect2(imageData, r, g, b, a) {
-        //     let repartirColor = 255 / (width / 2);
-        //     for (let x = 0; x < imageData.width; x++) {
-        //         if (x <= (width / 2)) {
-        //             r = repartirColor * x;
-        //             g = repartirColor * x;
-        //             b = 0;
-        //         } else {
-
-        //         }
-        //         for (let y = 0; y < imageData.height; y++) {
-        //             setPixel(imageData, x, y, r, g, b, a);
-        //         }
-        //     }
-        // }
-
-
-
-        // let image1 = new Image();
-        // let image2 = new Image();
-        // let image3 = new Image();
-        // image1.src = "imagen/casa.jpg";
-        // image2.src = "imagen/imagen_400x200.jpg";
-        // image3.src = "imagen/imagen_200x200.jpg";
-        // image1.onload = function() {
-        //     image2.onload = function() {
-        //         image3.onload = function() {
-        //             myDrawImageMrthod(image1, image2, image3);
-        //         };
-        //     };
-        // };
-
-        // function myDrawImageMrthod(image, image2, image3) {
-        //     ctx.drawImage(image, 0, 0);
-        //     let imageWidth = image.width; //400px
-        //     let imageHeight = image.height; //400px
-        //     ctx.drawImage(image2, 410, 0);
-        //     let image2Width = image2.width; //400px
-        //     let image2Height = image2.height; //200px
-        //     ctx.drawImage(image3, 620, 0);
-        //     let image3Width = image3.width; //200px
-        //     let image3Height = image3.height; //200px
-        //     // let imageWidth = 200;
-        //     // let imageHeight = 200;
-
-        //     // debugger;
-        //     let imageData = ctx.getImageData(0, 0, imageWidth, imageHeight);
-        //     ctx.putImageData(imageData, 0, 0);
-
-        //     let imageData2 = ctx.getImageData(0, 0, image2Width, image2Height);
-        //     let redimenImage = redimensionarEnX(imageData, imageData2, imageWidth, imageHeight);
-        //     ctx.putImageData(redimenImage, 410, 0);
-
-        //     let redimenImagGet = ctx.getImageData(410, 0, image2Width, image2Height);
-
-        //     let imageData3 = ctx.getImageData(410, 0, image3Width, image3Height);
-        //     let redimenImage2 = redimensionarEnY(redimenImagGet, imageData3, image2Width, image2Height);
-
-        //     let redimenImag2Get = ctx.getImageData(0, 0, image3Width, image3Height);
-        //     ctx.putImageData(redimenImag2Get, 620, 0);
-        //     // console.log("RedimeImage: " + redimenImage);
-
-
-
-        // }
-
-        // redimensiona en el eje Y
-
-        // function escalaGrises(imagen, ancho, alto) {
+        //-------------------------------------> FUNCION GRISES <--------------------------------------
         function escalaGrises() {
-            let imagen = ctx.getImageData(0, 0, cWidth, cHeight);
-
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
             for (let x = 0; x < cHeight; x++) {
                 for (let y = 0; y < cWidth; y++) {
-                    let pixelRGBA = getPixel(imagen, x, y);
+                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
                     let promedioPixel = verificarMaxyMin(Math.floor((pixelRGBA[0] + pixelRGBA[1] + pixelRGBA[2]) / 3));
                     let promPixelR = promedioPixel;
                     let promPixelG = promedioPixel;
                     let promPixelB = promedioPixel;
                     let promPixelA = 255;
-
-                    setPixel(imagen, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                    setPixel(imagenDeOriginal, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
                 }
-
             }
-            return imagen;
+            return imagenDeOriginal;
         }
+        //-------------------------------------> ////////////// <--------------------------------------
 
+        //-------------------------------------> FUNCION SEPIA <---------------------------------------
         function escalaSepia() {
-            let imagen = ctx.getImageData(0, 0, cWidth, cHeight);
-
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
             for (let x = 0; x < cHeight; x++) {
                 for (let y = 0; y < cWidth; y++) {
-                    let pixelRGBA = getPixel(imagen, x, y);
+                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
                     let promPixelR = (0.393 * pixelRGBA[0]) + (0.769 * pixelRGBA[1]) + (0.189 * pixelRGBA[2]);
                     let promPixelG = (0.349 * pixelRGBA[0]) + (0.686 * pixelRGBA[1]) + (0.168 * pixelRGBA[2]);
                     let promPixelB = (0.272 * pixelRGBA[0]) + (0.534 * pixelRGBA[1]) + (0.131 * pixelRGBA[2]);
                     let promPixelA = 255;
-                    setPixel(imagen, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                    setPixel(imagenDeOriginal, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
                 }
-
             }
-            return imagen;
+            return imagenDeOriginal;
         }
-
-        //----------------------------------------> ACA! <----------------------------------------
-        // let imagen1 = new Image();
-        // imagen1.src = "imagen/casa.jpg";
-        // imagen1.onload = function() {
-        //     myDrawImageMrthod(imagen1);
-        // };
+        //-------------------------------------> ///////////// <---------------------------------------
 
         function myDrawImageMrthod(imagen) {
-            ctx.drawImage(imagen, 0, 0);
-            let imagenWidth = imagen.width; //400px
-            let imagenHeight = imagen.height; //400px
+            ctx.drawImage(imagen, 0, 0); //dibujo en el CAMVAS ORIGINAL
+            //no hace falta pero lo dejo como referencia
+            // let imagenWidth = imagen.width; //400px
+            // let imagenHeight = imagen.height; //400px
 
-            let imagenData = ctx.getImageData(0, 0, imagenWidth, imagenHeight);
-            ctx.putImageData(imagenData, 0, 0);
+            // let imagenData = ctx.getImageData(0, 0, imagenWidth, imagenHeight);
+            // ctx.putImageData(imagenData, 0, 0);
         }
 
         function getPixel(imageData, x, y) {
