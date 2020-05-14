@@ -39,22 +39,22 @@
 
 
         document.querySelector("#btnGrises").addEventListener("click", e => {
-            // debugger;
-            let imageData = ctx.getImageData(0, 0, cWidth, cHeight);
-            let imageDataEditada = escalaGrises(imageData, cWidth, cHeight);
+            let imageDataEditada = escalaGrises();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
 
         document.querySelector("#btnBlur").addEventListener("click", e => {
-            // debugger;
-            let imageData = ctx.getImageData(0, 0, cWidth, cHeight);
             let imageDataEditada = blur();
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+
+        document.querySelector("#btnSepia").addEventListener("click", e => {
+            let imageDataEditada = escalaSepia();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
 
 
         function blur() {
-            console.log("llegue blur");
             var matrizFiltro = [
                 [1, 1, 1],
                 [1, 1, 1],
@@ -65,8 +65,7 @@
 
 
         function apFiltro(filtro, n) {
-            let obtener = ctx.getImageData(0, 0, c.width, c.height);
-            let copia = obtener;
+            let copia = ctx.getImageData(0, 0, c.width, c.height);
 
             for (let x = (0 + 1); x < (c.height - 1); x++) {
                 for (let y = (0 + 1); y < (c.width - 1); y++) {
@@ -95,12 +94,6 @@
                         (pixel_RGBA_4_Izq[2] * filtro[1][0]) + (pixel_RGBA_5_Centro[2] * filtro[1][1]) + (pixel_RGBA_6_Der[2] * filtro[1][2]) +
                         (pixel_RGBA_7_InfIzq[2] * filtro[2][0]) + (pixel_RGBA_8_Abajo[2] * filtro[2][1]) + (pixel_RGBA_9_InfDer[2] * filtro[2][2])
                     ) / n);
-
-                    // console.log(r);
-                    // console.log(g);
-                    // console.log(b);
-
-                    // debugger;
 
                     setPixel(copia, x, y, r, g, b, 255);
                 }
@@ -223,17 +216,36 @@
 
         // redimensiona en el eje Y
 
-        function escalaGrises(imagen, ancho, alto) {
-            let algo = "";
-            for (let x = 0; x < alto; x++) {
-                for (let y = 0; y < ancho; y++) {
-                    let arrayPixel = getPixel(imagen, x, y);
-                    let promedioPixel = verificarMaxyMin(Math.floor((arrayPixel[0] + arrayPixel[1] + arrayPixel[2]) / 3));
+        // function escalaGrises(imagen, ancho, alto) {
+        function escalaGrises() {
+            let imagen = ctx.getImageData(0, 0, cWidth, cHeight);
+
+            for (let x = 0; x < cHeight; x++) {
+                for (let y = 0; y < cWidth; y++) {
+                    let pixelRGBA = getPixel(imagen, x, y);
+                    let promedioPixel = verificarMaxyMin(Math.floor((pixelRGBA[0] + pixelRGBA[1] + pixelRGBA[2]) / 3));
                     let promPixelR = promedioPixel;
                     let promPixelG = promedioPixel;
                     let promPixelB = promedioPixel;
                     let promPixelA = 255;
 
+                    setPixel(imagen, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                }
+
+            }
+            return imagen;
+        }
+
+        function escalaSepia() {
+            let imagen = ctx.getImageData(0, 0, cWidth, cHeight);
+
+            for (let x = 0; x < cHeight; x++) {
+                for (let y = 0; y < cWidth; y++) {
+                    let pixelRGBA = getPixel(imagen, x, y);
+                    let promPixelR = (0.393 * pixelRGBA[0]) + (0.769 * pixelRGBA[1]) + (0.189 * pixelRGBA[2]);
+                    let promPixelG = (0.349 * pixelRGBA[0]) + (0.686 * pixelRGBA[1]) + (0.168 * pixelRGBA[2]);
+                    let promPixelB = (0.272 * pixelRGBA[0]) + (0.534 * pixelRGBA[1]) + (0.131 * pixelRGBA[2]);
+                    let promPixelA = 255;
                     setPixel(imagen, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
                 }
 
