@@ -40,42 +40,79 @@
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
 
+        //---------------------------------------> BOTON BLUR <----------------------------------------
+        let rangoBlur = document.querySelector("#rangoBlur");
+        rangoBlur.addEventListener("change", e => {
+            document.querySelector("#rangoValor").innerHTML = rangoBlur.value;
+        });
+
         document.querySelector("#btnBlur").addEventListener("click", e => {
-            let imageDataEditada = blur();
+            let rangoBlur = document.querySelector("#rangoBlur").value;
+            let imagenOriginal = ctx.getImageData(0, 0, c.width, c.height); //capturo del CONTEXTO ORIGINAL
+            let imageDataEditada = blur(imagenOriginal);
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
+            if (rangoBlur > 1) {
+                let imagen2 = ctxEdicion.getImageData(0, 0, cWidthEdicion, cHeightEdicion); //capturo del CAMVAS ORIGINAL
+                for (let i = 0; i < rangoBlur; i++) {
+                    let imageDataEditada = blur(imagen2);
+                    ctxEdicion.putImageData(imageDataEditada, 0, 0);
+                }
+            }
+        });
+        //---------------------------------------> ////////// <----------------------------------------
+
+        document.querySelector("#btnRetaurar").addEventListener("click", e => {
+            let imagenOriginal = ctx.getImageData(0, 0, c.width, c.height); //capturo del CONTEXTO ORIGINAL
+            ctxEdicion.putImageData(imagenOriginal, 0, 0);
         });
 
         document.querySelector("#btnSepia").addEventListener("click", e => {
             let imageDataEditada = escalaSepia();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
+
+        //--------------------------------------> BOTON BRILLO <---------------------------------------
+        let rango = document.querySelector("#rangoBrillo");
+        rango.addEventListener("change", e => {
+            document.querySelector("#rangoBrilloValor").innerHTML = rango.value;
+        });
+
+        document.querySelector("#btnBrillo").addEventListener("click", e => {
+            let rangoBrillo = document.querySelector("#rangoBrillo").value;
+            let imageDataEditada = brillo(rangoBrillo);
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+        //--------------------------------------> //////////// <---------------------------------------
+
         //-----------------------------------> ////////////////// <------------------------------------
 
         //--------------------------------------> FUNCION BLUR <---------------------------------------
-        function blur() {
+        function blur(imagen) {
             var matrizFiltro = [
                 [1, 1, 1],
                 [1, 1, 1],
                 [1, 1, 1]
             ];
-            return apFiltro(matrizFiltro, 9);
+            return apFiltro(matrizFiltro, 9, imagen);
         }
 
 
-        function apFiltro(filtro, n) {
-            let imagenDeOriginal = ctx.getImageData(0, 0, c.width, c.height); //capturo del CAMVAS ORIGINAL
+        function apFiltro(filtro, n, imagen) {
+            // if (imagen == "") {
+            // let imagen = ctx.getImageData(0, 0, c.width, c.height); //capturo del CONTEXTO ORIGINAL
+            // }
 
             for (let x = (0 + 1); x < (c.height - 1); x++) {
                 for (let y = (0 + 1); y < (c.width - 1); y++) {
-                    let pixel_RGBA_1_SupIzq = getPixel(imagenDeOriginal, x - 1, y - 1); //superior izquirda 1
-                    let pixel_RGBA_2_Arriba = getPixel(imagenDeOriginal, x - 1, y); //arriba 2
-                    let pixel_RGBA_3_SupDer = getPixel(imagenDeOriginal, x - 1, y + 1); //superior derecha 3
-                    let pixel_RGBA_4_Izq = getPixel(imagenDeOriginal, x, y - 1); //izquierda 4
-                    let pixel_RGBA_5_Centro = getPixel(imagenDeOriginal, x, y); // pixel a cambiar del medio 5
-                    let pixel_RGBA_6_Der = getPixel(imagenDeOriginal, x, y + 1); // derecha 6
-                    let pixel_RGBA_7_InfIzq = getPixel(imagenDeOriginal, x + 1, y - 1); // inferior izquierda 7
-                    let pixel_RGBA_8_Abajo = getPixel(imagenDeOriginal, x + 1, y); // abajo 8
-                    let pixel_RGBA_9_InfDer = getPixel(imagenDeOriginal, x + 1, y + 1); // inferior derecha 9
+                    let pixel_RGBA_1_SupIzq = getPixel(imagen, x - 1, y - 1); //superior izquirda 1
+                    let pixel_RGBA_2_Arriba = getPixel(imagen, x - 1, y); //arriba 2
+                    let pixel_RGBA_3_SupDer = getPixel(imagen, x - 1, y + 1); //superior derecha 3
+                    let pixel_RGBA_4_Izq = getPixel(imagen, x, y - 1); //izquierda 4
+                    let pixel_RGBA_5_Centro = getPixel(imagen, x, y); // pixel a cambiar del medio 5
+                    let pixel_RGBA_6_Der = getPixel(imagen, x, y + 1); // derecha 6
+                    let pixel_RGBA_7_InfIzq = getPixel(imagen, x + 1, y - 1); // inferior izquierda 7
+                    let pixel_RGBA_8_Abajo = getPixel(imagen, x + 1, y); // abajo 8
+                    let pixel_RGBA_9_InfDer = getPixel(imagen, x + 1, y + 1); // inferior derecha 9
 
                     let r = Math.floor((
                         (pixel_RGBA_1_SupIzq[0] * filtro[0][0]) + (pixel_RGBA_2_Arriba[0] * filtro[0][1]) + (pixel_RGBA_3_SupDer[0] * filtro[0][2]) +
@@ -93,11 +130,11 @@
                         (pixel_RGBA_7_InfIzq[2] * filtro[2][0]) + (pixel_RGBA_8_Abajo[2] * filtro[2][1]) + (pixel_RGBA_9_InfDer[2] * filtro[2][2])
                     ) / n);
 
-                    setPixel(imagenDeOriginal, x, y, r, g, b, 255);
+                    setPixel(imagen, x, y, r, g, b, 255);
                 }
             }
-            ctxEdicion.putImageData(imagenDeOriginal, 0, 0);
-            return imagenDeOriginal;
+            ctxEdicion.putImageData(imagen, 0, 0);
+            return imagen;
         }
         //--------------------------------------> //////////// <---------------------------------------
 
@@ -128,6 +165,27 @@
                     let promPixelR = (0.393 * pixelRGBA[0]) + (0.769 * pixelRGBA[1]) + (0.189 * pixelRGBA[2]);
                     let promPixelG = (0.349 * pixelRGBA[0]) + (0.686 * pixelRGBA[1]) + (0.168 * pixelRGBA[2]);
                     let promPixelB = (0.272 * pixelRGBA[0]) + (0.534 * pixelRGBA[1]) + (0.131 * pixelRGBA[2]);
+                    let promPixelA = 255;
+                    setPixel(imagenDeOriginal, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                }
+            }
+            return imagenDeOriginal;
+        }
+        //-------------------------------------> ///////////// <---------------------------------------
+        //-------------------------------------> FUNCION BRILLO <---------------------------------------
+        function brillo(intensidad) {
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
+            // const BRILLO = 30;
+            intensidad = 255 * (intensidad * 0.1);
+            for (let x = 0; x < cHeight; x++) {
+                for (let y = 0; y < cWidth; y++) {
+                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
+                    // let promPixelR = (pixelRGBA[0] + BRILLO);
+                    // let promPixelG = (pixelRGBA[1] + BRILLO);
+                    // let promPixelB = (pixelRGBA[2] + BRILLO);
+                    let promPixelR = verificarMaxyMin((pixelRGBA[0] + intensidad));
+                    let promPixelG = verificarMaxyMin((pixelRGBA[1] + intensidad));
+                    let promPixelB = verificarMaxyMin((pixelRGBA[2] + intensidad));
                     let promPixelA = 255;
                     setPixel(imagenDeOriginal, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
                 }
