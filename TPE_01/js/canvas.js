@@ -34,11 +34,28 @@
         });
         //---------------------------> ////////////////////////////////// <----------------------------
 
-        //-----------------------------------> BOTONES QUE EDITAN <------------------------------------
+        //-------------------------------------> BOTONES QUE EDITAN <--------------------------------------
+
+        //---------------------------------------> BOTON BLUR <----------------------------------------
         document.querySelector("#btnGrises").addEventListener("click", e => {
             let imageDataEditada = escalaGrises();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
+        //---------------------------------------> ////////// <----------------------------------------
+
+        //-------------------------------------> BOTON NEGATIVO <--------------------------------------
+        document.querySelector("#btnNegativo").addEventListener("click", e => {
+            let imageDataEditada = negativo();
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+        //-------------------------------------> ////////////// <--------------------------------------
+
+        //-------------------------------------> BOTON BINARIZACION <--------------------------------------
+        document.querySelector("#btnBinario").addEventListener("click", e => {
+            let imageDataEditada = binarizacion();
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+        //-------------------------------------> ////////////// <--------------------------------------
 
         //---------------------------------------> BOTON BLUR <----------------------------------------
         let rangoBlur = document.querySelector("#rangoBlur");
@@ -84,7 +101,7 @@
         });
         //--------------------------------------> //////////// <---------------------------------------
 
-        //-----------------------------------> ////////////////// <------------------------------------
+        //-------------------------------------> ////////////////// <--------------------------------------
 
         //--------------------------------------> FUNCION BLUR <---------------------------------------
         function blur(imagen) {
@@ -156,6 +173,42 @@
         }
         //-------------------------------------> ////////////// <--------------------------------------
 
+        //------------------------------------> FUNCION NEGATIVO <-------------------------------------
+        function negativo() {
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
+            for (let x = 0; x < cHeight; x++) {
+                for (let y = 0; y < cWidth; y++) {
+                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
+                    let promPixelR = 255 - pixelRGBA[0];
+                    let promPixelG = 255 - pixelRGBA[1];
+                    let promPixelB = 255 - pixelRGBA[2];
+                    let promPixelA = 255;
+                    setPixel(imagenDeOriginal, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                }
+            }
+            return imagenDeOriginal;
+        }
+        //-------------------------------------> ////////////// <--------------------------------------
+
+        //----------------------------------> FUNCION BINARIZACION <-----------------------------------
+        function binarizacion() {
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
+            for (let x = 0; x < cHeight; x++) {
+                for (let y = 0; y < cWidth; y++) {
+                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
+                    let promedioPixel = verificarMaxyMin(Math.floor((pixelRGBA[0] + pixelRGBA[1] + pixelRGBA[2]) / 3));
+                    let blanco_O_NegroPixel = comprobarBlanco_O_Negro(promedioPixel);
+                    let pixelR = blanco_O_NegroPixel;
+                    let pixelG = blanco_O_NegroPixel;
+                    let pixelB = blanco_O_NegroPixel;
+                    let pixelA = 255;
+                    setPixel(imagenDeOriginal, x, y, pixelR, pixelG, pixelB, pixelA);
+                }
+            }
+            return imagenDeOriginal;
+        }
+        //-------------------------------------> ////////////// <--------------------------------------
+
         //-------------------------------------> FUNCION SEPIA <---------------------------------------
         function escalaSepia() {
             let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
@@ -172,6 +225,7 @@
             return imagenDeOriginal;
         }
         //-------------------------------------> ///////////// <---------------------------------------
+
         //-------------------------------------> FUNCION BRILLO <---------------------------------------
         function brillo(intensidad) {
             let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
@@ -193,6 +247,17 @@
             return imagenDeOriginal;
         }
         //-------------------------------------> ///////////// <---------------------------------------
+
+        //--------------------------------> FUNCION BLANCO O NEGRO <-----------------------------------
+        function comprobarBlanco_O_Negro(pixel) {
+            // debugger;
+            if ((pixel > 127) && (pixel <= 255)) {
+                return 255;
+            } else if ((pixel >= 0) && (pixel <= 127)) {
+                return 0;
+            }
+        }
+        //--------------------------------> ////////////////////// <-----------------------------------
 
         function myDrawImageMrthod(imagen) {
             ctx.drawImage(imagen, 0, 0); //dibujo en el CAMVAS ORIGINAL
