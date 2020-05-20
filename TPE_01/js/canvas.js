@@ -43,6 +43,14 @@
         });
         //--------------------------------------> //////////// <---------------------------------------
 
+        //--------------------------------------> BOTON GUARDAR <---------------------------------------
+        let guardar = document.querySelector("#btnGuardar");
+        guardar.addEventListener("click", e => {
+            let dir = cEdicion.toDataURL('image/jpg');
+            guardar.href = dir;
+        });
+        //--------------------------------------> //////////// <---------------------------------------
+
         //-------------------------------------> BOTON NEGATIVO <--------------------------------------
         document.querySelector("#btnNegativo").addEventListener("click", e => {
             let imageDataEditada = negativo();
@@ -342,44 +350,43 @@
 
         }
 
-        function rgbToHsv(r, g, b) {
-            var h;
-            var s;
-            var v;
+        // function rgbToHsv(r, g, b) {
+        //     var h;
+        //     var s;
+        //     var v;
 
-            var maxColor = Math.max(r, g, b);
-            var minColor = Math.min(r, g, b);
-            var delta = maxColor - minColor;
+        //     var maxColor = Math.max(r, g, b);
+        //     var minColor = Math.min(r, g, b);
+        //     var delta = maxColor - minColor;
 
-            // Calculate hue
-            // To simplify the formula, we use 0-6 range.
-            if (delta == 0) {
-                h = 0;
-            } else if (r == maxColor) {
-                h = (6 + (g - b) / delta) % 6;
-            } else if (g == maxColor) {
-                h = 2 + (b - r) / delta;
-            } else if (b == maxColor) {
-                h = 4 + (r - g) / delta;
-            } else {
-                h = 0;
-            }
-            // Then adjust the range to be 0-1
-            h = h / 6;
+        //     // Calculate hue
+        //     // To simplify the formula, we use 0-6 range.
+        //     if (delta == 0) {
+        //         h = 0;
+        //     } else if (r == maxColor) {
+        //         h = (6 + (g - b) / delta) % 6;
+        //     } else if (g == maxColor) {
+        //         h = 2 + (b - r) / delta;
+        //     } else if (b == maxColor) {
+        //         h = 4 + (r - g) / delta;
+        //     } else {
+        //         h = 0;
+        //     }
+        //     // Then adjust the range to be 0-1
+        //     h = h / 6;
 
-            // Calculate saturation
-            if (maxColor != 0) {
-                s = delta / maxColor;
-            } else {
-                s = 0;
-            }
+        //     // Calculate saturation
+        //     if (maxColor != 0) {
+        //         s = delta / maxColor;
+        //     } else {
+        //         s = 0;
+        //     }
 
-            // Calculate value
-            v = maxColor / 255;
+        //     // Calculate value
+        //     v = maxColor / 255;
 
-            // return { h: h, s: s, v: v };
-            return [h, s, v];
-        }
-
+        //     // return { h: h, s: s, v: v };
+        //     return [h, s, v];
+        // }
     });
 }());
