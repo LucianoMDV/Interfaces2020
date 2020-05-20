@@ -51,7 +51,7 @@
         });
         //--------------------------------------> //////////// <---------------------------------------
 
-        //-------------------------------------> BOTON LIMPIAR <--------------------------------------
+        //-----------------------> BOTON LIMPIAR <--------------------------------------
         document.querySelector("#btnLimpiar").addEventListener("click", e => {
             let imageDataEditada = limpiar();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
