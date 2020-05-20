@@ -43,6 +43,21 @@
         });
         //--------------------------------------> //////////// <---------------------------------------
 
+        //--------------------------------------> BOTON GUARDAR <---------------------------------------
+        let guardar = document.querySelector("#btnGuardar");
+        guardar.addEventListener("click", e => {
+            let dir = cEdicion.toDataURL('image/jpg');
+            guardar.href = dir;
+        });
+        //--------------------------------------> //////////// <---------------------------------------
+
+        //-------------------------------------> BOTON LIMPIAR <--------------------------------------
+        document.querySelector("#btnLimpiar").addEventListener("click", e => {
+            let imageDataEditada = limpiar();
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+        //-------------------------------------> ////////////// <--------------------------------------
+
         //-------------------------------------> BOTON NEGATIVO <--------------------------------------
         document.querySelector("#btnNegativo").addEventListener("click", e => {
             let imageDataEditada = negativo();
@@ -64,14 +79,14 @@
         });
 
         document.querySelector("#btnSaturacion").addEventListener("click", e => {
-            let rangoSaturacion = document.querySelector("#rangoSaturacion").value;
-            //no se que hacer!
-            rangoSaturacion = rangoSaturacion * 10;
-            console.log(rangoSaturacion);
+            let rangoSaturacion = parseInt(document.querySelector("#rangoSaturacion").value);
 
+            // rangoSaturacion = rangoSaturacion * 10;
             // let contraste = -250;
+            // let imageDataEditada = saturacion2(rangoSaturacion);
+
+            rangoSaturacion = rangoSaturacion * 0.1;
             let imageDataEditada = saturacion(rangoSaturacion);
-            // let imageDataEditada = saturacion(contraste);
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
         //---------------------------------> ////////////////////// <----------------------------------
@@ -209,6 +224,22 @@
         }
         //-------------------------------------> ////////////// <--------------------------------------
 
+        //------------------------------------> FUNCION LIMPIAR <-------------------------------------
+        function limpiar() {
+            let imagenEdicion = ctxEdicion.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
+            for (let x = 0; x < cHeightEdicion; x++) {
+                for (let y = 0; y < cWidthEdicion; y++) {
+                    let promPixelR = 255;
+                    let promPixelG = 255;
+                    let promPixelB = 255;
+                    let promPixelA = 255;
+                    setPixel(imagenEdicion, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                }
+            }
+            return imagenEdicion;
+        }
+        //-------------------------------------> ////////////// <--------------------------------------
+
         //----------------------------------> FUNCION BINARIZACION <-----------------------------------
         function binarizacion() {
             let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
@@ -315,7 +346,26 @@
             return promPixel;
         }
 
-        function saturacion(contraste) {
+        function saturacion(saturacion) {
+            console.log(saturacion);
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
+            for (let x = 0; x < cHeight; x++) {
+                for (let y = 0; y < cWidth; y++) {
+                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
+
+                    let hsv = rgbToHsv(pixelRGBA[0], pixelRGBA[1], pixelRGBA[2]);
+                    let rgb = HSVtoRGB(hsv[0], hsv[1] + saturacion, hsv[2]);
+                    // debugger;
+                    let a = 255;
+
+                    setPixel(imagenDeOriginal, x, y, rgb[0], rgb[1], rgb[2], a);
+                }
+            }
+            return imagenDeOriginal;
+
+        }
+
+        function saturacion2(contraste) {
             let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
             // let C = 100;
             let FACTOR = (259 * (contraste + 255)) / (255 * (259 - contraste));
@@ -323,18 +373,11 @@
             for (let x = 0; x < cHeight; x++) {
                 for (let y = 0; y < cWidth; y++) {
                     let pixelRGBA = getPixel(imagenDeOriginal, x, y);
-                    // let hsv = rgbToHsv(pixelRGBA[0], pixelRGBA[1], pixelRGBA[2]);
-                    // debugger;
-
                     let r = FACTOR * (pixelRGBA[0] - 128) + 128;
                     let g = FACTOR * (pixelRGBA[1] - 128) + 128;
                     let b = FACTOR * (pixelRGBA[2] - 128) + 128;
-                    // debugger;
-
-                    // let promPixelR = Math.floor((hsv[0]));
-                    // let promPixelG = Math.floor((hsv[1]));
-                    // let promPixelB = Math.floor((hsv[2]));
                     let a = 255;
+
                     setPixel(imagenDeOriginal, x, y, r, g, b, a);
                 }
             }
@@ -379,6 +422,43 @@
 
             // return { h: h, s: s, v: v };
             return [h, s, v];
+        }
+
+        function HSVtoRGB(h, s, v) {
+            var r, g, b, i, f, p, q, t;
+            if (arguments.length === 1) {
+                s = h.s, v = h.v, h = h.h;
+            }
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0:
+                    r = v, g = t, b = p;
+                    break;
+                case 1:
+                    r = q, g = v, b = p;
+                    break;
+                case 2:
+                    r = p, g = v, b = t;
+                    break;
+                case 3:
+                    r = p, g = q, b = v;
+                    break;
+                case 4:
+                    r = t, g = p, b = v;
+                    break;
+                case 5:
+                    r = v, g = p, b = q;
+                    break;
+            }
+            return [
+                Math.round(r * 255),
+                Math.round(g * 255),
+                Math.round(b * 255)
+            ];
         }
 
     });
