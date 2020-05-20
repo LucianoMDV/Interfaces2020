@@ -36,12 +36,12 @@
 
         //-------------------------------------> BOTONES QUE EDITAN <--------------------------------------
 
-        //---------------------------------------> BOTON BLUR <----------------------------------------
+        //--------------------------------------> BOTON GRISES <---------------------------------------
         document.querySelector("#btnGrises").addEventListener("click", e => {
             let imageDataEditada = escalaGrises();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
-        //---------------------------------------> ////////// <----------------------------------------
+        //--------------------------------------> //////////// <---------------------------------------
 
         //-------------------------------------> BOTON NEGATIVO <--------------------------------------
         document.querySelector("#btnNegativo").addEventListener("click", e => {
@@ -56,6 +56,25 @@
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
         //-------------------------------------> ////////////// <--------------------------------------
+
+        //---------------------------------> BOTON SATURACION <----------------------------------
+        let rangoSaturacion = document.querySelector("#rangoSaturacion");
+        rangoSaturacion.addEventListener("change", e => {
+            document.querySelector("#rangoSaturacionValor").innerHTML = rangoSaturacion.value;
+        });
+
+        document.querySelector("#btnSaturacion").addEventListener("click", e => {
+            let rangoSaturacion = document.querySelector("#rangoSaturacion").value;
+            //no se que hacer!
+            rangoSaturacion = rangoSaturacion * 10;
+            console.log(rangoSaturacion);
+
+            // let contraste = -250;
+            let imageDataEditada = saturacion(rangoSaturacion);
+            // let imageDataEditada = saturacion(contraste);
+            ctxEdicion.putImageData(imageDataEditada, 0, 0);
+        });
+        //---------------------------------> ////////////////////// <----------------------------------
 
         //---------------------------------------> BOTON BLUR <----------------------------------------
         let rangoBlur = document.querySelector("#rangoBlur");
@@ -78,15 +97,19 @@
         });
         //---------------------------------------> ////////// <----------------------------------------
 
+        //-------------------------------------> BOTON RESTAURAR <-------------------------------------
         document.querySelector("#btnRetaurar").addEventListener("click", e => {
             let imagenOriginal = ctx.getImageData(0, 0, c.width, c.height); //capturo del CONTEXTO ORIGINAL
             ctxEdicion.putImageData(imagenOriginal, 0, 0);
         });
+        //-------------------------------------> /////////////// <-------------------------------------
 
+        //---------------------------------------> BOTON SEPIA <---------------------------------------
         document.querySelector("#btnSepia").addEventListener("click", e => {
             let imageDataEditada = escalaSepia();
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
+        //---------------------------------------> /////////// <---------------------------------------
 
         //--------------------------------------> BOTON BRILLO <---------------------------------------
         let rango = document.querySelector("#rangoBrillo");
@@ -105,7 +128,7 @@
 
         //--------------------------------------> FUNCION BLUR <---------------------------------------
         function blur(imagen) {
-            var matrizFiltro = [
+            let matrizFiltro = [
                 [1, 1, 1],
                 [1, 1, 1],
                 [1, 1, 1]
@@ -115,9 +138,6 @@
 
 
         function apFiltro(filtro, n, imagen) {
-            // if (imagen == "") {
-            // let imagen = ctx.getImageData(0, 0, c.width, c.height); //capturo del CONTEXTO ORIGINAL
-            // }
 
             for (let x = (0 + 1); x < (c.height - 1); x++) {
                 for (let y = (0 + 1); y < (c.width - 1); y++) {
@@ -153,7 +173,6 @@
             ctxEdicion.putImageData(imagen, 0, 0);
             return imagen;
         }
-        //--------------------------------------> //////////// <---------------------------------------
 
         //-------------------------------------> FUNCION GRISES <--------------------------------------
         function escalaGrises() {
@@ -294,6 +313,72 @@
                 promPixel = 0;
             }
             return promPixel;
+        }
+
+        function saturacion(contraste) {
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
+            // let C = 100;
+            let FACTOR = (259 * (contraste + 255)) / (255 * (259 - contraste));
+
+            for (let x = 0; x < cHeight; x++) {
+                for (let y = 0; y < cWidth; y++) {
+                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
+                    // let hsv = rgbToHsv(pixelRGBA[0], pixelRGBA[1], pixelRGBA[2]);
+                    // debugger;
+
+                    let r = FACTOR * (pixelRGBA[0] - 128) + 128;
+                    let g = FACTOR * (pixelRGBA[1] - 128) + 128;
+                    let b = FACTOR * (pixelRGBA[2] - 128) + 128;
+                    // debugger;
+
+                    // let promPixelR = Math.floor((hsv[0]));
+                    // let promPixelG = Math.floor((hsv[1]));
+                    // let promPixelB = Math.floor((hsv[2]));
+                    let a = 255;
+                    setPixel(imagenDeOriginal, x, y, r, g, b, a);
+                }
+            }
+            return imagenDeOriginal;
+
+        }
+
+        function rgbToHsv(r, g, b) {
+            var h;
+            var s;
+            var v;
+
+            var maxColor = Math.max(r, g, b);
+            var minColor = Math.min(r, g, b);
+            var delta = maxColor - minColor;
+
+            // Calculate hue
+            // To simplify the formula, we use 0-6 range.
+            if (delta == 0) {
+                h = 0;
+            } else if (r == maxColor) {
+                h = (6 + (g - b) / delta) % 6;
+            } else if (g == maxColor) {
+                h = 2 + (b - r) / delta;
+            } else if (b == maxColor) {
+                h = 4 + (r - g) / delta;
+            } else {
+                h = 0;
+            }
+            // Then adjust the range to be 0-1
+            h = h / 6;
+
+            // Calculate saturation
+            if (maxColor != 0) {
+                s = delta / maxColor;
+            } else {
+                s = 0;
+            }
+
+            // Calculate value
+            v = maxColor / 255;
+
+            // return { h: h, s: s, v: v };
+            return [h, s, v];
         }
 
     });
