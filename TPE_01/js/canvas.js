@@ -17,6 +17,64 @@
         let cHeightEdicion = cEdicion.height;
         //-------------------------------------> ////////////// <--------------------------------------
 
+        //---------------------------------------> MOUSE DOWN <----------------------------------------
+        let lapiz = document.querySelector("#btnLapiz");
+        lapiz.addEventListener("click", e => {
+            // lapiz.setAttribute("class", "active");
+            lapiz.className += " active";
+            dibujarLinea("lapiz");
+            // lapiz.addClass("Active");
+        });
+
+        function dibujarLinea(queEs) {
+            let click = false;
+            cEdicion.addEventListener("mousedown", e => { //presiono el click y empiezo a querer hacer algo
+                ctxEdicion.beginPath();
+                click = true;
+            });
+
+            cEdicion.addEventListener("mousemove", e => { //muevo el mouse y hace una linea
+                if (click == true) {
+                    dibujar(e, queEs);
+                }
+            });
+
+            cEdicion.addEventListener("mouseup", e => { //suelto el click deja de dibujar
+                click = false;
+                // ctxEdicion.closePath();
+            });
+
+            function dibujar(e, queEs) {
+                let x = e.layerX;
+                let y = e.layerY;
+
+                line(x, y, e, queEs);
+            }
+
+            function line(x, y, e, queEs) {
+                console.log(e);
+                console.log("X: " + x + " Y: " + y);
+                // let r = 0;
+                // let g = 0;
+                // let b = 0;
+                // let a = 255;
+                // let imagenEdicion = ctxEdicion.getImageData(0, 0, cWidthEdicion, cHeightEdicion); //capturo del CONTEXTO ORIGINAL
+                // setPixel(imagenEdicion, x, y, r, g, b, a);
+
+                // ctxEdicion.moveTo(antesX, antesY); //0, 0
+                ctxEdicion.lineWidth = 10;
+                if (queEs == "lapiz") {
+                    ctxEdicion.strokeStyle = "#000000";
+                } else {
+                    ctxEdicion.strokeStyle = "#FFFFFF";
+                }
+                ctxEdicion.lineTo(x, y); // 200, 300
+                ctxEdicion.stroke();
+            }
+        }
+
+        //---------------------------------------> ////////// <----------------------------------------
+
         //---------------------------> subir una imagen al canvas ORIGINAL <---------------------------
         document.querySelector('#inputFile').addEventListener('change', e => {
             const ARCHIVO = document.querySelector('#inputFile').files[0];
@@ -354,7 +412,7 @@
                     let pixelRGBA = getPixel(imagenDeOriginal, x, y);
 
                     let hsv = rgbToHsv(pixelRGBA[0], pixelRGBA[1], pixelRGBA[2]);
-                    let rgb = HSVtoRGB(hsv[0], hsv[1] + saturacion, hsv[2]);
+                    let rgb = HSVtoRGB(hsv[0], (hsv[1] + saturacion), hsv[2]);
                     // debugger;
                     let a = 255;
 
@@ -427,7 +485,9 @@
         function HSVtoRGB(h, s, v) {
             var r, g, b, i, f, p, q, t;
             if (arguments.length === 1) {
-                s = h.s, v = h.v, h = h.h;
+                s = h.s;
+                v = h.v;
+                h = h.h;
             }
             i = Math.floor(h * 6);
             f = h * 6 - i;
@@ -436,22 +496,34 @@
             t = v * (1 - (1 - f) * s);
             switch (i % 6) {
                 case 0:
-                    r = v, g = t, b = p;
+                    r = v;
+                    g = t;
+                    b = p;
                     break;
                 case 1:
-                    r = q, g = v, b = p;
+                    r = q;
+                    g = v;
+                    b = p;
                     break;
                 case 2:
-                    r = p, g = v, b = t;
+                    r = p;
+                    g = v;
+                    b = t;
                     break;
                 case 3:
-                    r = p, g = q, b = v;
+                    r = p;
+                    g = q;
+                    b = v;
                     break;
                 case 4:
-                    r = t, g = p, b = v;
+                    r = t;
+                    g = p;
+                    b = v;
                     break;
                 case 5:
-                    r = v, g = p, b = q;
+                    r = v;
+                    g = p;
+                    b = q;
                     break;
             }
             return [

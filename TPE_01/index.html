@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-auto mb-5">
+            <div class="col-4 mb-5">
                 <div class="col-auto">
                     <h3>ORIGINAL</h3>
                 </div>
@@ -41,14 +41,52 @@
                     <canvas id="canvasOriginal" width="500" height="500" style="border:1px solid black;"></canvas>
                 </div>
             </div>
-            <div class="col-auto mb-5">
+            <div class="col-4 mb-5">
                 <div class="col-auto">
                     <h3>EDICION</h3>
                 </div>
                 <div class="col-auto">
-                    <canvas id="canvasEdicion" width="500" height="500" style="border:1px solid black;"></canvas>
+                    <div class="col-auto">
+                        <canvas id="canvasEdicion" width="500" height="500" style="border:1px solid black;"></canvas>
+                    </div>
                 </div>
             </div>
+            <div class="col-4 mb-5">
+                <div class="col-auto">
+                    <h3>EDICION</h3>
+                </div>
+                <div class="col-auto">
+                    <div class="col mt-1">
+                        <div class="col-auto">
+                            <button id="btnRetaurar" class="btn btn-outline-primary btn-block" role="button">
+                                <i class="fas fa-sync-alt"></i> Restaurar
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <a id="btnGuardar" class="btn btn-outline-success btn-block" download="descarga.jpg">
+                                <i class="fas fa-download"></i> Guardar Imagen
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <button id="btnLimpiar" class="btn btn-outline-primary btn-block" role="button">
+                                <i class="fas fa-broom"></i> Limpiar Edicion
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <button id="btnLapiz" class="btn btn-outline-primary btn-block" role="button">
+                                <i class="fas fa-pencil-alt"></i> Lapiz
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <button id="btnGoma" class="btn btn-outline-primary btn-block" role="button">
+                                <i class="fas fa-eraser"></i> Goma
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="row">
             <div class="col">
@@ -103,27 +141,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row mt-1">
-            <div class="col">
-                <button id="btnRetaurar" class="btn btn-outline-primary btn-block" role="button">
-                    <i class="fas fa-sync-alt"></i> Restaurar
-                </button>
-            </div>
-            <!-- </div>
-        <div class="row mt-1"> -->
-            <div class="col">
-                <a id="btnGuardar" class="btn btn-outline-success btn-block" download="descarga.jpg">
-                    <i class="fas fa-download"></i> Guardar Imagen
-                </a>
-            </div>
-            <!-- </div>
-        <div class="row mt-1 mb-1"> -->
-            <div class="col">
-                <button id="btnLimpiar" class="btn btn-outline-primary btn-block" role="button">
-                    <i class="fas fa-broom"></i> Limpiar Edicion
-                </button>
-            </div>
         </div>
     </div>
 
