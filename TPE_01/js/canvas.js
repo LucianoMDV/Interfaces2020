@@ -18,16 +18,23 @@
         //-------------------------------------> ////////////// <--------------------------------------
 
         //---------------------------------------> MOUSE DOWN <----------------------------------------
+        let click;
         let lapiz = document.querySelector("#btnLapiz");
         lapiz.addEventListener("click", e => {
-            // lapiz.setAttribute("class", "active");
+            goma.classList.remove("active");
             lapiz.className += " active";
             dibujarLinea("lapiz");
-            // lapiz.addClass("Active");
+        });
+
+        let goma = document.querySelector("#btnGoma");
+        goma.addEventListener("click", e => {
+            lapiz.classList.remove("active");
+            goma.className += " active";
+            dibujarLinea("goma");
         });
 
         function dibujarLinea(queEs) {
-            let click = false;
+            click = false;
             cEdicion.addEventListener("mousedown", e => { //presiono el click y empiezo a querer hacer algo
                 ctxEdicion.beginPath();
                 click = true;
@@ -42,6 +49,7 @@
             cEdicion.addEventListener("mouseup", e => { //suelto el click deja de dibujar
                 click = false;
                 // ctxEdicion.closePath();
+                ctx.closePath();
             });
 
             function dibujar(e, queEs) {
@@ -52,8 +60,8 @@
             }
 
             function line(x, y, e, queEs) {
-                console.log(e);
-                console.log("X: " + x + " Y: " + y);
+                // console.log(e);
+                // console.log("X: " + x + " Y: " + y);
                 // let r = 0;
                 // let g = 0;
                 // let b = 0;
@@ -63,13 +71,24 @@
 
                 // ctxEdicion.moveTo(antesX, antesY); //0, 0
                 ctxEdicion.lineWidth = 10;
+                let color;
                 if (queEs == "lapiz") {
-                    ctxEdicion.strokeStyle = "#000000";
-                } else {
-                    ctxEdicion.strokeStyle = "#FFFFFF";
+                    color = "black";
+                    // ctxEdicion.strokeStyle = "black";
+                    // ctxEdicion.strokeStyle = "#FFFFFF";
+
+                    // ctxEdicion.lineTo(x, y); // 200, 300
+                    // ctxEdicion.stroke();
+                } else if (queEs == "goma") {
+                    color = "white";
+                    // ctxEdicion.strokeStyle = "#FFFFFF";
+                    // ctxEdicion.clearRect(x, y, 10, 10);
                 }
-                ctxEdicion.lineTo(x, y); // 200, 300
-                ctxEdicion.stroke();
+                if (click) {
+                    ctxEdicion.strokeStyle = color;
+                    ctxEdicion.lineTo(x, y); // 200, 300
+                    ctxEdicion.stroke();
+                }
             }
         }
 
