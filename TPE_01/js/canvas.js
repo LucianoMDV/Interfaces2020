@@ -9,7 +9,7 @@
         let cWidth = c.width;
         let cHeight = c.height;
 
-        //pinto el fondo de blanco ni bien carga la pagina
+        //pinto el fondo del contexto original blanco ni bien carga la pagina
         let imagenOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
         let imag = limpiar(imagenOriginal, cWidth, cHeight);
         ctx.putImageData(imag, 0, 0);
@@ -21,7 +21,7 @@
         let cWidthEdicion = cEdicion.width;
         let cHeightEdicion = cEdicion.height;
 
-        //pinto el fondo de blanco ni bien carga la pagina
+        //pinto el fondo del contexto edicion de blanco ni bien carga la pagina
         let imagenEdicion = ctxEdicion.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
         let imageDataEditada = limpiar(imagenEdicion, cWidthEdicion, cHeightEdicion);
         ctxEdicion.putImageData(imageDataEditada, 0, 0);

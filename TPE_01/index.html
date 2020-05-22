@@ -26,7 +26,7 @@
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
-                    <div class="col-4 mb-5">
+                    <div class="col-4">
                         <div class="col-auto">
                             <h3>ORIGINAL</h3>
                         </div>
@@ -34,7 +34,7 @@
                             <canvas id="canvasOriginal" width="500" height="500" style="border:1px solid black;"></canvas>
                         </div>
                     </div>
-                    <div class="col-5 mb-5">
+                    <div class="col-5">
                         <div class="col-auto">
                             <h3>EDICION</h3>
                         </div>
@@ -42,27 +42,27 @@
                             <div class="col-auto">
                                 <canvas id="canvasEdicion" width="500" height="500" style="border:1px solid black;"></canvas>
                             </div>
+                            <div class="col-6 mt-2 ml-auto mr-auto">
+                                <a id="btnGuardar" class="btn btn-warning btn-block" download="descarga.jpg">
+                                    <i class="fas fa-download"></i> Guardar Imagen
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-3 mb-5">
+                    <div class="col-3 p-0">
                         <div class="col-auto">
                             <h3>Herramientas</h3>
                         </div>
                         <div class="col-auto">
                             <div class="col mt-1">
                                 <div class="col-auto">
-                                    <button id="btnLapiz" class="btn btn-outline-primary btn-block" role="button">
-                                        <i class="fas fa-pencil-alt"></i> Lapiz
+                                    <button id="btnLapiz" class="btn btn-outline-dark btn-block" role="button">
+                                        <i class="fas fa-pencil-alt text-success"></i> Lapiz
                                     </button>
                                 </div>
                                 <div class="col-auto">
-                                    <button id="btnGoma" class="btn btn-outline-primary btn-block" role="button">
-                                        <i class="fas fa-eraser"></i> Goma
-                                    </button>
-                                </div>
-                                <div class="col-auto">
-                                    <button id="btnRetaurar" class="btn btn-outline-primary btn-block" role="button">
-                                        <i class="fas fa-sync-alt"></i> Restaurar
+                                    <button id="btnGoma" class="btn btn-outline-dark btn-block" role="button">
+                                        <i class="fas fa-eraser text-danger"></i> Goma
                                     </button>
                                 </div>
                                 <div class="col-auto">
@@ -74,66 +74,72 @@
                         </div>
                         <div class="col-auto">
                             <div class="col-auto">
-                                <h3>Descargar</h3>
+                                <h3>Filtros</h3>
                             </div>
-                            <div class="col-auto">
-                                <a id="btnGuardar" class="btn btn-outline-success btn-block" download="descarga.jpg">
-                                    <i class="fas fa-download"></i> Guardar Imagen
-                                </a>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="btnGrises" class="btn btn-outline-primary btn-block" role="button">
+                                            <i class="fas fa-edit"></i> Grises
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button id="btnSepia" class="btn btn-outline-primary btn-block" role="button">
+                                            <i class="fas fa-edit"></i> Sepia
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="btnNegativo" class="btn btn-outline-primary btn-block" role="button">
+                                            <i class="fas fa-edit"></i> Negativo
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button id="btnBinario" class="btn btn-outline-primary btn-block" role="button">
+                                            <i class="fas fa-edit"></i> Binarización
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <button id="btnGrises" class="btn btn-outline-primary btn-block" role="button">
-                            <i class="fas fa-edit"></i> Grises
-                        </button>
-                    </div>
-                    <div class="col">
-                        <div class="col">
-                            <label for="customRange2">Rango de Blur x<span id="rangoValor">6</span> veces</label>
-                            <input id="rangoBlur" type="range" class="custom-range" min="1" max="10">
-                        </div>
-                        <button id="btnBlur" class="btn btn-outline-primary btn-block" role="button">
-                            <i class="fas fa-edit"></i> Blur
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button id="btnSepia" class="btn btn-outline-primary btn-block" role="button">
-                            <i class="fas fa-edit"></i> Sepia
-                        </button>
-                    </div>
-                    <div class="col">
-                        <div class="col">
-                            <label for="customRange2">Rango de brillo  <span id="rangoBrilloValor">6</span>0%</label>
-                            <input id="rangoBrillo" type="range" class="custom-range" min="1" max="10">
-                        </div>
-                        <div class="col">
-                            <button id="btnBrillo" class="btn btn-outline-primary btn-block" role="button">
-                                <i class="fas fa-edit"></i> Brillo
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <button id="btnNegativo" class="btn btn-outline-primary btn-block" role="button">
-                            <i class="fas fa-edit"></i> Negativo
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button id="btnBinario" class="btn btn-outline-primary btn-block" role="button">
-                            <i class="fas fa-edit"></i> Binarización
-                        </button>
-                    </div>
-                    <div class="col">
-                        <div class="col">
-                            <label for="customRange2">Rango de Saturacion  <span id="rangoSaturacionValor">6</span>0%</label>
-                            <input id="rangoSaturacion" type="range" class="custom-range" min="1" max="10">
-                        </div>
-                        <div class="col">
-                            <button id="btnSaturacion" class="btn btn-outline-primary btn-block" role="button">
-                                <i class="fas fa-edit"></i> Saturacion
-                            </button>
+                            <div class="col">
+                                <div class="col p-0">
+                                    <label for="customRange2">Rango de Blur x<span id="rangoValor">6</span> veces</label>
+                                    <input id="rangoBlur" type="range" class="custom-range" min="1" max="10">
+                                </div>
+                                <div class="col p-0">
+                                    <button id="btnBlur" class="btn btn-outline-primary btn-block" role="button">
+                                        <i class="fas fa-edit"></i> Blur
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="col p-0">
+                                    <label for="customRange2">Rango de brillo  <span id="rangoBrilloValor">6</span>0%</label>
+                                    <input id="rangoBrillo" type="range" class="custom-range" min="1" max="10">
+                                </div>
+                                <div class="col p-0">
+                                    <button id="btnBrillo" class="btn btn-outline-primary btn-block" role="button">
+                                        <i class="fas fa-edit"></i> Brillo
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="col p-0">
+                                    <label for="customRange2">Rango de Saturacion  <span id="rangoSaturacionValor">6</span>0%</label>
+                                    <input id="rangoSaturacion" type="range" class="custom-range" min="1" max="10">
+                                </div>
+                                <div class="col p-0">
+                                    <button id="btnSaturacion" class="btn btn-outline-primary btn-block" role="button">
+                                        <i class="fas fa-edit"></i> Saturacion
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button id="btnRetaurar" class="btn btn-outline-primary btn-block" role="button">
+                                    <i class="fas fa-sync-alt"></i> Restaurar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
