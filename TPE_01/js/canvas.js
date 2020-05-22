@@ -8,6 +8,11 @@
         let ctx = c.getContext("2d");
         let cWidth = c.width;
         let cHeight = c.height;
+
+        //pinto el fondo de blanco ni bien carga la pagina
+        let imagenOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
+        let imag = limpiar(imagenOriginal, cWidth, cHeight);
+        ctx.putImageData(imag, 0, 0);
         //-------------------------------------> /////////////// <-------------------------------------
 
         //-------------------------------------> CANVAS EDICION <--------------------------------------
@@ -15,25 +20,37 @@
         let ctxEdicion = cEdicion.getContext("2d");
         let cWidthEdicion = cEdicion.width;
         let cHeightEdicion = cEdicion.height;
+
+        //pinto el fondo de blanco ni bien carga la pagina
+        let imagenEdicion = ctxEdicion.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
+        let imageDataEditada = limpiar(imagenEdicion, cWidthEdicion, cHeightEdicion);
+        ctxEdicion.putImageData(imageDataEditada, 0, 0);
         //-------------------------------------> ////////////// <--------------------------------------
 
         //---------------------------------------> MOUSE DOWN <----------------------------------------
         let click;
         let lapiz = document.querySelector("#btnLapiz");
+        let goma = document.querySelector("#btnGoma");
+        let varL = false;
+        let varG = false;
+
         lapiz.addEventListener("click", e => {
+            varL = true;
+            varG = false;
             goma.classList.remove("active");
             lapiz.className += " active";
-            dibujarLinea("lapiz");
+            dibujarLinea();
         });
 
-        let goma = document.querySelector("#btnGoma");
         goma.addEventListener("click", e => {
+            varL = false;
+            varG = true;
             lapiz.classList.remove("active");
             goma.className += " active";
-            dibujarLinea("goma");
+            dibujarLinea();
         });
 
-        function dibujarLinea(queEs) {
+        function dibujarLinea() {
             click = false;
             cEdicion.addEventListener("mousedown", e => { //presiono el click y empiezo a querer hacer algo
                 ctxEdicion.beginPath();
@@ -42,56 +59,34 @@
 
             cEdicion.addEventListener("mousemove", e => { //muevo el mouse y hace una linea
                 if (click == true) {
-                    dibujar(e, queEs);
+                    dibujar(e);
                 }
             });
 
             cEdicion.addEventListener("mouseup", e => { //suelto el click deja de dibujar
                 click = false;
-                // ctxEdicion.closePath();
-                ctx.closePath();
+                ctxEdicion.closePath();
             });
 
-            function dibujar(e, queEs) {
+            function dibujar(e) {
                 let x = e.layerX;
                 let y = e.layerY;
-
-                line(x, y, e, queEs);
+                line(x, y, e);
             }
 
-            function line(x, y, e, queEs) {
-                // console.log(e);
-                // console.log("X: " + x + " Y: " + y);
-                // let r = 0;
-                // let g = 0;
-                // let b = 0;
-                // let a = 255;
-                // let imagenEdicion = ctxEdicion.getImageData(0, 0, cWidthEdicion, cHeightEdicion); //capturo del CONTEXTO ORIGINAL
-                // setPixel(imagenEdicion, x, y, r, g, b, a);
-
-                // ctxEdicion.moveTo(antesX, antesY); //0, 0
+            function line(x, y, e) {
                 ctxEdicion.lineWidth = 10;
-                let color;
-                if (queEs == "lapiz") {
-                    color = "black";
-                    // ctxEdicion.strokeStyle = "black";
-                    // ctxEdicion.strokeStyle = "#FFFFFF";
-
-                    // ctxEdicion.lineTo(x, y); // 200, 300
-                    // ctxEdicion.stroke();
-                } else if (queEs == "goma") {
-                    color = "white";
-                    // ctxEdicion.strokeStyle = "#FFFFFF";
-                    // ctxEdicion.clearRect(x, y, 10, 10);
+                if (varL) {
+                    ctxEdicion.strokeStyle = "#000000";
+                } else if (varG) {
+                    ctxEdicion.strokeStyle = "#FFFFFF";
                 }
                 if (click) {
-                    ctxEdicion.strokeStyle = color;
                     ctxEdicion.lineTo(x, y); // 200, 300
                     ctxEdicion.stroke();
                 }
             }
         }
-
         //---------------------------------------> ////////// <----------------------------------------
 
         //---------------------------> subir una imagen al canvas ORIGINAL <---------------------------
@@ -130,7 +125,8 @@
 
         //-----------------------> BOTON LIMPIAR <--------------------------------------
         document.querySelector("#btnLimpiar").addEventListener("click", e => {
-            let imageDataEditada = limpiar();
+            let imagenEdicion = ctxEdicion.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
+            let imageDataEditada = limpiar(imagenEdicion, cWidthEdicion, cHeightEdicion);
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
         });
         //-------------------------------------> ////////////// <--------------------------------------
@@ -157,11 +153,6 @@
 
         document.querySelector("#btnSaturacion").addEventListener("click", e => {
             let rangoSaturacion = parseInt(document.querySelector("#rangoSaturacion").value);
-
-            // rangoSaturacion = rangoSaturacion * 10;
-            // let contraste = -250;
-            // let imageDataEditada = saturacion2(rangoSaturacion);
-
             rangoSaturacion = rangoSaturacion * 0.1;
             let imageDataEditada = saturacion(rangoSaturacion);
             ctxEdicion.putImageData(imageDataEditada, 0, 0);
@@ -228,9 +219,7 @@
             return apFiltro(matrizFiltro, 9, imagen);
         }
 
-
         function apFiltro(filtro, n, imagen) {
-
             for (let x = (0 + 1); x < (c.height - 1); x++) {
                 for (let y = (0 + 1); y < (c.width - 1); y++) {
                     let pixel_RGBA_1_SupIzq = getPixel(imagen, x - 1, y - 1); //superior izquirda 1
@@ -302,18 +291,17 @@
         //-------------------------------------> ////////////// <--------------------------------------
 
         //------------------------------------> FUNCION LIMPIAR <-------------------------------------
-        function limpiar() {
-            let imagenEdicion = ctxEdicion.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
-            for (let x = 0; x < cHeightEdicion; x++) {
-                for (let y = 0; y < cWidthEdicion; y++) {
+        function limpiar(ima, width, height) {
+            for (let x = 0; x < height; x++) {
+                for (let y = 0; y < width; y++) {
                     let promPixelR = 255;
                     let promPixelG = 255;
                     let promPixelB = 255;
                     let promPixelA = 255;
-                    setPixel(imagenEdicion, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
+                    setPixel(ima, x, y, promPixelR, promPixelG, promPixelB, promPixelA);
                 }
             }
-            return imagenEdicion;
+            return ima;
         }
         //-------------------------------------> ////////////// <--------------------------------------
 
@@ -355,15 +343,11 @@
 
         //-------------------------------------> FUNCION BRILLO <---------------------------------------
         function brillo(intensidad) {
-            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
-            // const BRILLO = 30;
+            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CONTEXTO ORIGINAL
             intensidad = 255 * (intensidad * 0.1);
             for (let x = 0; x < cHeight; x++) {
                 for (let y = 0; y < cWidth; y++) {
                     let pixelRGBA = getPixel(imagenDeOriginal, x, y);
-                    // let promPixelR = (pixelRGBA[0] + BRILLO);
-                    // let promPixelG = (pixelRGBA[1] + BRILLO);
-                    // let promPixelB = (pixelRGBA[2] + BRILLO);
                     let promPixelR = verificarMaxyMin((pixelRGBA[0] + intensidad));
                     let promPixelG = verificarMaxyMin((pixelRGBA[1] + intensidad));
                     let promPixelB = verificarMaxyMin((pixelRGBA[2] + intensidad));
@@ -377,7 +361,6 @@
 
         //--------------------------------> FUNCION BLANCO O NEGRO <-----------------------------------
         function comprobarBlanco_O_Negro(pixel) {
-            // debugger;
             if ((pixel > 127) && (pixel <= 255)) {
                 return 255;
             } else if ((pixel >= 0) && (pixel <= 127)) {
@@ -387,7 +370,7 @@
         //--------------------------------> ////////////////////// <-----------------------------------
 
         function myDrawImageMrthod(imagen) {
-            ctx.drawImage(imagen, 0, 0); //dibujo en el CAMVAS ORIGINAL
+            ctx.drawImage(imagen, 0, 0, c.width, c.height); //dibujo en el CAMVAS ORIGINAL
             //no hace falta pero lo dejo como referencia
             // let imagenWidth = imagen.width; //400px
             // let imagenHeight = imagen.height; //400px
@@ -424,42 +407,17 @@
         }
 
         function saturacion(saturacion) {
-            console.log(saturacion);
             let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
             for (let x = 0; x < cHeight; x++) {
                 for (let y = 0; y < cWidth; y++) {
                     let pixelRGBA = getPixel(imagenDeOriginal, x, y);
-
                     let hsv = rgbToHsv(pixelRGBA[0], pixelRGBA[1], pixelRGBA[2]);
                     let rgb = HSVtoRGB(hsv[0], (hsv[1] + saturacion), hsv[2]);
-                    // debugger;
                     let a = 255;
-
                     setPixel(imagenDeOriginal, x, y, rgb[0], rgb[1], rgb[2], a);
                 }
             }
             return imagenDeOriginal;
-
-        }
-
-        function saturacion2(contraste) {
-            let imagenDeOriginal = ctx.getImageData(0, 0, cWidth, cHeight); //capturo del CAMVAS ORIGINAL
-            // let C = 100;
-            let FACTOR = (259 * (contraste + 255)) / (255 * (259 - contraste));
-
-            for (let x = 0; x < cHeight; x++) {
-                for (let y = 0; y < cWidth; y++) {
-                    let pixelRGBA = getPixel(imagenDeOriginal, x, y);
-                    let r = FACTOR * (pixelRGBA[0] - 128) + 128;
-                    let g = FACTOR * (pixelRGBA[1] - 128) + 128;
-                    let b = FACTOR * (pixelRGBA[2] - 128) + 128;
-                    let a = 255;
-
-                    setPixel(imagenDeOriginal, x, y, r, g, b, a);
-                }
-            }
-            return imagenDeOriginal;
-
         }
 
         function rgbToHsv(r, g, b) {
@@ -471,8 +429,6 @@
             var minColor = Math.min(r, g, b);
             var delta = maxColor - minColor;
 
-            // Calculate hue
-            // To simplify the formula, we use 0-6 range.
             if (delta == 0) {
                 h = 0;
             } else if (r == maxColor) {
@@ -484,20 +440,17 @@
             } else {
                 h = 0;
             }
-            // Then adjust the range to be 0-1
+
             h = h / 6;
 
-            // Calculate saturation
             if (maxColor != 0) {
                 s = delta / maxColor;
             } else {
                 s = 0;
             }
 
-            // Calculate value
             v = maxColor / 255;
 
-            // return { h: h, s: s, v: v };
             return [h, s, v];
         }
 
@@ -551,6 +504,5 @@
                 Math.round(b * 255)
             ];
         }
-
     });
 }());
