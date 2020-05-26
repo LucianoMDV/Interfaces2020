@@ -3,14 +3,17 @@ class Figure {
         this.x = x;
         this.y = y;
         this.color = this.randomRGBA();
-        // this.ctx = this.getContext();
-        this.canvas = document.querySelector("#canvasOriginal");
+        this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
     }
 
-    getCanvas() {
-        return this.canvas;
+    drawImage(image, x1, y1) {
+        this.ctx.drawImage(image, this.x + x1, this.y + y1, 50, 50);
     }
+
+    // getCanvas() {
+    //     return this.canvas;
+    // }
 
     // randomX() {
     //     return Math.floor(Math.random() * this.canvas.height);

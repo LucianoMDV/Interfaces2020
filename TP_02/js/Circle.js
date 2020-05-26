@@ -1,6 +1,6 @@
 class Circle extends Figure {
-    constructor(x, y, radio) {
-        super(x, y);
+    constructor(x, y, radio, canvas) {
+        super(x, y, canvas);
         this.radio = radio;
     }
 
