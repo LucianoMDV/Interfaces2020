@@ -1,6 +1,6 @@
 class Rect extends Figure {
-    constructor(x, y, width, height, canvas) {
-        super(x, y, canvas);
+    constructor(x, y, width, height, colour, canvas) {
+        super(x, y, colour, canvas);
         this.width = width;
         this.height = height;
     }
@@ -8,6 +8,7 @@ class Rect extends Figure {
     draw() {
         this.ctx.beginPath();
         this.ctx.fillStyle = this.color;
+        this.ctx.strokeRect(this.x, this.y, this.width, this.height);
         this.ctx.fillRect(this.x, this.y, this.width, this.height);
         this.ctx.closePath();
     }

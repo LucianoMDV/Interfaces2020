@@ -1,8 +1,8 @@
 class Figure {
-    constructor(x, y, canvas) {
+    constructor(x, y, colour, canvas) {
         this.x = x;
         this.y = y;
-        this.colour = "#000000";
+        this.colour = colour;
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
     }

@@ -37,13 +37,28 @@ class GameBoard {
     }
 
     drawBoard(canvas) {
-        this.board = new Rect(0, 0, canvas.width, canvas.height, canvas);
+        this.board = new Rect(240, 100, 720, 450, "#000000", canvas);
         this.board.draw();
         let arrayCircles = [];
-        for (let fila = 0; fila < canvas.width; fila += 50) {
-            arrayCircles[fila] = new Circle(25, 25, 50, canvas);
-            arrayCircles[fila].setColor("#FFFFFF");
-            arrayCircles[fila].draw();
+        let puntero = 0;
+        let x = 0;
+        let y = 0;
+        // for (let fila = 0; fila < 640; fila += 90) {
+        //     for (let col = 0; col < 400; col += 90) {
+        let colour = "#FFFFFF";
+        for (let fila = 0; fila < 640; fila += 90) {
+            for (let col = 0; col < 400; col += 90) {
+                x = fila + 285;
+                y = col + 145;
+                // arrayCircles[puntero] = new Circle(285, 145, 40, color, canvas);
+                arrayCircles[puntero] = new Circle(x, y, 40, colour, canvas);
+                if (puntero > 4) {
+                    colour = "#FF0000";
+                }
+                arrayCircles[puntero].setColor(colour);
+                arrayCircles[puntero].draw();
+                puntero++;
+            }
         }
         console.log(arrayCircles);
 
