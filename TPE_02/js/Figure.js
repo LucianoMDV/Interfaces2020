@@ -7,9 +7,13 @@ class Figure {
         this.ctx = this.canvas.getContext('2d');
     }
 
-    // drawImage(image, x1, y1) {
-    //     this.ctx.drawImage(image, this.x + x1, this.y + y1, 50, 50);
-    // }
+    drawImage(image, x1, y1) {
+        this.ctx.drawImage(image, this.x + x1, this.y + y1, 50, 50);
+    }
+
+    setColor(colour) {
+        this.colour = colour;
+    }
 
     // getCanvas() {
     //     return this.canvas;
