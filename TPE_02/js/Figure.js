@@ -36,6 +36,11 @@ class Figure {
     //     return 
     // }
 
+    setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+
+    }
 
     randomRGBA() {
         let r = Math.round(Math.random() * 255);

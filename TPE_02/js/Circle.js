@@ -33,4 +33,10 @@ class Circle extends Figure {
     setColor(colour) {
         this.colour = colour;
     }
+
+    hit(x, y) {
+        let temp = false;
+        let m = Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2);
+        return m < Math.pow(this.radio, 2);
+    }
 }

@@ -40,7 +40,7 @@ class GameBoard {
         this.board = new Rect(240, 100, 720, 450, "#000000", canvas);
         this.board.draw();
         let arrayCircles = [];
-        let puntero = 0;
+        let pointer = 0;
         let x = 0;
         let y = 0;
         // for (let fila = 0; fila < 640; fila += 90) {
@@ -50,14 +50,14 @@ class GameBoard {
             for (let col = 0; col < 400; col += 90) {
                 x = fila + 285;
                 y = col + 145;
-                // arrayCircles[puntero] = new Circle(285, 145, 40, color, canvas);
-                arrayCircles[puntero] = new Circle(x, y, 40, colour, canvas);
-                if (puntero > 4) {
-                    colour = "#FF0000";
-                }
-                arrayCircles[puntero].setColor(colour);
-                arrayCircles[puntero].draw();
-                puntero++;
+                // arrayCircles[pointer] = new Circle(285, 145, 40, color, canvas);
+                arrayCircles[pointer] = new Circle(x, y, 40, colour, canvas);
+                // if (pointer > 4) {
+                //     colour = "#FF0000";
+                // }
+                // arrayCircles[pointer].setColor(colour);
+                arrayCircles[pointer].draw();
+                pointer++;
             }
         }
         console.log(arrayCircles);
