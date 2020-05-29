@@ -5,6 +5,7 @@ class GameBoard {
         this.arrayCircles = [];
         this.turn = 0;
         this.canvas = canvas;
+        this.ultimaFicha = null;
         this.board = new Rect(240, 100, 720, 450, "#000000", canvas);
         this.drawBoard();
         // this.cont = 0;
@@ -60,6 +61,8 @@ class GameBoard {
         for (let i = 0; i < this.arrayCircles.length; i++) {
             this.arrayCircles[i].draw();
         }
+        console.log(this.arrayCircles);
+
     }
 
     setCol(col, colour) {
@@ -100,12 +103,65 @@ class GameBoard {
     setcolourColumn(fromHere, toHere, colour, freeSpace) {
         for (let i = toHere; i >= fromHere; i--) {
             if (this.arrayCircles[i].getColour() == '#FFFFFF') {
+                this.ultimaFicha = i;
                 this.arrayCircles[i].setColour(colour);
                 freeSpace = true;
                 break;
             }
         }
         return freeSpace;
+    }
+
+    buscar(takeChip) {
+        console.log("ultima FICHA: ");
+        console.log(this.ultimaFicha);
+
+        console.log(takeChip);
+        let cont = 0;
+        if (this.arrayCircles[this.ultimaFicha].getColour() == takeChip.getColour()) {
+            console.log("buscar: " + this.ultimaFicha);
+            if (this.ultimaFicha >= 15) {
+                cont = this.horizontalIzqMenos5(this.ultimaFicha, takeChip, cont);
+            }
+            if (this.ultimaFicha <= 24) {
+                cont = this.horizontalDerMas5(this.ultimaFicha, takeChip, cont);
+            }
+
+        }
+    }
+
+    horizontalIzqMenos5(i, takeChip, cont) {
+        for (let j = i; j >= 0; j -= 5) {
+            if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                console.log(this.arrayCircles[j]);
+                console.log("ficha buscada: " + j);
+                cont++;
+                if (cont == 4) {
+                    console.log("gano");
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+        return cont;
+    }
+
+    horizontalDerMas5(i, takeChip, cont) {
+        for (let j = i; j < this.arrayCircles.length; j += 5) {
+            if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                console.log(this.arrayCircles[j]);
+                console.log("ficha buscada: " + j);
+                cont++;
+                if (cont == 4) {
+                    console.log("gano");
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+        return cont;
     }
 
 }
