@@ -5,16 +5,21 @@
         let canvas = document.querySelector("#canvas");
         let ctx = canvas.getContext("2d");
         let fourInLine = new GameBoard(canvas);
+
+        let chips = [];
+        let detectPosition = [];
+        let takeChip = null;
+        let dragging = false;
+        let draggingId = -1;
+
         document.querySelector("#startGame").addEventListener("click", e => {
             fourInLine.start();
         });
 
-        let chips = [];
+        addChipsToPlayer(40, 360, "#FF0000", 0);
+        addChipsToPlayer(1010, 360, "#0000FF", 20);
 
-        addChipsPlayer(40, 360, "#FF0000", 0);
-        addChipsPlayer(1010, 360, "#0000FF", 20);
-
-        function addChipsPlayer(x, y, colour, pointer) {
+        function addChipsToPlayer(x, y, colour, pointer) {
             for (let i = 0; i < 120; i += 6) {
                 let chip = new Circle((x + Math.floor(Math.random() * 150 + 1)), (y + i), 40, colour, canvas);
                 chip.draw();
@@ -23,30 +28,69 @@
             }
         }
 
-        // let figures = [];
-        let dragging = false;
-        let draggingId = -1;
-        console.log(chips);
-
-
-        // detectClick();
-
-        // function detectClick() {
         canvas.addEventListener('mousedown', r => {
             dragging = true;
             for (let i = 0; i < chips.length; i++) {
                 let status = chips[i].hit(r.layerX, r.layerY);
                 if (status) {
                     draggingId = i;
+                    takeChip = chips[i];
                     console.log('le pegue');
                     break;
                 }
             }
         });
 
+        //----------------------------------------> DETECTAR POSICIONES DE FICHAS <----------------------------------------
+        //                  X,  Y, X1, Y1
+        let re = new Rect(240, 15, 90, 85, "#00FF00", canvas);
+        let re2 = new Rect(330, 15, 90, 85, "#00FFAA", canvas);
+        let re3 = new Rect(420, 15, 90, 85, "#AAFF00", canvas);
+        let re4 = new Rect(510, 15, 90, 85, "#00FF00", canvas);
+        let re5 = new Rect(600, 15, 90, 85, "#00FFAA", canvas);
+        let re6 = new Rect(690, 15, 90, 85, "#AAFF00", canvas);
+        let re7 = new Rect(780, 15, 90, 85, "#00FFAA", canvas);
+        let re8 = new Rect(870, 15, 90, 85, "#00FF00", canvas);
+        detectPosition = [re, re2, re3, re4, re5, re6, re7, re8];
+
+        detectPosition.forEach(elem => {
+            elem.draw();
+        });
+        //----------------------------------------> ///////////////////////////// <----------------------------------------
+
         canvas.addEventListener('mouseup', r => {
             dragging = false;
             draggingId = -1;
+            let dropX = r.layerX;
+            let dropY = r.layerY;
+            console.log(takeChip);
+            if (takeChip != null) {
+                if (re.hit(dropX, dropY)) {
+                    fijarFichaColumna(1);
+                }
+                if (re2.hit(dropX, dropY)) {
+                    fijarFichaColumna(2);
+                }
+                if (re3.hit(dropX, dropY)) {
+                    fijarFichaColumna(3);
+                }
+                if (re4.hit(dropX, dropY)) {
+                    fijarFichaColumna(4);
+                }
+                if (re5.hit(dropX, dropY)) {
+                    fijarFichaColumna(5);
+                }
+                if (re6.hit(dropX, dropY)) {
+                    fijarFichaColumna(6);
+                }
+                if (re7.hit(dropX, dropY)) {
+                    fijarFichaColumna(7);
+                }
+                if (re8.hit(dropX, dropY)) {
+                    fijarFichaColumna(8);
+                }
+                takeChip = null;
+            }
         });
 
         canvas.addEventListener('mousemove', r => {
@@ -59,20 +103,30 @@
         function redraw() {
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // tablero.dibujarTablero();
-            fourInLine.drawBoard(canvas);
+            detectPosition.forEach(elem => {
+                elem.draw();
+            });
+
+            fourInLine.redrawBoard();
             for (let i = 0; i < chips.length; i++) {
                 if (draggingId !== i) {
                     chips[i].draw();
                 }
             }
 
-
             if (draggingId !== -1) {
                 chips[draggingId].draw();
             }
 
         }
-        // }
+
+        function fijarFichaColumna(col) {
+            let cambio = fourInLine.setCol(col, takeChip.getColour());
+            if (cambio == true) {
+                let a = chips.indexOf(takeChip);
+                chips.splice(a, 1);
+                redraw();
+            }
+        }
     });
 }());

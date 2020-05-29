@@ -1,9 +1,12 @@
 class GameBoard {
     constructor(canvas) {
-        this.drawBoard(canvas);
         this.players = [new Player("Lucho"), new Player("Seba")];
         this.startGame = false;
+        this.arrayCircles = [];
         this.turn = 0;
+        this.canvas = canvas;
+        this.board = new Rect(240, 100, 720, 450, "#000000", canvas);
+        this.drawBoard();
         // this.cont = 0;
     }
 
@@ -25,7 +28,6 @@ class GameBoard {
                 }
             }
         }, 3000);
-
     }
 
     play(player) {
@@ -36,32 +38,74 @@ class GameBoard {
         this.startGame = false;
     }
 
-    drawBoard(canvas) {
-        this.board = new Rect(240, 100, 720, 450, "#000000", canvas);
+    drawBoard() {
         this.board.draw();
-        let arrayCircles = [];
         let pointer = 0;
         let x = 0;
         let y = 0;
-        // for (let fila = 0; fila < 640; fila += 90) {
-        //     for (let col = 0; col < 400; col += 90) {
         let colour = "#FFFFFF";
-        for (let fila = 0; fila < 640; fila += 90) {
+        for (let row = 0; row < 640; row += 90) {
             for (let col = 0; col < 400; col += 90) {
-                x = fila + 285;
+                x = row + 285;
                 y = col + 145;
-                // arrayCircles[pointer] = new Circle(285, 145, 40, color, canvas);
-                arrayCircles[pointer] = new Circle(x, y, 40, colour, canvas);
-                // if (pointer > 4) {
-                //     colour = "#FF0000";
-                // }
-                // arrayCircles[pointer].setColor(colour);
-                arrayCircles[pointer].draw();
+                this.arrayCircles[pointer] = new Circle(x, y, 40, colour, this.canvas);
+                this.arrayCircles[pointer].draw();
                 pointer++;
             }
         }
-        console.log(arrayCircles);
+    }
 
+    redrawBoard() {
+        this.board.draw();
+        for (let i = 0; i < this.arrayCircles.length; i++) {
+            this.arrayCircles[i].draw();
+        }
+    }
+
+    setCol(col, colour) {
+        let freeSpace = false;
+        switch (col) {
+            case 1:
+                freeSpace = this.setcolourColumn(0, 4, colour, freeSpace);
+                break;
+            case 2:
+                freeSpace = this.setcolourColumn(5, 9, colour, freeSpace);
+                break;
+            case 3:
+                freeSpace = this.setcolourColumn(10, 14, colour, freeSpace);
+                break;
+            case 4:
+                freeSpace = this.setcolourColumn(15, 19, colour, freeSpace);
+                break;
+            case 5:
+                freeSpace = this.setcolourColumn(20, 24, colour, freeSpace);
+                break;
+            case 6:
+                freeSpace = this.setcolourColumn(25, 29, colour, freeSpace);
+                break;
+            case 7:
+                freeSpace = this.setcolourColumn(30, 34, colour, freeSpace);
+                break;
+            case 8:
+                freeSpace = this.setcolourColumn(35, 39, colour, freeSpace);
+                break;
+                // default:
+                //     break;
+        }
+        this.redrawBoard();
+        return freeSpace;
+    }
+
+    //deberia ser privada pero no se como 
+    setcolourColumn(fromHere, toHere, colour, freeSpace) {
+        for (let i = toHere; i >= fromHere; i--) {
+            if (this.arrayCircles[i].getColour() == '#FFFFFF') {
+                this.arrayCircles[i].setColour(colour);
+                freeSpace = true;
+                break;
+            }
+        }
+        return freeSpace;
     }
 
 }

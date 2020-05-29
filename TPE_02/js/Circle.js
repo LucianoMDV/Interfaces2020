@@ -9,17 +9,17 @@ class Circle extends Figure {
         this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
         this.ctx.fillStyle = this.colour;
         this.ctx.fill();
-        this.ctx.lineWidth = 1;
-        this.ctx.lineCap = 'round';
-        this.ctx.strokeStyle = 'black';
+        // this.ctx.lineWidth = 1;
+        // this.ctx.lineCap = 'round';
+        // this.ctx.strokeStyle = 'black';
         this.ctx.stroke();
         this.ctx.closePath();
     }
 
-    drawRandom(x2, y2, color2) {
+    drawRandom(x2, y2, colour2) {
         this.ctx.beginPath();
         this.ctx.arc(this.x + x2, this.y + y2, this.radio, 0, 2 * Math.PI);
-        this.ctx.fillStyle = color2;
+        this.ctx.fillStyle = colour2;
         this.ctx.fill();
         this.ctx.closePath();
     }
@@ -30,7 +30,7 @@ class Circle extends Figure {
     setY(y) {
         this.y += y;
     }
-    setColor(colour) {
+    setColour(colour) {
         this.colour = colour;
     }
 

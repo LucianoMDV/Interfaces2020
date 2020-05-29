@@ -11,8 +11,12 @@ class Figure {
         this.ctx.drawImage(image, this.x + x1, this.y + y1, 50, 50);
     }
 
-    setColor(colour) {
+    setColour(colour) {
         this.colour = colour;
+    }
+
+    getColour() {
+        return this.colour;
     }
 
     // getCanvas() {
