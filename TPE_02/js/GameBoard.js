@@ -112,25 +112,150 @@ class GameBoard {
         return freeSpace;
     }
 
-    buscar(takeChip) {
-        console.log("ultima FICHA: ");
-        console.log(this.ultimaFicha);
-
-        console.log(takeChip);
+    buscar(takeChip, limite) {
+        // console.log("ultima FICHA: ");
+        // console.log(this.ultimaFicha);
         let cont = 0;
-        if (this.arrayCircles[this.ultimaFicha].getColour() == takeChip.getColour()) {
-            console.log("buscar: " + this.ultimaFicha);
-            if (this.ultimaFicha >= 15) {
-                cont = this.horizontalIzqMenos5(this.ultimaFicha, takeChip, cont);
-            }
-            if (this.ultimaFicha <= 24) {
-                cont = this.horizontalDerMas5(this.ultimaFicha, takeChip, cont);
+
+        for (let index = 0; index < this.arrayCircles.length; index++) {
+            if (this.arrayCircles[index].getColour() == takeChip.getColour()) {
+                for (let j = index; j < this.arrayCircles.length; j += 5) {
+                    //busca por derecha
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la derecha " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
+                //busca por izquierda
+                for (let j = index; j >= 0; j -= 5) {
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la izquierda " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
+                //busca por limite hacia arriba
+                for (let j = index; j >= 0; j--) {
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la izquierda " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
+                //busca por limite hacia abajo
+                for (let j = index; j <= limite; j++) {
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la izquierda " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
+                //busca por diagonal derecha arriba
+                for (let j = index; j < this.arrayCircles.length; j += 4) {
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la izquierda " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
+                //busca por diagonal derecha abajo
+                for (let j = index; j < this.arrayCircles.length; j += 6) {
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la izquierda " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
+                //busca por diagonal izquierda arriba
+                for (let j = index; j >= 0; j -= 6) {
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la izquierda " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
+                //busca por diagonal izquierda abajo
+                for (let j = index; j >= 0; j -= 4) {
+                    if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
+                        //console.log(" busco hacia la izquierda " + index + " ---- " + cont);
+                        cont++;
+                        if (cont == 4) {
+                            console.log("win");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                cont = 0;
             }
 
         }
+
+        // for (let i = 0; i < this.arrayCircles.length; i++) {
+        //     if (this.arrayCircles[i].getColour() == takeChip.getColour()) {
+        //         // debugger;
+        //         // if (this.ultimaFicha >= 15) {
+        //         cont = this.horizontalIzqMenos5(15, takeChip, cont);
+        //         // }
+        //         // if (this.ultimaFicha <= 24) {
+        //         // cont = this.horizontalDerMas5(this.ultimaFicha, takeChip, cont);
+        //         // }
+        //     }
+
+        // }
+
+        // console.log(takeChip);
+        // let cont = 0;
+        // if (this.arrayCircles[this.ultimaFicha].getColour() == takeChip.getColour()) {
+        //     console.log("buscar: " + this.ultimaFicha);
+        //     if (this.ultimaFicha >= 15) {
+        //         cont = this.horizontalIzqMenos5(this.ultimaFicha, takeChip, cont);
+        //     }
+        //     if (this.ultimaFicha <= 24) {
+        //         cont = this.horizontalDerMas5(this.ultimaFicha, takeChip, cont);
+        //     }
+
+        // }
     }
 
     horizontalIzqMenos5(i, takeChip, cont) {
+        debugger;
         for (let j = i; j >= 0; j -= 5) {
             if (this.arrayCircles[j].getColour() == takeChip.getColour()) {
                 console.log(this.arrayCircles[j]);
@@ -138,6 +263,8 @@ class GameBoard {
                 cont++;
                 if (cont == 4) {
                     console.log("gano");
+                    // document.querySelector("#staticBackdrop");
+                    $("#staticBackdrop").modal("show");
                     break;
                 }
             } else {
@@ -155,6 +282,7 @@ class GameBoard {
                 cont++;
                 if (cont == 4) {
                     console.log("gano");
+                    $("#staticBackdrop").modal("show");
                     break;
                 }
             } else {

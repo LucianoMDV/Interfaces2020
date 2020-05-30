@@ -67,35 +67,35 @@
             if (takeChip != null) { //lo necesito para evitar que se coloque una ficha sin agarrar ninguna y evitar el error que no hay ninguna ficha seleccionada para colocar en el tablero
                 if (re.hit(dropX, dropY)) {
                     fijarFichaColumna(1);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 4);
                 }
                 if (re2.hit(dropX, dropY)) {
                     fijarFichaColumna(2);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 9);
                 }
                 if (re3.hit(dropX, dropY)) {
                     fijarFichaColumna(3);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 14);
                 }
                 if (re4.hit(dropX, dropY)) {
                     fijarFichaColumna(4);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 19);
                 }
                 if (re5.hit(dropX, dropY)) {
                     fijarFichaColumna(5);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 24);
                 }
                 if (re6.hit(dropX, dropY)) {
                     fijarFichaColumna(6);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 29);
                 }
                 if (re7.hit(dropX, dropY)) {
                     fijarFichaColumna(7);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 34);
                 }
                 if (re8.hit(dropX, dropY)) {
                     fijarFichaColumna(8);
-                    fourInLine.buscar(takeChip);
+                    fourInLine.buscar(takeChip, 39);
                 }
                 takeChip = null;
             }
