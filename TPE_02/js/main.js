@@ -12,8 +12,11 @@
         let dragging = false;
         let draggingId = -1;
 
+        let startGame = false;
+        let turn;
+
         document.querySelector("#startGame").addEventListener("click", e => {
-            fourInLine.start();
+            start();
         });
 
         addChipsToPlayer(40, 360, "#FF0000", 0);
@@ -27,19 +30,6 @@
                 pointer++;
             }
         }
-
-        canvas.addEventListener('mousedown', r => {
-            dragging = true;
-            for (let i = 0; i < chips.length; i++) {
-                let status = chips[i].hit(r.layerX, r.layerY);
-                if (status) {
-                    draggingId = i;
-                    takeChip = chips[i];
-                    console.log('le pegue');
-                    break;
-                }
-            }
-        });
 
         //----------------------------------------> DETECTAR POSICIONES DE FICHAS <----------------------------------------
         //                  X,  Y, X1, Y1
@@ -58,46 +48,94 @@
         });
         //----------------------------------------> ///////////////////////////// <----------------------------------------
 
+        canvas.addEventListener('mousedown', r => {
+            // debugger;
+            console.log(startGame);
+            console.log(turn);
+
+            if (startGame == true) {
+                if (turn == true) {
+                    fourInLine.play(turn);
+                    // turn = 1;
+
+
+                    dragging = true;
+                    if (turn == true) {
+                        for (let i = 0; i <= 19; i++) {
+                            let status = chips[i].hit(r.layerX, r.layerY);
+                            if (status) {
+                                draggingId = i;
+                                takeChip = chips[i];
+                                // console.log('le pegue');
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    fourInLine.play(turn);
+
+                    // turn = 0;
+                    if (turn == false) {
+                        for (let i = 20; i < chips.length; i++) {
+                            let status = chips[i].hit(r.layerX, r.layerY);
+                            if (status) {
+                                draggingId = i;
+                                takeChip = chips[i];
+                                // console.log('le pegue');
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
         canvas.addEventListener('mouseup', r => {
             dragging = false;
             draggingId = -1;
             let dropX = r.layerX;
             let dropY = r.layerY;
-            console.log(takeChip);
+            // console.log(takeChip);
             if (takeChip != null) { //lo necesito para evitar que se coloque una ficha sin agarrar ninguna y evitar el error que no hay ninguna ficha seleccionada para colocar en el tablero
                 if (re.hit(dropX, dropY)) {
                     fijarFichaColumna(1);
-                    fourInLine.buscar(takeChip, 4);
+                    fourInLine.buscar(takeChip);
                 }
                 if (re2.hit(dropX, dropY)) {
                     fijarFichaColumna(2);
-                    fourInLine.buscar(takeChip, 9);
+                    fourInLine.buscar(takeChip);
                 }
                 if (re3.hit(dropX, dropY)) {
                     fijarFichaColumna(3);
-                    fourInLine.buscar(takeChip, 14);
+                    fourInLine.buscar(takeChip);
                 }
                 if (re4.hit(dropX, dropY)) {
                     fijarFichaColumna(4);
-                    fourInLine.buscar(takeChip, 19);
+                    fourInLine.buscar(takeChip);
                 }
                 if (re5.hit(dropX, dropY)) {
                     fijarFichaColumna(5);
-                    fourInLine.buscar(takeChip, 24);
+                    fourInLine.buscar(takeChip);
                 }
                 if (re6.hit(dropX, dropY)) {
                     fijarFichaColumna(6);
-                    fourInLine.buscar(takeChip, 29);
+                    fourInLine.buscar(takeChip);
                 }
                 if (re7.hit(dropX, dropY)) {
                     fijarFichaColumna(7);
-                    fourInLine.buscar(takeChip, 34);
+                    fourInLine.buscar(takeChip);
                 }
                 if (re8.hit(dropX, dropY)) {
                     fijarFichaColumna(8);
-                    fourInLine.buscar(takeChip, 39);
+                    fourInLine.buscar(takeChip);
                 }
                 takeChip = null;
+                // debugger;
+                let change = fourInLine.verificarFichas();
+                if (change) {
+                    turn = !turn;
+                    // turn == true ? false : true;
+                }
             }
         });
 
@@ -135,6 +173,25 @@
                 chips.splice(a, 1);
                 redraw();
             }
+        }
+
+        function start() {
+            startGame = true;
+
+            let result = Math.floor((Math.random() * 2) + 1);
+            console.log(result);
+
+            if (result == 1) {
+                turn = true;
+                alert("JUGADOR 1");
+            } else {
+                turn = false;
+                alert("JUGADOR 2");
+            }
+        }
+
+        function endGame() {
+            startGame = false;
         }
     });
 }());
