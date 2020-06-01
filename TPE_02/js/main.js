@@ -26,6 +26,8 @@
             for (let i = 0; i < 120; i += 6) {
                 let chip = new Circle((x + Math.floor(Math.random() * 150 + 1)), (y + i), 40, colour, canvas);
                 chip.draw();
+                // chip.drawImage2();
+                // this.chipsBoard[pointer].drawImage2()("repeat");
                 chips[pointer] = chip;
                 pointer++;
             }
@@ -50,8 +52,10 @@
 
         canvas.addEventListener('mousedown', r => {
             // debugger;
-            console.log(startGame);
-            console.log(turn);
+            // console.log(startGame);
+            // console.log(turn);
+            // console.log(chips[0].getImage());
+
 
             if (startGame == true) {
                 if (turn == true) {
@@ -61,13 +65,19 @@
 
                     dragging = true;
                     if (turn == true) {
-                        for (let i = 0; i <= 19; i++) {
-                            let status = chips[i].hit(r.layerX, r.layerY);
-                            if (status) {
-                                draggingId = i;
-                                takeChip = chips[i];
-                                // console.log('le pegue');
-                                break;
+                        for (let i = 0; i < chips.length; i++) {
+                            // console.log(Math.floor((chips.length / 2) - 1) + " ROJO");
+                            if (chips[i].getColour() == "#FF0000") {
+                                let status = chips[i].hit(r.layerX, r.layerY);
+                                if (status) {
+                                    draggingId = i;
+                                    takeChip = chips[i];
+                                    // console.log('le pegue');
+                                    console.log(takeChip);
+                                    console.log(i);
+
+                                    break;
+                                }
                             }
                         }
                     }
@@ -76,13 +86,19 @@
 
                     // turn = 0;
                     if (turn == false) {
-                        for (let i = 20; i < chips.length; i++) {
-                            let status = chips[i].hit(r.layerX, r.layerY);
-                            if (status) {
-                                draggingId = i;
-                                takeChip = chips[i];
-                                // console.log('le pegue');
-                                break;
+                        for (let i = 0; i < chips.length; i++) {
+
+                            // console.log(Math.floor((chips.length / 2)) + " AZUL");
+                            if (chips[i].getColour() == "#0000FF") {
+                                let status = chips[i].hit(r.layerX, r.layerY);
+                                if (status) {
+                                    draggingId = i;
+                                    takeChip = chips[i];
+                                    console.log(takeChip);
+                                    console.log(i);
+                                    // console.log('le pegue');
+                                    break;
+                                }
                             }
                         }
                     }
@@ -132,7 +148,7 @@
                 takeChip = null;
                 // debugger;
                 let change = fourInLine.verificarFichas();
-                if (change) {
+                if (change == true) {
                     turn = !turn;
                     // turn == true ? false : true;
                 }
@@ -157,17 +173,20 @@
             for (let i = 0; i < chips.length; i++) {
                 if (draggingId !== i) {
                     chips[i].draw();
+                    // chips[i].drawImage2();
                 }
             }
 
             if (draggingId !== -1) {
                 chips[draggingId].draw();
+                // chips[draggingId].drawImage2("repat");
             }
 
         }
 
         function fijarFichaColumna(col) {
             let cambio = fourInLine.setCol(col, takeChip.getColour());
+            // let cambio = fourInLine.setCol(col, takeChip.getImage());
             if (cambio == true) {
                 let a = chips.indexOf(takeChip);
                 chips.splice(a, 1);
@@ -179,7 +198,7 @@
             startGame = true;
 
             let result = Math.floor((Math.random() * 2) + 1);
-            console.log(result);
+            // console.log(result);
 
             if (result == 1) {
                 turn = true;

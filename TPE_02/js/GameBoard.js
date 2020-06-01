@@ -23,6 +23,7 @@ class GameBoard {
                 y = col + 145;
                 this.chipsBoard[pointer] = new Circle(x, y, 40, colour, this.canvas);
                 this.chipsBoard[pointer].draw();
+                // this.chipsBoard[pointer].drawImage2();
                 pointer++;
             }
         }
@@ -32,6 +33,7 @@ class GameBoard {
         this.board.draw();
         for (let i = 0; i < this.chipsBoard.length; i++) {
             this.chipsBoard[i].draw();
+            // this.chipsBoard[i].drawImage2();
         }
         // console.log(this.chipsBoard);
 
@@ -73,10 +75,13 @@ class GameBoard {
 
     //deberia ser privada pero no se como 
     setcolourColumn(fromHere, toHere, colour, freeSpace) {
+        // setcolourColumn(fromHere, toHere, pat, freeSpace) {
+
         for (let i = toHere; i >= fromHere; i--) {
             if (this.chipsBoard[i].getColour() == '#FFFFFF') {
                 this.ultimaFicha = i;
                 this.chipsBoard[i].setColour(colour);
+                // this.chipsBoard[i].setImage(pat);
                 freeSpace = true;
                 break;
             }
@@ -258,7 +263,7 @@ class GameBoard {
     verificarFichas() {
         // debugger;
         let cont = 0;
-        for (let i = 0; i < this.meQuedan; i++) {
+        for (let i = 0; i < this.chipsBoard.length; i++) {
             if (this.chipsBoard[i].getColour() == "#FFFFFF") {
                 cont++;
             }
