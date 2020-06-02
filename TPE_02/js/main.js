@@ -1,13 +1,16 @@
 (function() {
     'use strict';
 
-    document.addEventListener("DOMContentLoaded", function(event) {
+    window.onload = function() {
+        // document.addEventListener("DOMContentLoaded", function(event) {
+
         let canvas = document.querySelector("#canvas");
         let ctx = canvas.getContext("2d");
         let chipImage = document.querySelector("#img1");
         let boardImage = document.querySelector("#img2");
         let canvasImage = document.querySelector("#img3");
         let here = document.querySelector("#img4");
+
         ctx.drawImage(canvasImage, 0, 0, canvas.width, canvas.height);
         let fourInLine = new GameBoard(canvas, chipImage, boardImage);
 
@@ -28,16 +31,16 @@
             start();
         });
 
-        addChipsToPlayer(40, 360, "#FF0000", 0);
-        addChipsToPlayer(1010, 360, "#0000FF", 20);
+        // addChipsToPlayer(40, 360, "#FF0000", 0);
+        // addChipsToPlayer(1010, 360, "#0000FF", 20);
 
-        // let chip1 = new Circle((40 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#FF0000", canvas);
-        // chip1.setImage(chipImage);
-        // chip1.drawImage();
-        // let chip2 = new Circle((1010 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#0000FF", canvas);
-        // chip2.setImage(chipImage);
-        // chip2.drawImage();
-        // chips = [chip1, chip2];
+        let chip1 = new Circle((40 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#FF0000", canvas);
+        chip1.setImage(chipImage);
+        chip1.drawImage();
+        let chip2 = new Circle((1010 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#0000FF", canvas);
+        chip2.setImage(chipImage);
+        chip2.drawImage();
+        chips = [chip1, chip2];
 
         function addChipsToPlayer(x, y, colour, pointer) {
             let imagen1 = new Image();
@@ -250,5 +253,5 @@
             start();
         }
 
-    });
+    };
 }());
