@@ -94,48 +94,48 @@ class GameBoard {
 
     buscar() {
         let cont = 0;
+        let chipsWin = new Array();
         let colourTakeChip = this.ultimaFicha.getColour();
         for (let index = 0; index < this.chipsBoard.length; index++) {
             if (this.chipsBoard[index].getColour() == this.ultimaFicha.getColour()) {
 
                 //busca por derecha
-                if (cont != 4) {
-                    cont = this.buscarPorDerecha(index, colourTakeChip, cont);
-                }
+                cont = this.buscarPorDerecha(index, colourTakeChip, cont, chipsWin);
+
 
                 //busca por izquierda
                 if (cont != 4) {
-                    cont = this.buscarPorIzquierda(index, colourTakeChip, cont);
+                    cont = this.buscarPorIzquierda(index, colourTakeChip, cont, chipsWin);
                 }
 
                 //busca por columnLimit hacia arriba
                 if (cont != 4) {
-                    cont = this.buscarParaArriba(index, colourTakeChip, cont);
+                    cont = this.buscarParaArriba(index, colourTakeChip, cont, chipsWin);
                 }
 
                 //busca por columnLimit hacia abajo
                 if (cont != 4) {
-                    cont = this.buscarParaAbajo(index, colourTakeChip, cont);
+                    cont = this.buscarParaAbajo(index, colourTakeChip, cont, chipsWin);
                 }
 
                 //busca por diagonal derecha arriba
                 if (cont != 4) {
-                    cont = this.buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont);
+                    cont = this.buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont, chipsWin);
                 }
 
                 //busca por diagonal derecha abajo
                 if (cont != 4) {
-                    cont = this.buscarDiagonalInferiorDerecha(index, colourTakeChip, cont);
+                    cont = this.buscarDiagonalInferiorDerecha(index, colourTakeChip, cont, chipsWin);
                 }
 
                 //busca por diagonal izquierda arriba
                 if (cont != 4) {
-                    cont = this.buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont);
+                    cont = this.buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont, chipsWin);
                 }
 
                 //busca por diagonal izquierda abajo
                 if (cont != 4) {
-                    cont = this.buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont);
+                    cont = this.buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont, chipsWin);
                 }
 
                 if (cont == 4) {
@@ -152,11 +152,18 @@ class GameBoard {
         }
     }
 
-    buscarPorDerecha(index, colourTakeChip, cont) {
+    buscarPorDerecha(index, colourTakeChip, cont, chipsWin) {
         for (let j = index; j < this.chipsBoard.length; j += 5) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     return cont;
                 }
             } else {
@@ -166,32 +173,50 @@ class GameBoard {
         return 0;
     }
 
-    buscarPorIzquierda(index, colourTakeChip, cont) {
+    buscarPorIzquierda(index, colourTakeChip, cont, chipsWin) {
         for (let j = index; j >= 0; j -= 5) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     return cont;
                 }
             } else {
+                chipsWin.splice(0, chipsWin.length);
                 break;
             }
         }
+        chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
-    buscarParaArriba(index, colourTakeChip, cont) {
+    buscarParaArriba(index, colourTakeChip, cont, chipsWin) {
         let columnLimit = this.verifyColumnLimit(index, "top");
         for (let j = index; j >= columnLimit; j--) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     return cont;
                 }
             } else {
+                chipsWin.splice(0, chipsWin.length);
                 break;
             }
         }
+        chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
@@ -218,75 +243,120 @@ class GameBoard {
         return columnLimit;
     }
 
-    buscarParaAbajo(index, colourTakeChip, cont) {
+    buscarParaAbajo(index, colourTakeChip, cont, chipsWin) {
         let columnLimit = this.verifyColumnLimit(index, "bottom");
         for (let j = index; j <= columnLimit; j++) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     return cont;
                 }
             } else {
+                chipsWin.splice(0, chipsWin.length);
                 break;
             }
         }
+        chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
-    buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont) {
+    buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont, chipsWin) {
         for (let j = index; j < this.chipsBoard.length; j += 4) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     // $("#staticBackdrop").modal("show");
                     return cont;
                 }
             } else {
+                chipsWin.splice(0, chipsWin.length);
                 break;
             }
         }
+        chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
-    buscarDiagonalInferiorDerecha(index, colourTakeChip, cont) {
+    buscarDiagonalInferiorDerecha(index, colourTakeChip, cont, chipsWin) {
         for (let j = index; j < this.chipsBoard.length; j += 6) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     return cont;
                 }
             } else {
+                chipsWin.splice(0, chipsWin.length);
                 break;
             }
         }
+        chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
-    buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont) {
+    buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont, chipsWin) {
         for (let j = index; j >= 0; j -= 6) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     return cont;
                 }
             } else {
+                chipsWin.splice(0, chipsWin.length);
                 break;
             }
         }
+        chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
-    buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont) {
+    buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont, chipsWin) {
         for (let j = index; j >= 0; j -= 4) {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
+                chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
+                    // debugger;
+                    for (let i = 0; i < chipsWin.length; i++) {
+                        chipsWin[i].setColour("#00FF00");
+                        chipsWin[i].drawImage();
+                    }
+                    chipsWin.splice(0, chipsWin.length);
                     return cont;
                 }
             } else {
+                chipsWin.splice(0, chipsWin.length);
                 break;
             }
         }
+        chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
@@ -332,6 +402,10 @@ class GameBoard {
         ctx.strokeText(name.nombre, x + 40, y + 50);
         ctx.fillText(name.nombre, x + 40, y + 50);
         ctx.closePath();
+    }
+
+    reset() {
+        this.meQuedan = this.chipsBoard.length;
     }
 
 }

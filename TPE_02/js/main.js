@@ -11,6 +11,9 @@
         ctx.drawImage(canvasImage, 0, 0, canvas.width, canvas.height);
         let fourInLine = new GameBoard(canvas, chipImage, boardImage);
 
+
+        // fourInLine.setImage(boardImage);
+
         let chips = [];
         let detectPosition = [];
         let takeChip = null;
@@ -28,14 +31,25 @@
         addChipsToPlayer(40, 360, "#FF0000", 0);
         addChipsToPlayer(1010, 360, "#0000FF", 20);
 
+        // let chip1 = new Circle((40 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#FF0000", canvas);
+        // chip1.setImage(chipImage);
+        // chip1.drawImage();
+        // let chip2 = new Circle((1010 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#0000FF", canvas);
+        // chip2.setImage(chipImage);
+        // chip2.drawImage();
+        // chips = [chip1, chip2];
 
         function addChipsToPlayer(x, y, colour, pointer) {
-            for (let i = 0; i < 120; i += 6) {
-                let chip = new Circle((x + Math.floor(Math.random() * 150 + 1)), (y + i), 40, colour, canvas);
-                chip.setImage(chipImage);
-                chip.drawImage();
-                chips[pointer] = chip;
-                pointer++;
+            let imagen1 = new Image();
+            imagen1.src = "./imagen/ficha.png";
+            imagen1.onload = function() {
+                for (let i = 0; i < 120; i += 6) {
+                    let chip = new Circle((x + Math.floor(Math.random() * 150 + 1)), (y + i), 40, colour, canvas);
+                    chip.setImage(imagen1);
+                    chip.drawImage();
+                    chips[pointer] = chip;
+                    pointer++;
+                }
             }
         }
 
@@ -137,30 +151,25 @@
                 takeChip = null;
 
                 if (chips.length != 0) {
+                    debugger;
                     let change = fourInLine.verificarFichas();
                     if (change == true) {
                         turn = !turn;
                         fourInLine.play(turn);
                     }
                 } else {
-                    $("#titleModal").text("Prepare for this");
+                    ctx.drawImage(canvasImage, 0, 0, canvas.width, canvas.height);
+                    endGame();
+                    $("#titleModal").text("No more chips left");
                     $("#modalMessage").text("Game Over");
                     $("#staticBackdrop").modal("show");
-                    endGame();
+
                 }
             }
         });
 
         $("#playAgain").on("click", e => {
-            startGame = false;
-            fourInLine.drawBoard();
-            $("#playerWin").text(" ");
-            $("#staticBackdrop").modal("hide");
-            chips = [];
-            addChipsToPlayer(40, 360, "#FF0000", 0);
-            addChipsToPlayer(1010, 360, "#0000FF", 20);
-            redraw();
-            start();
+            reset();
         });
 
         canvas.addEventListener('mousemove', r => {
@@ -179,6 +188,7 @@
             });
 
             fourInLine.redrawBoard();
+
             for (let i = 0; i < chips.length; i++) {
                 if (draggingId !== i) {
                     // chips[i].draw();
@@ -201,6 +211,8 @@
                 let a = chips.indexOf(takeChip);
                 chips.splice(a, 1);
                 redraw();
+                // turn = !turn;
+                // fourInLine.play(turn);
             }
         }
 
@@ -223,6 +235,19 @@
 
         function endGame() {
             startGame = false;
+        }
+
+        function reset() {
+            startGame = false;
+            fourInLine.reset();
+            fourInLine.drawBoard();
+            $("#playerWin").text(" ");
+            $("#staticBackdrop").modal("hide");
+            chips = [];
+            addChipsToPlayer(40, 360, "#FF0000", 0);
+            addChipsToPlayer(1010, 360, "#0000FF", 20);
+            redraw();
+            start();
         }
 
     });
