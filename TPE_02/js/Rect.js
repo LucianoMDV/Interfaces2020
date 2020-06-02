@@ -13,6 +13,17 @@ class Rect extends Figure {
         this.ctx.closePath();
     }
 
+    drawImage() {
+        this.ctx.beginPath();
+        this.ctx.fillStyle = this.colour;
+        this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        if (this.image != null) {
+            this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }
+        this.ctx.closePath();
+    }
+
     hit(x, y) {
         return (x > this.x && x < this.x + this.width) && (y > this.y && y < this.y + this.height);
     }

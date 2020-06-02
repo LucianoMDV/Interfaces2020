@@ -1,10 +1,13 @@
 class GameBoard {
-    constructor(canvas) {
+    constructor(canvas, chipImage, boardImage) {
         this.players = [new Player("Lucho"), new Player("Seba")];
         this.chipsBoard = [];
         this.canvas = canvas;
         this.ultimaFicha = null;
+        this.chipImage = chipImage;
+        this.boardImage = boardImage;
         this.board = new Rect(240, 100, 720, 450, "#000000", canvas);
+        this.board.setImage(this.boardImage);
         this.drawBoard();
         this.meQuedan = this.chipsBoard.length;
         // this.cont = 0;
@@ -12,7 +15,7 @@ class GameBoard {
 
 
     drawBoard() {
-        this.board.draw();
+        this.board.drawImage();
         let pointer = 0;
         let x = 0;
         let y = 0;
@@ -23,48 +26,48 @@ class GameBoard {
                 y = col + 145;
                 this.chipsBoard[pointer] = new Circle(x, y, 40, colour, this.canvas);
                 this.chipsBoard[pointer].draw();
-                // this.chipsBoard[pointer].drawImage2();
+                // this.chipsBoard[pointer].drawImage(this.chipImage);
                 pointer++;
             }
         }
     }
 
     redrawBoard() {
-        this.board.draw();
+        this.board.drawImage();
         for (let i = 0; i < this.chipsBoard.length; i++) {
-            this.chipsBoard[i].draw();
-            // this.chipsBoard[i].drawImage2();
+            // this.chipsBoard[i].draw();
+            this.chipsBoard[i].drawImage();
         }
         // console.log(this.chipsBoard);
 
     }
 
-    setCol(col, colour) {
+    setCol(col, image, colour) {
         let freeSpace = false;
         switch (col) {
             case 1:
-                freeSpace = this.setcolourColumn(0, 4, colour, freeSpace);
+                freeSpace = this.setcolourColumn(0, 4, image, colour, freeSpace);
                 break;
             case 2:
-                freeSpace = this.setcolourColumn(5, 9, colour, freeSpace);
+                freeSpace = this.setcolourColumn(5, 9, image, colour, freeSpace);
                 break;
             case 3:
-                freeSpace = this.setcolourColumn(10, 14, colour, freeSpace);
+                freeSpace = this.setcolourColumn(10, 14, image, colour, freeSpace);
                 break;
             case 4:
-                freeSpace = this.setcolourColumn(15, 19, colour, freeSpace);
+                freeSpace = this.setcolourColumn(15, 19, image, colour, freeSpace);
                 break;
             case 5:
-                freeSpace = this.setcolourColumn(20, 24, colour, freeSpace);
+                freeSpace = this.setcolourColumn(20, 24, image, colour, freeSpace);
                 break;
             case 6:
-                freeSpace = this.setcolourColumn(25, 29, colour, freeSpace);
+                freeSpace = this.setcolourColumn(25, 29, image, colour, freeSpace);
                 break;
             case 7:
-                freeSpace = this.setcolourColumn(30, 34, colour, freeSpace);
+                freeSpace = this.setcolourColumn(30, 34, image, colour, freeSpace);
                 break;
             case 8:
-                freeSpace = this.setcolourColumn(35, 39, colour, freeSpace);
+                freeSpace = this.setcolourColumn(35, 39, image, colour, freeSpace);
                 break;
                 // default:
                 //     break;
@@ -74,14 +77,14 @@ class GameBoard {
     }
 
     //deberia ser privada pero no se como 
-    setcolourColumn(fromHere, toHere, colour, freeSpace) {
+    setcolourColumn(fromHere, toHere, image, colour, freeSpace) {
         // setcolourColumn(fromHere, toHere, pat, freeSpace) {
 
         for (let i = toHere; i >= fromHere; i--) {
             if (this.chipsBoard[i].getColour() == '#FFFFFF') {
-                this.ultimaFicha = i;
+                this.ultimaFicha = this.chipsBoard[i];
                 this.chipsBoard[i].setColour(colour);
-                // this.chipsBoard[i].setImage(pat);
+                this.chipsBoard[i].setImage(image);
                 freeSpace = true;
                 break;
             }
@@ -89,37 +92,63 @@ class GameBoard {
         return freeSpace;
     }
 
-    buscar(takeChip) {
+    buscar() {
         let cont = 0;
-        let colourTakeChip = takeChip.getColour();
+        let colourTakeChip = this.ultimaFicha.getColour();
         for (let index = 0; index < this.chipsBoard.length; index++) {
-            if (this.chipsBoard[index].getColour() == takeChip.getColour()) {
+            if (this.chipsBoard[index].getColour() == this.ultimaFicha.getColour()) {
 
                 //busca por derecha
-                this.buscarPorDerecha(index, colourTakeChip, cont);
+                if (cont != 4) {
+                    cont = this.buscarPorDerecha(index, colourTakeChip, cont);
+                }
 
                 //busca por izquierda
-                this.buscarPorIzquierda(index, colourTakeChip, cont);
+                if (cont != 4) {
+                    cont = this.buscarPorIzquierda(index, colourTakeChip, cont);
+                }
 
                 //busca por columnLimit hacia arriba
-                this.buscarParaArriba(index, colourTakeChip, cont);
+                if (cont != 4) {
+                    cont = this.buscarParaArriba(index, colourTakeChip, cont);
+                }
 
                 //busca por columnLimit hacia abajo
-                this.buscarParaAbajo(index, colourTakeChip, cont);
+                if (cont != 4) {
+                    cont = this.buscarParaAbajo(index, colourTakeChip, cont);
+                }
 
                 //busca por diagonal derecha arriba
-                this.buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont);
+                if (cont != 4) {
+                    cont = this.buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont);
+                }
 
                 //busca por diagonal derecha abajo
-                this.buscarDiagonalInferiorDerecha(index, colourTakeChip, cont);
+                if (cont != 4) {
+                    cont = this.buscarDiagonalInferiorDerecha(index, colourTakeChip, cont);
+                }
 
                 //busca por diagonal izquierda arriba
-                this.buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont);
+                if (cont != 4) {
+                    cont = this.buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont);
+                }
 
                 //busca por diagonal izquierda abajo
-                this.buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont);
-            }
+                if (cont != 4) {
+                    cont = this.buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont);
+                }
 
+                if (cont == 4) {
+                    // debugger;
+                    if (this.chipsBoard[index].getColour() == "#FF0000") {
+                        $("#modalMessage").text("Congratulations " + this.players[0].nombre + ", you win!");
+                    } else {
+                        $("#modalMessage").text("Congratulations " + this.players[1].nombre + ", you win!");
+                    }
+                    $("#staticBackdrop").modal("show");
+                    break;
+                }
+            }
         }
     }
 
@@ -128,13 +157,13 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     buscarPorIzquierda(index, colourTakeChip, cont) {
@@ -142,13 +171,13 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     buscarParaArriba(index, colourTakeChip, cont) {
@@ -157,13 +186,13 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     verifyColumnLimit(index, thisSideIs) {
@@ -195,13 +224,13 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont) {
@@ -209,13 +238,14 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    // $("#staticBackdrop").modal("show");
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     buscarDiagonalInferiorDerecha(index, colourTakeChip, cont) {
@@ -223,13 +253,13 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont) {
@@ -237,13 +267,13 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont) {
@@ -251,13 +281,13 @@ class GameBoard {
             if (this.chipsBoard[j].getColour() == colourTakeChip) {
                 cont++;
                 if (cont == 4) {
-                    $("#staticBackdrop").modal("show");
-                    break;
+                    return cont;
                 }
             } else {
                 break;
             }
         }
+        return 0;
     }
 
     verificarFichas() {
@@ -278,11 +308,30 @@ class GameBoard {
 
     play(turn) {
         if (turn == true) {
-            console.log(this.players[0]);
+            this.drawPlayer("PLAYER 1", this.players[0], 10, 55);
+            // console.log(this.players[0]);
 
         } else {
-            console.log(this.players[1]);
+            this.drawPlayer("PLAYER 2", this.players[1], 970, 55);
+            // console.log(this.players[1]);
         }
+    }
+
+    drawPlayer(player, name, x, y) {
+        console.log("nombre: " + name.nombre);
+        let ctx = this.canvas.getContext('2d');
+        /* Dibujando texto relleno y con contorno */
+        ctx.beginPath(); // Inicializamos una ruta
+        ctx.lineCap = "butt"; // Trazo sin terminaciones
+        ctx.lineWidth = 4; // Trazo de 1 pixeles de ancho
+        ctx.strokeStyle = "#000000"; // Azul
+        ctx.fillStyle = "#F3E00B"; // Amarillo
+        ctx.font = "45px Verdana"; // Establecemos la tipografía
+        ctx.strokeText(player, x, y);
+        ctx.fillText(player, x, y);
+        ctx.strokeText(name.nombre, x + 40, y + 50);
+        ctx.fillText(name.nombre, x + 40, y + 50);
+        ctx.closePath();
     }
 
 }

@@ -2,9 +2,6 @@ class Circle extends Figure {
     constructor(x, y, radio, colour, canvas) {
         super(x, y, colour, canvas);
         this.radio = radio;
-        // let img = document.querySelector("#img4");
-        // let pat = this.ctx.createPattern(img, "no-repeat");
-        // this.image = pat;
     }
 
     draw() {
@@ -19,21 +16,18 @@ class Circle extends Figure {
         this.ctx.closePath();
     }
 
-    drawImage2() {
-        // var c = document.getElementById("myCanvas");
-        // var ctx = c.getContext("2d");
+    drawImage() {
         this.ctx.beginPath();
-        // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        // var img = document.querySelector("#img4");
-        // var pat = this.ctx.createPattern(img, "repeat");
         this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
-        // this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
-        // this.ctx.fillStyle = this.colour;
-        this.ctx.fillStyle = this.image;
+        this.ctx.fillStyle = this.colour;
         this.ctx.fill();
-
-        this.ctx.lineWidth = 3;
+        this.ctx.lineWidth = 1;
+        this.ctx.lineCap = 'round';
+        this.ctx.strokeStyle = 'black';
         this.ctx.stroke();
+        if (this.image != null) {
+            this.ctx.drawImage(this.image, this.x - this.radio, this.y - this.radio, this.radio * 2, this.radio * 2);
+        }
         this.ctx.closePath();
     }
 
@@ -54,16 +48,20 @@ class Circle extends Figure {
     setColour(colour) {
         this.colour = colour;
     }
-    setImage(pattern) {
-        this.image = pattern;
-    }
-    getImage() {
-        return this.image;
-    }
 
     hit(x, y) {
         let temp = false;
         let m = Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2);
         return m < Math.pow(this.radio, 2);
+    }
+
+    fillFigure(pattern) {
+        // debugger;
+        this.ctx.beginPath();
+        this.ctx.fillStyle = pattern;
+        this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
+        this.ctx.fillStyle = pattern;
+        this.ctx.fill();
+        this.ctx.closePath();
     }
 }

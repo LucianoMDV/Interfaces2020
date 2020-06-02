@@ -45,10 +45,10 @@
         // let scueare = new Squeare(x, y, width, height, canvas);
 
         //----------------------------------------> DIBUJOS ALEATORIOS <----------------------------------------
-        // let scueare2 = new Squeare(x, y, width + 100, height + 100, canvas);
+        let scueare2 = new Squeare(x, y, width + 100, height + 100, canvas);
 
-        // let ima = new Image();
-        // ima.src = "./img/casa.jpg";
+        let ima = new Image();
+        ima.src = "./img/casa.jpg";
         // let ima2 = new Image();
         // ima2.src = "./img/img1.jpg";
         // let ima3 = new Image();
@@ -91,19 +91,19 @@
             ctx.fill();
         }
         // console.log(ima1);
-        // let ima = new Image();
+        // let ima5 = new Image();
         // ima.src = document.querySelector("#img4");
         // let picture = document.querySelector("#img4");
 
-        // let figures;
-        // ima.onload = function() {
-        //     // let pattern = scueare2.ctx.createPattern(ima, 'no-repeat');
-        //     // scueare2.fillFigure(pattern);
-        //     scueare2.drawImage(ima);
+        let figures;
+        ima.onload = function() {
+            let pattern = scueare2.ctx.createPattern(ima, 'no-repeat');
+            scueare2.fillFigure(pattern);
+            scueare2.drawImage(ima);
 
-        //     figures = [scueare2];
+            figures = [scueare2];
 
-        // };
+        };
 
         // setTimeout(() => {
         //     drawFigures();

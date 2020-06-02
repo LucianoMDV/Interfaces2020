@@ -5,10 +5,7 @@ class Figure {
         this.colour = colour;
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
-    }
-
-    drawImage(image, x1, y1) {
-        this.ctx.drawImage(image, this.x + x1, this.y + y1, 50, 50);
+        this.image = null;
     }
 
     setColour(colour) {
@@ -18,17 +15,12 @@ class Figure {
     getColour() {
         return this.colour;
     }
-
-    // getCanvas() {
-    //     return this.canvas;
-    // }
-
-    // randomX() {
-    //     return Math.floor(Math.random() * this.canvas.height);
-    // }
-    // randomY() {
-    //     return Math.floor(Math.random() * this.canvas.width);
-    // }
+    setImage(image) {
+        this.image = image;
+    }
+    getImage() {
+        return this.image;
+    }
 
     // getContext() {
     //     this.canvas = document.querySelector("#canvasOriginal");
@@ -43,7 +35,6 @@ class Figure {
     setPosition(x, y) {
         this.x = x;
         this.y = y;
-
     }
 
     randomRGBA() {

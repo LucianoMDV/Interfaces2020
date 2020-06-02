@@ -25,6 +25,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <img id="img1" src="imagen/ficha.png" alt="" hidden>
+                <img id="img2" src="imagen/fondoTablero.jpg" alt="" hidden>
+                <img id="img3" src="imagen/fondoCanvas.png" alt="" hidden>
+                <img id="img4" src="imagen/here.png" alt="" hidden>
+            </div>
+        </div>
+
     </div>
 
     <!-- MODAL WIN -->
@@ -32,13 +42,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Winner!</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel"><span id="titleModal">Winner!</span></h5>
                 </div>
                 <div class="modal-body">
-                    <h3>Congratulations you win!</h3>
+                    <h3 id="modalMessage"></h3>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                     <button type="button" id="playAgain" class="btn btn-primary">Play Again</button>
                 </div>
             </div>
