@@ -54,14 +54,4 @@ class Circle extends Figure {
         let m = Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2);
         return m < Math.pow(this.radio, 2);
     }
-
-    fillFigure(pattern) {
-        // debugger;
-        this.ctx.beginPath();
-        this.ctx.fillStyle = pattern;
-        this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
-        this.ctx.fillStyle = pattern;
-        this.ctx.fill();
-        this.ctx.closePath();
-    }
 }

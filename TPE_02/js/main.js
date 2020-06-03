@@ -2,7 +2,6 @@
     'use strict';
 
     window.onload = function() {
-        // document.addEventListener("DOMContentLoaded", function(event) {
 
         let canvas = document.querySelector("#canvas");
         let ctx = canvas.getContext("2d");
@@ -13,9 +12,6 @@
 
         ctx.drawImage(canvasImage, 0, 0, canvas.width, canvas.height);
         let fourInLine = new GameBoard(canvas, chipImage, boardImage);
-
-
-        // fourInLine.setImage(boardImage);
 
         let chips = [];
         let detectPosition = [];
@@ -31,16 +27,8 @@
             start();
         });
 
-        // addChipsToPlayer(40, 360, "#FF0000", 0);
-        // addChipsToPlayer(1010, 360, "#0000FF", 20);
-
-        let chip1 = new Circle((40 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#FF0000", canvas);
-        chip1.setImage(chipImage);
-        chip1.drawImage();
-        let chip2 = new Circle((1010 + Math.floor(Math.random() * 150 + 1)), (360 + 6), 40, "#0000FF", canvas);
-        chip2.setImage(chipImage);
-        chip2.drawImage();
-        chips = [chip1, chip2];
+        addChipsToPlayer(40, 360, "#FF0000", 0);
+        addChipsToPlayer(1010, 360, "#0000FF", 20);
 
         function addChipsToPlayer(x, y, colour, pointer) {
             let imagen1 = new Image();
@@ -80,13 +68,11 @@
                     dragging = true;
                     if (turn == true) {
                         for (let i = 0; i < chips.length; i++) {
-                            // console.log(Math.floor((chips.length / 2) - 1) + " ROJO");
                             if (chips[i].getColour() == "#FF0000") {
                                 let status = chips[i].hit(r.layerX, r.layerY);
                                 if (status) {
                                     draggingId = i;
                                     takeChip = chips[i];
-                                    // console.log('le pegue');
                                     break;
                                 }
                             }
@@ -95,13 +81,11 @@
                 } else {
                     if (turn == false) {
                         for (let i = 0; i < chips.length; i++) {
-                            // console.log(Math.floor((chips.length / 2)) + " AZUL");
                             if (chips[i].getColour() == "#0000FF") {
                                 let status = chips[i].hit(r.layerX, r.layerY);
                                 if (status) {
                                     draggingId = i;
                                     takeChip = chips[i];
-                                    // console.log('le pegue');
                                     break;
                                 }
                             }
@@ -116,7 +100,6 @@
             draggingId = -1;
             let dropX = r.layerX;
             let dropY = r.layerY;
-            // console.log(takeChip);
             if (takeChip != null) { //lo necesito para evitar que se coloque una ficha sin agarrar ninguna y evitar el error que no hay ninguna ficha seleccionada para colocar en el tablero
                 if (re.hit(dropX, dropY)) {
                     fijarFichaColumna(1, takeChip);
@@ -154,7 +137,6 @@
                 takeChip = null;
 
                 if (chips.length != 0) {
-                    debugger;
                     let change = fourInLine.verificarFichas();
                     if (change == true) {
                         turn = !turn;
@@ -194,28 +176,22 @@
 
             for (let i = 0; i < chips.length; i++) {
                 if (draggingId !== i) {
-                    // chips[i].draw();
                     chips[i].drawImage();
                 }
             }
 
             if (draggingId !== -1) {
-                // chips[draggingId].draw();
                 chips[draggingId].drawImage();
             }
 
         }
 
         function fijarFichaColumna(col, takeChip) {
-            // debugger;
-            // let cambio = fourInLine.setCol(col, takeChip.getColour());
             let cambio = fourInLine.setCol(col, takeChip.getImage(), takeChip.getColour());
             if (cambio == true) {
                 let a = chips.indexOf(takeChip);
                 chips.splice(a, 1);
                 redraw();
-                // turn = !turn;
-                // fourInLine.play(turn);
             }
         }
 
@@ -223,16 +199,13 @@
             startGame = true;
             btnStartGame.setAttribute("disabled", " ");
             let result = Math.floor((Math.random() * 2) + 1);
-            // console.log(result);
 
             if (result == 1) {
                 turn = true;
                 fourInLine.play(turn);
-                // alert("JUGADOR 1");
             } else {
                 turn = false;
                 fourInLine.play(turn);
-                // alert("JUGADOR 2");
             }
         }
 

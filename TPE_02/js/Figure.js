@@ -22,26 +22,8 @@ class Figure {
         return this.image;
     }
 
-    // getContext() {
-    //     this.canvas = document.querySelector("#canvasOriginal");
-    //     let ctx = canvas.getContext('2d');
-    //     return ctx;
-    // }
-
-    // getHeight() {
-    //     return 
-    // }
-
     setPosition(x, y) {
         this.x = x;
         this.y = y;
-    }
-
-    randomRGBA() {
-        let r = Math.round(Math.random() * 255);
-        let g = Math.round(Math.random() * 255);
-        let b = Math.round(Math.random() * 255);
-        let a = 255;
-        return `rgba(${r}, ${g}, ${b}, ${a})`;
     }
 }

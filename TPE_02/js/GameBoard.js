@@ -10,7 +10,6 @@ class GameBoard {
         this.board.setImage(this.boardImage);
         this.drawBoard();
         this.meQuedan = this.chipsBoard.length;
-        // this.cont = 0;
     }
 
 
@@ -26,7 +25,6 @@ class GameBoard {
                 y = col + 145;
                 this.chipsBoard[pointer] = new Circle(x, y, 40, colour, this.canvas);
                 this.chipsBoard[pointer].draw();
-                // this.chipsBoard[pointer].drawImage(this.chipImage);
                 pointer++;
             }
         }
@@ -35,10 +33,8 @@ class GameBoard {
     redrawBoard() {
         this.board.drawImage();
         for (let i = 0; i < this.chipsBoard.length; i++) {
-            // this.chipsBoard[i].draw();
             this.chipsBoard[i].drawImage();
         }
-        // console.log(this.chipsBoard);
 
     }
 
@@ -69,8 +65,6 @@ class GameBoard {
             case 8:
                 freeSpace = this.setcolourColumn(35, 39, image, colour, freeSpace);
                 break;
-                // default:
-                //     break;
         }
         this.redrawBoard();
         return freeSpace;
@@ -78,8 +72,6 @@ class GameBoard {
 
     //deberia ser privada pero no se como 
     setcolourColumn(fromHere, toHere, image, colour, freeSpace) {
-        // setcolourColumn(fromHere, toHere, pat, freeSpace) {
-
         for (let i = toHere; i >= fromHere; i--) {
             if (this.chipsBoard[i].getColour() == '#FFFFFF') {
                 this.ultimaFicha = this.chipsBoard[i];
@@ -101,7 +93,6 @@ class GameBoard {
 
                 //busca por derecha
                 cont = this.buscarPorDerecha(index, colourTakeChip, cont, chipsWin);
-
 
                 //busca por izquierda
                 if (cont != 4) {
@@ -139,7 +130,6 @@ class GameBoard {
                 }
 
                 if (cont == 4) {
-                    // debugger;
                     if (this.chipsBoard[index].getColour() == "#FF0000") {
                         $("#modalMessage").text("Congratulations " + this.players[0].nombre + ", you win!");
                     } else {
@@ -158,7 +148,6 @@ class GameBoard {
                 cont++;
                 chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
-                    // debugger;
                     for (let i = 0; i < chipsWin.length; i++) {
                         chipsWin[i].setColour("#00FF00");
                         chipsWin[i].drawImage();
@@ -179,7 +168,6 @@ class GameBoard {
                 cont++;
                 chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
-                    // debugger;
                     for (let i = 0; i < chipsWin.length; i++) {
                         chipsWin[i].setColour("#00FF00");
                         chipsWin[i].drawImage();
@@ -203,7 +191,6 @@ class GameBoard {
                 cont++;
                 chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
-                    // debugger;
                     for (let i = 0; i < chipsWin.length; i++) {
                         chipsWin[i].setColour("#00FF00");
                         chipsWin[i].drawImage();
@@ -221,7 +208,6 @@ class GameBoard {
     }
 
     verifyColumnLimit(index, thisSideIs) {
-        // debugger;
         let columnLimit;
         if (index > 0 && index <= 4) {
             thisSideIs === "top" ? columnLimit = 0 : thisSideIs === "bottom" ? columnLimit = 4 : columnLimit;
@@ -250,7 +236,6 @@ class GameBoard {
                 cont++;
                 chipsWin.push(this.chipsBoard[j]);
                 if (cont == 4) {
-                    // debugger;
                     for (let i = 0; i < chipsWin.length; i++) {
                         chipsWin[i].setColour("#00FF00");
                         chipsWin[i].drawImage();
@@ -268,23 +253,24 @@ class GameBoard {
     }
 
     buscarDiagonalSuperiorDerecha(index, colourTakeChip, cont, chipsWin) {
-        for (let j = index; j < this.chipsBoard.length; j += 4) {
-            if (this.chipsBoard[j].getColour() == colourTakeChip) {
-                cont++;
-                chipsWin.push(this.chipsBoard[j]);
-                if (cont == 4) {
-                    // debugger;
-                    for (let i = 0; i < chipsWin.length; i++) {
-                        chipsWin[i].setColour("#00FF00");
-                        chipsWin[i].drawImage();
+        let limitDiagonal = new Array(3, 4, 8, 9, 13, 14, 18, 19, 23, 24);
+        if (limitDiagonal.includes(index)) {
+            for (let j = index; j < this.chipsBoard.length; j += 4) {
+                if (this.chipsBoard[j].getColour() == colourTakeChip) {
+                    cont++;
+                    chipsWin.push(this.chipsBoard[j]);
+                    if (cont == 4) {
+                        for (let i = 0; i < chipsWin.length; i++) {
+                            chipsWin[i].setColour("#00FF00");
+                            chipsWin[i].drawImage();
+                        }
+                        chipsWin.splice(0, chipsWin.length);
+                        return cont;
                     }
+                } else {
                     chipsWin.splice(0, chipsWin.length);
-                    // $("#staticBackdrop").modal("show");
-                    return cont;
+                    break;
                 }
-            } else {
-                chipsWin.splice(0, chipsWin.length);
-                break;
             }
         }
         chipsWin.splice(0, chipsWin.length);
@@ -292,22 +278,24 @@ class GameBoard {
     }
 
     buscarDiagonalInferiorDerecha(index, colourTakeChip, cont, chipsWin) {
-        for (let j = index; j < this.chipsBoard.length; j += 6) {
-            if (this.chipsBoard[j].getColour() == colourTakeChip) {
-                cont++;
-                chipsWin.push(this.chipsBoard[j]);
-                if (cont == 4) {
-                    // debugger;
-                    for (let i = 0; i < chipsWin.length; i++) {
-                        chipsWin[i].setColour("#00FF00");
-                        chipsWin[i].drawImage();
+        let limitDiagonal = new Array(0, 1, 5, 6, 10, 11, 15, 16, 20, 21);
+        if (limitDiagonal.includes(index)) {
+            for (let j = index; j < this.chipsBoard.length; j += 6) {
+                if (this.chipsBoard[j].getColour() == colourTakeChip) {
+                    cont++;
+                    chipsWin.push(this.chipsBoard[j]);
+                    if (cont == 4) {
+                        for (let i = 0; i < chipsWin.length; i++) {
+                            chipsWin[i].setColour("#00FF00");
+                            chipsWin[i].drawImage();
+                        }
+                        chipsWin.splice(0, chipsWin.length);
+                        return cont;
                     }
+                } else {
                     chipsWin.splice(0, chipsWin.length);
-                    return cont;
+                    break;
                 }
-            } else {
-                chipsWin.splice(0, chipsWin.length);
-                break;
             }
         }
         chipsWin.splice(0, chipsWin.length);
@@ -315,45 +303,50 @@ class GameBoard {
     }
 
     buscarDiagonalSuperiorIzquierda(index, colourTakeChip, cont, chipsWin) {
-        for (let j = index; j >= 0; j -= 6) {
-            if (this.chipsBoard[j].getColour() == colourTakeChip) {
-                cont++;
-                chipsWin.push(this.chipsBoard[j]);
-                if (cont == 4) {
-                    // debugger;
-                    for (let i = 0; i < chipsWin.length; i++) {
-                        chipsWin[i].setColour("#00FF00");
-                        chipsWin[i].drawImage();
+        let limitDiagonal = new Array(18, 19, 23, 24, 28, 29, 33, 34, 38, 39);
+        if (limitDiagonal.includes(index)) {
+            for (let j = index; j >= 0; j -= 6) {
+                if (this.chipsBoard[j].getColour() == colourTakeChip) {
+                    cont++;
+                    chipsWin.push(this.chipsBoard[j]);
+                    if (cont == 4) {
+                        for (let i = 0; i < chipsWin.length; i++) {
+                            chipsWin[i].setColour("#00FF00");
+                            chipsWin[i].drawImage();
+                        }
+                        chipsWin.splice(0, chipsWin.length);
+                        return cont;
                     }
+                } else {
                     chipsWin.splice(0, chipsWin.length);
-                    return cont;
+                    break;
                 }
-            } else {
-                chipsWin.splice(0, chipsWin.length);
-                break;
             }
+
         }
         chipsWin.splice(0, chipsWin.length);
         return 0;
     }
 
     buscarDiagonalInferiorIzquierda(index, colourTakeChip, cont, chipsWin) {
-        for (let j = index; j >= 0; j -= 4) {
-            if (this.chipsBoard[j].getColour() == colourTakeChip) {
-                cont++;
-                chipsWin.push(this.chipsBoard[j]);
-                if (cont == 4) {
-                    // debugger;
-                    for (let i = 0; i < chipsWin.length; i++) {
-                        chipsWin[i].setColour("#00FF00");
-                        chipsWin[i].drawImage();
+        let limitDiagonal = new Array(15, 16, 20, 21, 25, 26, 30, 31, 35, 36);
+        if (limitDiagonal.includes(index)) {
+            for (let j = index; j >= 0; j -= 4) {
+                if (this.chipsBoard[j].getColour() == colourTakeChip) {
+                    cont++;
+                    chipsWin.push(this.chipsBoard[j]);
+                    if (cont == 4) {
+                        for (let i = 0; i < chipsWin.length; i++) {
+                            chipsWin[i].setColour("#00FF00");
+                            chipsWin[i].drawImage();
+                        }
+                        chipsWin.splice(0, chipsWin.length);
+                        return cont;
                     }
+                } else {
                     chipsWin.splice(0, chipsWin.length);
-                    return cont;
+                    break;
                 }
-            } else {
-                chipsWin.splice(0, chipsWin.length);
-                break;
             }
         }
         chipsWin.splice(0, chipsWin.length);
@@ -361,14 +354,12 @@ class GameBoard {
     }
 
     verificarFichas() {
-        // debugger;
         let cont = 0;
         for (let i = 0; i < this.chipsBoard.length; i++) {
             if (this.chipsBoard[i].getColour() == "#FFFFFF") {
                 cont++;
             }
         }
-        // debugger;
         if (cont < this.meQuedan) {
             this.meQuedan = cont;
             return true;
@@ -379,16 +370,13 @@ class GameBoard {
     play(turn) {
         if (turn == true) {
             this.drawPlayer("PLAYER 1", this.players[0], 10, 55);
-            // console.log(this.players[0]);
 
         } else {
             this.drawPlayer("PLAYER 2", this.players[1], 970, 55);
-            // console.log(this.players[1]);
         }
     }
 
     drawPlayer(player, name, x, y) {
-        console.log("nombre: " + name.nombre);
         let ctx = this.canvas.getContext('2d');
         /* Dibujando texto relleno y con contorno */
         ctx.beginPath(); // Inicializamos una ruta
