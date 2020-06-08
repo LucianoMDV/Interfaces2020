@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    /* padding: 5%; */
+}
+
+.padreMarco {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute; */
+}
+
+.marcoReloj {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.centroReloj {
+    background-color: #00FF00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+}
+
+.clock {
+    background: url("../image/esfera-reloj-4.png") no-repeat center;
+    height: 221px;
+    position: relative;
+    width: 228px;
+}
+
+
+/* .minutes-container,
+.hours-container,
+.seconds-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+} */
+
+.minutes {
+    background: grey;
+    height: 10%;
+    /* left: 49%; */
+    position: absolute;
+    top: 4%;
+    width: 5px;
+    /* transform-origin: bottom; */
+    /* transform: rotate(270deg); */
+}
+
+.seconds {
+    background: #FF0000;
+    height: 10%;
+    /* left: 85%; */
+    position: absolute;
+    transform-origin: bottom;
+    /* transform: rotate(290deg); */
+    top: 4%;
+    /* top: 39.5%; */
+    width: 2px;
+}
+
+.hours {
+    background: grey;
+    height: 7%;
+    /* left: 49.5%; */
+    /* left: 49.5%; */
+    position: absolute;
+    /* transform-origin: bottom; */
+    /* transform: rotate(290deg); */
+    top: 7%;
+    /* top: 43.5%; */
+    width: 5px;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+.hours {
+    animation: rotate 43200s infinite linear;
+}
+
+.minutes {
+    animation: rotate 3600s infinite linear;
+    /* animation: rotate 3600s infinite steps(60); */
+}
+
+.seconds {
+    animation: rotate 60s infinite linear;
+    /* animation: rotate 60s infinite steps(60); */
+}
