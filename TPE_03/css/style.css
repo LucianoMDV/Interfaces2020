@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    /* align-self: center; */
+    align-items: flex-end;
+    width: 100vw;
+    height: 100vh;
+    background: url("../image/parallax2/parallax-mountain-bg.png");
+    background-size: cover;
+}
+
+.fondoLejos {
+    width: 100vw;
+    height: 100vh;
+    /* height: 160px; */
+    /* background: url("../image/parallax/parallax-forest-back-trees.png") repeat-x; */
+    /* background: url("../image/parallax2/parallax-mountain-bg.png"); */
+    background-size: cover;
+    /* animation: fondoMove 50s linear infinite; */
+}
+
+.fondoCerca3 {
+    position: relative;
+    width: 100vw;
+    /* height: 100vh; */
+    height: 160px;
+    /* background: url("../image/parallax/parallax-forest-lights.png") repeat-x; */
+    background: url("../image/parallax2/parallax-mountain-montain-far.png") repeat-x;
+    /* background-size: contain; */
+    animation: fondoMove 40s linear infinite;
+}
+
+.fondoCerca2 {
+    position: relative;
+    width: 100vw;
+    /* height: 100vh; */
+    height: 160px;
+    /* top: -30px; */
+    /* background: url("../image/parallax/parallax-forest-middle-trees.png") repeat-x; */
+    background: url("../image/parallax2/parallax-mountain-mountains.png") repeat-x;
+    /* background-size: cover; */
+    animation: fondoMove 30s linear infinite;
+}
+
+.fondoCerca1 {
+    position: relative;
+    width: 100vw;
+    /* height: 100vh; */
+    height: 160px;
+    background: url("../image/parallax2/parallax-mountain-trees.png") repeat-x;
+    /* background-size: cover; */
+    animation: fondoMove 20s linear infinite;
+}
+
+.fondoCerca {
+    position: relative;
+    /* width: 544px; */
+    width: 100vw;
+    height: 160px;
+    /* height: 100vh; */
+    /* background: url("../image/parallax/parallax-forest-front-trees.png") repeat-x; */
+    background: url("../image/parallax2/parallax-mountain-foreground-trees.png") repeat-x;
+    background-size: contain;
+    animation: fondoMove 10s linear infinite;
+}
+
+@keyframes fondoMove {
+    0% {
+        /* background-position: 100vw; */
+        background-position: 544px;
+        /* background-position: 1229px; */
+    }
+    100% {
+        background-position: 0;
+    }
+}
+
+
+/* .player {
+    background: url("../image/Player_Bird.png") left center;
+    width: 46px;
+    height: 43px;
+    animation: fly 0.8s steps(10) infinite;
+}
+
+@keyframes fly {
+    from {
+        background-position: 0%;
+    }
+    to {
+        background-position: -487px;
+    }
+} */
+
+
+/* ------------------------------------------------------------------- */
+
+
+/* .container-player:hover {
+    top: 50px;
+    transition: top 3s easeInOutQuint;
+} */
+
+.container-player {
+    top: 250px;
+    position: absolute;
+    width: 46px;
+    height: 41.1px;
+    /* animation: impulso 0.8s linear infinite alternate; */
+    /* animation-play-state: paused; */
+    /* animation-iteration-count: 2; */
+    /* transition: top 3s linear; */
+}
+
+
+/* :root {
+    --my-var: 200px;
+} */
+
+.caer {
+    --my-var: 0px;
+    transform: translate(0, var(--my-var));
+    /*transform: translate(0,0); */
+}
+
+.player {
+    display: flex;
+    align-self: flex-end;
+    width: 46px;
+    height: 41.1px;
+    background-image: url("../image/Bird_Sheet3.png");
+    animation: playX 0.8s steps(10) infinite;
+    /* ,  */
+    /* playY 3s steps(10) infinite; */
+}
+
+@keyframes impulso {
+    100% {
+        top: 50px;
+    }
+}
+
+@keyframes playX {
+    from {
+        background-position-x: 0px;
+        background-position-y: -41.1px;
+    }
+    to {
+        background-position-x: -487px;
+        background-position-y: -41.1px;
+    }
+}
+
+@keyframes playY {
+    from {
+        background-position-y: 0px;
+    }
+    to {
+        background-position-y: -355px;
+    }
+}
