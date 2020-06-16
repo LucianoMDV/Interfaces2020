@@ -1,6 +1,23 @@
 * {
     margin: 0;
     padding: 0;
+    overflow: hidden;
+}
+
+.menu {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#start {
+    background-color: chartreuse;
+    font-size: large;
+    font-style: normal;
+    padding: 1%;
 }
 
 .container {
@@ -81,6 +98,94 @@
     }
 }
 
+.obstaculo1 {
+    background: url("../image/block-big.png") repeat-y;
+    position: absolute;
+    top: 0px;
+    left: 800px;
+    transform: rotateZ(180deg);
+    width: 32px;
+    height: 200px;
+    animation: obstaculoMove 10s linear infinite;
+}
+
+.obstaculo2 {
+    background: url("../image/block-big.png") repeat-y;
+    position: absolute;
+    left: 800px;
+    width: 32px;
+    height: 200px;
+    animation: obstaculoMove 10s linear infinite;
+}
+
+.obstaculo3 {
+    background: url("../image/block-big.png") repeat-y;
+    position: absolute;
+    top: 0px;
+    left: 1000px;
+    transform: rotateZ(180deg);
+    width: 32px;
+    height: 200px;
+    animation: obstaculoMove 10s linear infinite;
+}
+
+.obstaculo4 {
+    background: url("../image/block-big.png") repeat-y;
+    position: absolute;
+    left: 1000px;
+    width: 32px;
+    height: 200px;
+    animation: obstaculoMove 10s linear infinite;
+}
+
+.obstaculo5 {
+    background: url("../image/block-big.png") repeat-y;
+    position: absolute;
+    top: 0px;
+    left: 1200px;
+    transform: rotateZ(180deg);
+    width: 32px;
+    height: 200px;
+    animation: obstaculoMove 10s linear infinite;
+}
+
+.obstaculo6 {
+    background: url("../image/block-big.png") repeat-y;
+    position: absolute;
+    left: 1200px;
+    width: 32px;
+    height: 200px;
+    animation: obstaculoMove 10s linear infinite;
+}
+
+@keyframes obstaculoMove {
+    /* 0% {
+        left: 1229px;
+        left: 100%;
+    } */
+    100% {
+        left: -100%;
+    }
+}
+
+@keyframes obstaculoMove2 {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -90%;
+    }
+}
+
+@keyframes obstaculoMove3 {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -80%;
+    }
+}
+
 
 /* .player {
     background: url("../image/Player_Bird.png") left center;
@@ -135,9 +240,17 @@
     width: 46px;
     height: 41.1px;
     background-image: url("../image/Bird_Sheet3.png");
-    animation: playX 0.8s steps(10) infinite;
+    /* animation: playX 0.8s steps(10) infinite; */
     /* ,  */
     /* playY 3s steps(10) infinite; */
+}
+
+.subir {
+    animation: playX 1s steps(10) infinite;
+}
+
+.subirTurbo {
+    animation: playX 0.4s steps(10) infinite;
 }
 
 @keyframes impulso {

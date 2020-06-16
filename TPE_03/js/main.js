@@ -23,6 +23,12 @@
         let game = new Game();
         game.initGame();
 
+        // let player = document.querySelector(".player");
+        // setInterval(() => {
+        //     player.classList.toggle("subir");
+        //     player.classList.toggle("subirTurbo");
+        // }, 1000);
+
 
         // caer.addEventListener("click", e => {
         //     console.log(BODYHEIGHT);
