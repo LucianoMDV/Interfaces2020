@@ -4,6 +4,7 @@ class Player {
         this.playerDiv = document.querySelector('.container-player');
         this.width = parseInt(window.getComputedStyle(this.playerDiv, null).getPropertyValue("width").split("px")[0]);
         this.height = parseInt(window.getComputedStyle(this.playerDiv, null).getPropertyValue("height").split("px")[0]);
+        this.initialPosition = parseInt(window.getComputedStyle(this.playerDiv, null).getPropertyValue("top").split("px")[0]);
 
     }
 
@@ -49,5 +50,9 @@ class Player {
 
         this.playerDiv.children[0].classList.remove("subirTurbo");
         this.playerDiv.children[0].classList.add("subir");
+    }
+
+    setInitialPosition() {
+        this.playerDiv.style.setProperty("top", this.initialPosition + "px");
     }
 }

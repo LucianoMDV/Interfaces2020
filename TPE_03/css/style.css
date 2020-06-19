@@ -4,11 +4,15 @@
     overflow: hidden;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .container {
-    background-color: aqua;
+    /* background-color: aqua; */
     display: flex;
-    /* justify-content: center; */
-    /* align-self: center; */
+    justify-content: center;
+    align-self: center;
     align-items: flex-end;
     width: 100vw;
     height: 100vh;
@@ -26,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #start {
@@ -35,8 +40,6 @@
     border-radius: .25em;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
     color: transparent;
-    /* font-size: large;
-    font-style: normal; */
     padding: 5vw;
     animation: text-shadow-3 1s infinite alternate;
 }
@@ -57,6 +60,62 @@
     to {
         /* text-shadow: 0 0 rgba(255, 255, 255, 0), -45px -45px 0 red, -30px -30px 0 orange, -15px -15px 0 yellow, 0 0 0 green, 15px 15px 0 blue, 30px 30px 0 indigo, 45px 45px 0 violet; */
         text-shadow: 0 0 rgba(255, 255, 255, 0), -45px -45px 0 #fff7e2, -30px -30px 0 #734049, -15px -15px 0 #b36950, 0 0 0 #f8d200, 15px 15px 0 #b36950, 30px 30px 0 #734049, 45px 45px 0 #fff7e2;
+    }
+}
+
+#descripcion {
+    font-family: monospace;
+    font-size: xx-large;
+    background-color: transparent;
+    border-radius: .25em;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    color: white;
+    width: 30vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+}
+
+.agrandar {
+    animation: agrandarWidth 1s ease-in;
+    animation-fill-mode: forwards;
+}
+
+.achicar {
+    animation: achicarWidth 1s ease-out;
+    animation-fill-mode: forwards;
+}
+
+#descripcion:hover {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 .08em .24em rgba(0, 0, 0, 0.3);
+}
+
+#descripcion:active {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 .08em .24em rgba(0, 0, 0, 0.3);
+    background: transparent;
+}
+
+@keyframes agrandarWidth {
+    /* 0% {
+        width: 30vw;
+        height: 10vh;
+    } */
+    100% {
+        width: 35vw;
+        height: 35vh;
+    }
+}
+
+@keyframes achicarWidth {
+    0% {
+        width: 35vw;
+        height: 35vh;
+    }
+    100% {
+        width: 30vw;
+        height: 10vh;
     }
 }
 
@@ -139,67 +198,86 @@
 /* -----------------------------------------------> OBSTACULOS <---------------------------------------------- */
 
 .obstaculo1 {
-    background: url("../image/block-big.png") repeat-y;
+    background: url("../image/block-big.png") repeat;
     position: absolute;
     top: 0px;
     left: 100vw;
     transform: rotateZ(180deg);
-    width: 32px;
-    height: 200px;
-    animation: obstaculoMove 10s linear infinite;
+    /* width: 32px; */
+    /* height: 200px; */
+    width: 64px;
+    height: 70vh;
+    background-color: red;
+    /* animation: obstaculoMove 10s linear infinite; */
 }
 
 .obstaculo2 {
-    background: url("../image/block-big.png") repeat-y;
+    background: url("../image/block-big.png") repeat;
     position: absolute;
     left: 100vw;
-    width: 32px;
-    height: 200px;
-    animation: obstaculoMove 10s linear infinite;
+    /* width: 32px;
+    height: 200px; */
+    width: 64px;
+    height: 12vh;
+    background-color: yellow;
+    /* animation: obstaculoMove 10s linear infinite; */
 }
 
 .obstaculo3 {
-    background: url("../image/block-big.png") repeat-y;
+    background: url("../image/block-big.png") repeat;
     position: absolute;
     top: 0px;
     left: 100vw;
     transform: rotateZ(180deg);
-    width: 32px;
-    height: 200px;
-    animation: obstaculoMove 10s linear infinite;
-    animation-delay: 1s;
+    /* width: 32px;
+    height: 200px; */
+    width: 64px;
+    height: 40vh;
+    /* animation: obstaculoMove 10s linear infinite; */
+    /* animation-delay: 2s; */
 }
 
 .obstaculo4 {
-    background: url("../image/block-big.png") repeat-y;
+    background: url("../image/block-big.png") repeat;
     position: absolute;
     left: 100vw;
-    width: 32px;
-    height: 200px;
-    animation: obstaculoMove 10s linear infinite;
-    animation-delay: 1s;
+    /* width: 32px;
+    height: 200px; */
+    width: 64px;
+    height: 42vh;
+    /* animation: obstaculoMove 10s linear infinite; */
+    /* animation-delay: 2s; */
 }
 
 .obstaculo5 {
-    background: url("../image/block-big.png") repeat-y;
+    background: url("../image/block-big.png") repeat;
     position: absolute;
     top: 0px;
     left: 100vw;
     transform: rotateZ(180deg);
-    width: 32px;
-    height: 200px;
-    animation: obstaculoMove 10s linear infinite;
-    animation-delay: 2s;
+    /* width: 32px;
+    height: 200px; */
+    width: 64px;
+    height: 50vh;
+    /* animation: obstaculoMove 10s linear infinite; */
+    /* animation-delay: 4s; */
 }
 
 .obstaculo6 {
-    background: url("../image/block-big.png") repeat-y;
+    background: url("../image/block-big.png") repeat;
     position: absolute;
     left: 100vw;
-    width: 32px;
-    height: 200px;
+    /* width: 32px;
+    height: 200px; */
+    width: 64px;
+    height: 32vh;
+    /* animation: obstaculoMove 10s linear infinite; */
+    /* animation-delay: 4s; */
+}
+
+.moveObstacle {
     animation: obstaculoMove 10s linear infinite;
-    animation-delay: 2s;
+    animation-delay: 0s;
 }
 
 @keyframes obstaculoMove {
@@ -245,6 +323,7 @@
     position: absolute;
     width: 46px;
     height: 41.1px;
+    /* background-color: blue; */
     /* animation: impulso 0.8s linear infinite alternate; */
     /* animation-play-state: paused; */
     /* animation-iteration-count: 2; */
@@ -278,7 +357,7 @@
 }
 
 .subirTurbo {
-    animation: playX 0.4s steps(10) infinite;
+    animation: playX 0.3s steps(10) infinite;
 }
 
 @keyframes impulso {

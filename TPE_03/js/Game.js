@@ -20,7 +20,7 @@ class Game {
         // this.obstacles.push(new Obstaculo());
         let num = 1;
         for (let i = 0; i < 3; i++) {
-            this.obstacles.push(new Obstaculo(200, num));
+            this.obstacles.push(new Obstaculo(num));
             num += 2;
         }
 
@@ -42,10 +42,10 @@ class Game {
         top = parseInt(top.split('px')[0]);
 
         if (this.goUp) {
-            if (this.cont < 10) {
+            if (this.cont < 5) {
 
-                if ((top - 5) >= 0) {
-                    this.player.goUp(top - 5);
+                if ((top - 10) >= 0) {
+                    this.player.goUp(top - 10);
                 } else {
                     top = 0;
                 }
@@ -99,6 +99,9 @@ class Game {
             // if (((posLeftObstacleX <= posRigthPlayerX) && (posPlayerY <= posObstacleBottom)) || ((posLeftObstacleX2 <= posRigthPlayerX) && (posPlayerBottomY >= posObstacleTop))) {
             if (((posPlayerY <= posObstacleBottom)) || ((posPlayerBottomY >= posObstacleTop))) {
                 // console.log("colisiono");
+                // console.log(posPlayerBottomY);
+                // console.log(posObstacleTop);
+
                 // alert("perdiste");
                 return true;
 
@@ -125,7 +128,16 @@ class Game {
 
     endGame() {
         clearInterval(this.interval);
-        alert("perdiste");
+        this.player.cambiarAnimacionNormal();
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].removeAnimation();
+        }
+        this.player.setInitialPosition();
+        let btnStart = document.querySelector("#start");
+        let btnHowToPlay = document.querySelector("#descripcion");
+        btnStart.classList.toggle("hidden");
+        btnHowToPlay.classList.toggle("hidden");
+        alert("Game Over");
         // this.obstacles[0].classList.remove("obstaculo1");
     }
 
