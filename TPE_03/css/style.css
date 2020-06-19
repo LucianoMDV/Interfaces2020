@@ -4,6 +4,21 @@
     overflow: hidden;
 }
 
+.container {
+    background-color: aqua;
+    display: flex;
+    /* justify-content: center; */
+    /* align-self: center; */
+    align-items: flex-end;
+    width: 100vw;
+    height: 100vh;
+    background: url("../image/parallax2/parallax-mountain-bg.png");
+    background-size: cover;
+}
+
+
+/* ---------------------------------------------> MENU PRINCIPAL <--------------------------------------------- */
+
 .menu {
     position: absolute;
     width: 100vw;
@@ -14,23 +29,42 @@
 }
 
 #start {
-    background-color: chartreuse;
-    font-size: large;
-    font-style: normal;
-    padding: 1%;
+    font-family: monospace;
+    font-size: xxx-large;
+    background-color: transparent;
+    border-radius: .25em;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    color: transparent;
+    /* font-size: large;
+    font-style: normal; */
+    padding: 5vw;
+    animation: text-shadow-3 1s infinite alternate;
 }
 
-.container {
-    background-color: aqua;
-    display: flex;
-    justify-content: center;
-    /* align-self: center; */
-    align-items: flex-end;
-    width: 100vw;
-    height: 100vh;
-    background: url("../image/parallax2/parallax-mountain-bg.png");
-    background-size: cover;
+#start:hover {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 .08em .24em rgba(0, 0, 0, 0.3);
 }
+
+#start:active {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 .08em .24em rgba(0, 0, 0, 0.3);
+    background: transparent;
+}
+
+@keyframes text-shadow-3 {
+    from {
+        text-shadow: 0 0 white;
+    }
+    to {
+        /* text-shadow: 0 0 rgba(255, 255, 255, 0), -45px -45px 0 red, -30px -30px 0 orange, -15px -15px 0 yellow, 0 0 0 green, 15px 15px 0 blue, 30px 30px 0 indigo, 45px 45px 0 violet; */
+        text-shadow: 0 0 rgba(255, 255, 255, 0), -45px -45px 0 #fff7e2, -30px -30px 0 #734049, -15px -15px 0 #b36950, 0 0 0 #f8d200, 15px 15px 0 #b36950, 30px 30px 0 #734049, 45px 45px 0 #fff7e2;
+    }
+}
+
+
+/* ---------------------------------------------> ///////////// <--------------------------------------------- */
+
+
+/* ---------------------------------------------> FONDO PARALLAX <-------------------------------------------- */
 
 .fondoLejos {
     width: 100vw;
@@ -43,7 +77,7 @@
 }
 
 .fondoCerca3 {
-    position: relative;
+    /* position: relative; */
     width: 100vw;
     /* height: 100vh; */
     height: 160px;
@@ -54,7 +88,7 @@
 }
 
 .fondoCerca2 {
-    position: relative;
+    /* position: relative; */
     width: 100vw;
     /* height: 100vh; */
     height: 160px;
@@ -66,7 +100,7 @@
 }
 
 .fondoCerca1 {
-    position: relative;
+    /* position: relative; */
     width: 100vw;
     /* height: 100vh; */
     height: 160px;
@@ -83,7 +117,7 @@
     /* height: 100vh; */
     /* background: url("../image/parallax/parallax-forest-front-trees.png") repeat-x; */
     background: url("../image/parallax2/parallax-mountain-foreground-trees.png") repeat-x;
-    background-size: contain;
+    /* background-size: contain; */
     animation: fondoMove 10s linear infinite;
 }
 
@@ -98,11 +132,17 @@
     }
 }
 
+
+/* ---------------------------------------------> ////////////// <-------------------------------------------- */
+
+
+/* -----------------------------------------------> OBSTACULOS <---------------------------------------------- */
+
 .obstaculo1 {
     background: url("../image/block-big.png") repeat-y;
     position: absolute;
     top: 0px;
-    left: 800px;
+    left: 100vw;
     transform: rotateZ(180deg);
     width: 32px;
     height: 200px;
@@ -112,7 +152,7 @@
 .obstaculo2 {
     background: url("../image/block-big.png") repeat-y;
     position: absolute;
-    left: 800px;
+    left: 100vw;
     width: 32px;
     height: 200px;
     animation: obstaculoMove 10s linear infinite;
@@ -122,69 +162,57 @@
     background: url("../image/block-big.png") repeat-y;
     position: absolute;
     top: 0px;
-    left: 1000px;
+    left: 100vw;
     transform: rotateZ(180deg);
     width: 32px;
     height: 200px;
     animation: obstaculoMove 10s linear infinite;
+    animation-delay: 1s;
 }
 
 .obstaculo4 {
     background: url("../image/block-big.png") repeat-y;
     position: absolute;
-    left: 1000px;
+    left: 100vw;
     width: 32px;
     height: 200px;
     animation: obstaculoMove 10s linear infinite;
+    animation-delay: 1s;
 }
 
 .obstaculo5 {
     background: url("../image/block-big.png") repeat-y;
     position: absolute;
     top: 0px;
-    left: 1200px;
+    left: 100vw;
     transform: rotateZ(180deg);
     width: 32px;
     height: 200px;
     animation: obstaculoMove 10s linear infinite;
+    animation-delay: 2s;
 }
 
 .obstaculo6 {
     background: url("../image/block-big.png") repeat-y;
     position: absolute;
-    left: 1200px;
+    left: 100vw;
     width: 32px;
     height: 200px;
     animation: obstaculoMove 10s linear infinite;
+    animation-delay: 2s;
 }
 
 @keyframes obstaculoMove {
-    /* 0% {
-        left: 1229px;
-        left: 100%;
-    } */
     100% {
-        left: -100%;
+        left: -32px;
     }
 }
 
-@keyframes obstaculoMove2 {
-    0% {
-        left: 100%;
-    }
-    100% {
-        left: -90%;
-    }
-}
 
-@keyframes obstaculoMove3 {
-    0% {
-        left: 100%;
-    }
-    100% {
-        left: -80%;
-    }
-}
+/* -----------------------------------------------> ////////// <---------------------------------------------- */
+
+
+/* ------------------------------------------------> JUGADOR <------------------------------------------------ */
 
 
 /* .player {
@@ -278,3 +306,6 @@
         background-position-y: -355px;
     }
 }
+
+
+/* ------------------------------------------------> /////// <------------------------------------------------ */

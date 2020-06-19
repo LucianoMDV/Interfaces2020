@@ -6,7 +6,11 @@ class Obstaculo {
         this.body = document.querySelector('body');
         this.bodyHeight = parseInt(window.getComputedStyle(this.body, null).getPropertyValue("height").split("px")[0]);
         // this.left = porcentajeLeft;
-        this.obstaculo1.style.left += porcentajeLeft * 100;
+        // this.obstaculo1.style.left += porcentajeLeft * 100;
+        this.leftObstacle1 = parseInt(window.getComputedStyle(this.obstaculo1, null).getPropertyValue("left").split("px")[0]);
+        // this.obstaculo1.style.setProperty("left", this.leftObstacle1 + porcentajeLeft + "px");
+        // this.leftObstacle2 = parseInt(window.getComputedStyle(this.obstaculo2, null).getPropertyValue("left").split("px")[0]);
+        // this.obstaculo2.style.setProperty("left", this.leftObstacle2 + porcentajeLeft + "px");
         // this.cont = 0;
     }
 

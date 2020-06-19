@@ -20,7 +20,7 @@ class Game {
         // this.obstacles.push(new Obstaculo());
         let num = 1;
         for (let i = 0; i < 3; i++) {
-            this.obstacles.push(new Obstaculo(10, num));
+            this.obstacles.push(new Obstaculo(200, num));
             num += 2;
         }
 
@@ -59,7 +59,7 @@ class Game {
         } else {
             //CAER
             if ((top + 1) <= this.diferencia) {
-                this.player.setPosition(top + 1);
+                this.player.setPosition(top + 3);
             }
         }
 
