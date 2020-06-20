@@ -32,7 +32,7 @@ class Game {
             }
         });
 
-        this.interval = setInterval(this.loop.bind(this), 40);
+        this.interval = setInterval(this.loop.bind(this), 33);
 
     }
 
@@ -73,11 +73,12 @@ class Game {
         this.updateScreen();
 
         for (let i = 0; i < this.obstacles.length; i++) {
-            if (this.checkColition(this.obstacles[i])) {
-                this.endGame();
-            } else {
-                //     this.score++;
-            }
+            // if (this.checkColition(this.obstacles[i])) {
+            //     this.endGame();
+            // } else {
+            //     //     this.score++;
+            // }
+            this.obstacles[i].checkFinish();
         }
 
     }

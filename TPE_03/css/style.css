@@ -25,10 +25,11 @@
 
 .menu {
     position: absolute;
+    z-index: 1;
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
 }
@@ -98,10 +99,10 @@
 }
 
 @keyframes agrandarWidth {
-    /* 0% {
+    0% {
         width: 30vw;
         height: 10vh;
-    } */
+    }
     100% {
         width: 35vw;
         height: 35vh;
@@ -203,24 +204,18 @@
     top: 0px;
     left: 100vw;
     transform: rotateZ(180deg);
-    /* width: 32px; */
-    /* height: 200px; */
     width: 64px;
     height: 70vh;
     background-color: red;
-    /* animation: obstaculoMove 10s linear infinite; */
 }
 
 .obstaculo2 {
     background: url("../image/block-big.png") repeat;
     position: absolute;
     left: 100vw;
-    /* width: 32px;
-    height: 200px; */
     width: 64px;
     height: 12vh;
     background-color: yellow;
-    /* animation: obstaculoMove 10s linear infinite; */
 }
 
 .obstaculo3 {
@@ -229,24 +224,16 @@
     top: 0px;
     left: 100vw;
     transform: rotateZ(180deg);
-    /* width: 32px;
-    height: 200px; */
     width: 64px;
     height: 40vh;
-    /* animation: obstaculoMove 10s linear infinite; */
-    /* animation-delay: 2s; */
 }
 
 .obstaculo4 {
     background: url("../image/block-big.png") repeat;
     position: absolute;
     left: 100vw;
-    /* width: 32px;
-    height: 200px; */
     width: 64px;
     height: 42vh;
-    /* animation: obstaculoMove 10s linear infinite; */
-    /* animation-delay: 2s; */
 }
 
 .obstaculo5 {
@@ -255,24 +242,16 @@
     top: 0px;
     left: 100vw;
     transform: rotateZ(180deg);
-    /* width: 32px;
-    height: 200px; */
     width: 64px;
     height: 50vh;
-    /* animation: obstaculoMove 10s linear infinite; */
-    /* animation-delay: 4s; */
 }
 
 .obstaculo6 {
     background: url("../image/block-big.png") repeat;
     position: absolute;
     left: 100vw;
-    /* width: 32px;
-    height: 200px; */
     width: 64px;
     height: 32vh;
-    /* animation: obstaculoMove 10s linear infinite; */
-    /* animation-delay: 4s; */
 }
 
 .moveObstacle {
@@ -282,7 +261,7 @@
 
 @keyframes obstaculoMove {
     100% {
-        left: -32px;
+        left: -64px;
     }
 }
 
