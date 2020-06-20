@@ -32,7 +32,7 @@ class Game {
             }
         });
 
-        this.interval = setInterval(this.loop.bind(this), 33);
+        this.interval = setInterval(this.loop.bind(this), 16.6);
 
     }
 
@@ -42,10 +42,10 @@ class Game {
         top = parseInt(top.split('px')[0]);
 
         if (this.goUp) {
-            if (this.cont < 5) {
+            if (this.cont < 38) {
 
-                if ((top - 10) >= 0) {
-                    this.player.goUp(top - 10);
+                if ((top - 1.5) >= 0) {
+                    this.player.goUp(top - 1.5);
                 } else {
                     top = 0;
                 }
@@ -58,7 +58,7 @@ class Game {
             }
         } else {
             //CAER
-            if ((top + 1) <= this.diferencia) {
+            if ((top + 10) <= this.diferencia) {
                 this.player.setPosition(top + 3);
             }
         }
