@@ -43,13 +43,33 @@ class Player {
         // console.log(this.playerDiv.children[0]);
 
         this.playerDiv.children[0].classList.remove("subir");
+        this.playerDiv.children[0].classList.remove("morir");
         this.playerDiv.children[0].classList.add("subirTurbo");
     }
     cambiarAnimacionNormal() {
         // console.log(this.playerDiv.children[0]);
 
         this.playerDiv.children[0].classList.remove("subirTurbo");
+        this.playerDiv.children[0].classList.remove("morir");
         this.playerDiv.children[0].classList.add("subir");
+    }
+
+    cambiarAnimacionMorir() {
+        this.playerDiv.children[0].classList.remove("subirTurbo");
+        this.playerDiv.children[0].classList.remove("subir");
+        this.playerDiv.children[0].classList.add("morir");
+    }
+    addAnimationCaer() {
+        this.playerDiv.classList.add("caer");
+        //adapto el contenedor del player, al tamaño que necesita la animacion caer
+        this.playerDiv.style.setProperty("width", 22 + "px");
+        this.playerDiv.style.setProperty("height", 49 + "px");
+    }
+    removeAnimationCaer() {
+        this.playerDiv.classList.remove("caer");
+        //adapto el contenedor del player, al tamaño que necesita la animacion Normal
+        this.playerDiv.style.setProperty("width", 46 + "px");
+        this.playerDiv.style.setProperty("height", 41.1 + "px");
     }
 
     setInitialPosition() {

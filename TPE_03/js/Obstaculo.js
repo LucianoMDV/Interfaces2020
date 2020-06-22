@@ -1,5 +1,5 @@
 class Obstaculo {
-    constructor(num) {
+    constructor(num, delay) {
         this.obstaculo1 = document.querySelector('.obstaculo' + num);
         this.obstaculo2 = document.querySelector('.obstaculo' + (num + 1));
         this.width = parseInt(window.getComputedStyle(this.obstaculo1, null).getPropertyValue("width").split("px")[0]);
@@ -7,8 +7,8 @@ class Obstaculo {
         this.bodyHeight = parseInt(window.getComputedStyle(this.body, null).getPropertyValue("height").split("px")[0]);
         this.leftObstacle1 = parseInt(window.getComputedStyle(this.obstaculo1, null).getPropertyValue("left").split("px")[0]);
         this.addAnimation();
-        this.obstaculo1.style.setProperty("animation-delay", num + "s");
-        this.obstaculo2.style.setProperty("animation-delay", num + "s");
+        this.obstaculo1.style.setProperty("animation-delay", delay + "s");
+        this.obstaculo2.style.setProperty("animation-delay", delay + "s");
     }
 
     update() {
@@ -52,8 +52,8 @@ class Obstaculo {
 
         if (this.getPositionLeft_X() <= -61) {
             console.log("llegue al final");
-            let random = (Math.floor((Math.random() * 82)) + 1);
-            let random2 = (100 - random) - 18;
+            let random = (Math.floor((Math.random() * 80)) + 1);
+            let random2 = (100 - random) - 20;
             console.log(random);
             console.log(random2);
 

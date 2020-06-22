@@ -120,6 +120,30 @@
     }
 }
 
+#continuar {
+    font-family: monospace;
+    font-size: xx-large;
+    background-color: transparent;
+    border-radius: .25em;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    color: white;
+    width: 30vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+}
+
+#continuar:hover {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 .08em .24em rgba(0, 0, 0, 0.3);
+}
+
+#continuar:active {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 .08em .24em rgba(0, 0, 0, 0.3);
+    background: transparent;
+}
+
 
 /* ---------------------------------------------> ///////////// <--------------------------------------------- */
 
@@ -214,7 +238,7 @@
     position: absolute;
     left: 100vw;
     width: 64px;
-    height: 12vh;
+    height: 10vh;
     background-color: yellow;
 }
 
@@ -233,7 +257,7 @@
     position: absolute;
     left: 100vw;
     width: 64px;
-    height: 42vh;
+    height: 40vh;
 }
 
 .obstaculo5 {
@@ -251,7 +275,7 @@
     position: absolute;
     left: 100vw;
     width: 64px;
-    height: 32vh;
+    height: 30vh;
 }
 
 .moveObstacle {
@@ -262,6 +286,47 @@
 @keyframes obstaculoMove {
     100% {
         left: -64px;
+    }
+}
+
+
+/* -----------------------------------------------> ////////// <---------------------------------------------- */
+
+
+/* ------------------------------------------------> JUGADOR <------------------------------------------------ */
+
+.container-diamante {
+    width: 45px;
+    height: 39px;
+    position: absolute;
+    left: 100vw;
+    top: 50vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.animarDiamante {
+    transform: scale(3, 3);
+    width: 100%;
+    height: 100%;
+    background: url("../image/gem.png") repeat;
+    animation: animarGem 1s steps(5) infinite;
+}
+
+@keyframes animarGem {
+    100% {
+        background-position-x: -75px;
+    }
+}
+
+.diamondMove {
+    animation: gemMove 10s linear infinite;
+}
+
+@keyframes gemMove {
+    100% {
+        left: -45px;
     }
 }
 
@@ -315,9 +380,14 @@
 } */
 
 .caer {
-    --my-var: 0px;
-    transform: translate(0, var(--my-var));
-    /*transform: translate(0,0); */
+    animation: moriryCaer 3s linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes moriryCaer {
+    100% {
+        transform: translateY(100vh);
+    }
 }
 
 .player {
@@ -336,7 +406,15 @@
 }
 
 .subirTurbo {
-    animation: playX 0.3s steps(10) infinite;
+    animation: playX 300ms steps(10) infinite;
+}
+
+.morir {
+    display: flex;
+    align-self: flex-end;
+    width: 22px;
+    height: 49px;
+    animation: playXMorir 1s steps(3) infinite;
 }
 
 @keyframes impulso {
@@ -353,6 +431,17 @@
     to {
         background-position-x: -487px;
         background-position-y: -41.1px;
+    }
+}
+
+@keyframes playXMorir {
+    from {
+        background-position-x: 0px;
+        background-position-y: -123px;
+    }
+    to {
+        background-position-x: -76px;
+        background-position-y: -123px;
     }
 }
 

@@ -1,5 +1,6 @@
 class Game {
     constructor() {
+        this.continuar = document.querySelector("#continuar");
         this.container = document.querySelector(".container-player");
         this.body = document.querySelector('body');
         this.bodyHeight = parseInt(window.getComputedStyle(this.body, null).getPropertyValue("height").split("px")[0]);
@@ -20,7 +21,7 @@ class Game {
         // this.obstacles.push(new Obstaculo());
         let num = 1;
         for (let i = 0; i < 3; i++) {
-            this.obstacles.push(new Obstaculo(num));
+            this.obstacles.push(new Obstaculo(num, (3.5 * i)));
             num += 2;
         }
 
@@ -40,12 +41,13 @@ class Game {
 
         let top = window.getComputedStyle(this.container, null).getPropertyValue("top");
         top = parseInt(top.split('px')[0]);
+        let seCorre = 2;
 
         if (this.goUp) {
-            if (this.cont < 38) {
-
-                if ((top - 1.5) >= 0) {
-                    this.player.goUp(top - 1.5);
+            if (this.cont < 18) { //frame para activar turbo es 300ms /16.6 frame
+                //subir
+                if ((top - seCorre - 1) >= 0) {
+                    this.player.goUp(top - seCorre - 1);
                 } else {
                     top = 0;
                 }
@@ -57,9 +59,12 @@ class Game {
                 this.cont = 0;
             }
         } else {
-            //CAER
-            if ((top + 10) <= this.diferencia) {
-                this.player.setPosition(top + 3);
+            // CAER
+            top += seCorre + 1;
+            if ((top) <= this.diferencia) {
+                this.player.setPosition(top);
+            } else {
+                this.endGame();
             }
         }
 
@@ -73,14 +78,16 @@ class Game {
         this.updateScreen();
 
         for (let i = 0; i < this.obstacles.length; i++) {
-            // if (this.checkColition(this.obstacles[i])) {
-            //     this.endGame();
-            // } else {
-            //     //     this.score++;
-            // }
-            this.obstacles[i].checkFinish();
-        }
+            if (this.checkColition(this.obstacles[i])) {
+                this.endGame();
+            } else {
+                // if (this.checkColitionDiamond(this.diamond[i])) {
+                //     this.score++;
+                // }
+                this.obstacles[i].checkFinish();
+            }
 
+        }
     }
 
     checkColition(obstacle) {
@@ -96,20 +103,10 @@ class Game {
         let posPlayerBottomY = this.player.getPositionBottomY();
 
         if (posRigthObstacleX > posLeftPlayerX && posLeftObstacleX < posRigthPlayerX) { //controlo que este dentro del rango de la columna y si se paso que deje de controlar si colisiono
-            // console.log("ENTRO!!!");
-            // if (((posLeftObstacleX <= posRigthPlayerX) && (posPlayerY <= posObstacleBottom)) || ((posLeftObstacleX2 <= posRigthPlayerX) && (posPlayerBottomY >= posObstacleTop))) {
             if (((posPlayerY <= posObstacleBottom)) || ((posPlayerBottomY >= posObstacleTop))) {
-                // console.log("colisiono");
-                // console.log(posPlayerBottomY);
-                // console.log(posObstacleTop);
-
-                // alert("perdiste");
                 return true;
-
             }
         }
-        // console.log(posObstacle);
-        // console.log(posPlayer);
 
     }
 
@@ -128,18 +125,21 @@ class Game {
     }
 
     endGame() {
+        this.player.cambiarAnimacionMorir();
         clearInterval(this.interval);
+        this.player.addAnimationCaer();
+        this.continuar.classList.remove("hidden");
+        // alert("Game Over");
+    }
+
+    reset() {
         this.player.cambiarAnimacionNormal();
+        this.player.setInitialPosition();
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].removeAnimation();
         }
-        this.player.setInitialPosition();
-        let btnStart = document.querySelector("#start");
-        let btnHowToPlay = document.querySelector("#descripcion");
-        btnStart.classList.toggle("hidden");
-        btnHowToPlay.classList.toggle("hidden");
-        alert("Game Over");
-        // this.obstacles[0].classList.remove("obstaculo1");
+        this.obstacles = [];
+        this.player.removeAnimationCaer();
     }
 
 }

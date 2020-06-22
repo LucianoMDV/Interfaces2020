@@ -22,6 +22,14 @@
             }
         });
 
+        let continuar = document.querySelector("#continuar");
+        continuar.addEventListener("click", e => {
+            game.reset();
+            continuar.classList.toggle("hidden");
+            btnStart.classList.toggle("hidden");
+            btnHowToPlay.classList.toggle("hidden");
+        });
+
 
     });
 
