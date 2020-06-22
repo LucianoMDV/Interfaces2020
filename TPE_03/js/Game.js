@@ -22,12 +22,15 @@ class Game {
         let num = 1;
         for (let i = 0; i < 3; i++) {
             this.obstacles.push(new Obstaculo(num, (3.5 * i)));
+            this.obstacles[i].runningAnimation();
             num += 2;
         }
 
         window.addEventListener('keyup', e => {
+            console.log(e.keyCode);
+
             if (e.keyCode === 38) {
-                console.log("entre");
+                // console.log("entre");
                 this.player.cambiarAnimacionSaltar();
                 this.goUp = true;
             }
@@ -81,13 +84,14 @@ class Game {
             if (this.checkColition(this.obstacles[i])) {
                 this.endGame();
             } else {
-                // if (this.checkColitionDiamond(this.diamond[i])) {
-                //     this.score++;
-                // }
+                if ((this.checkPass(this.obstacles[i])) && (this.obstacles[i].getPassObs() == true)) {
+                    this.score++;
+                }
                 this.obstacles[i].checkFinish();
             }
-
         }
+        document.querySelector("#point").innerHTML = this.score;
+
     }
 
     checkColition(obstacle) {
@@ -108,6 +112,17 @@ class Game {
             }
         }
 
+
+    }
+
+    checkPass(obstacle) {
+        let posRigthObstacleX = obstacle.getPositionRight_X();
+        let posLeftPlayerX = this.player.getPositionLeft_X();
+        if (posLeftPlayerX > posRigthObstacleX && !obstacle.getPassObs()) {
+            obstacle.setPassObs(true);
+            return true;
+        }
+
     }
 
     updateScreen() {
@@ -126,9 +141,12 @@ class Game {
 
     endGame() {
         this.player.cambiarAnimacionMorir();
-        clearInterval(this.interval);
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].stopAnimation();
+        }
         this.player.addAnimationCaer();
         this.continuar.classList.remove("hidden");
+        clearInterval(this.interval);
         // alert("Game Over");
     }
 
@@ -139,6 +157,8 @@ class Game {
             this.obstacles[i].removeAnimation();
         }
         this.obstacles = [];
+        // console.log(this.obstacles);
+
         this.player.removeAnimationCaer();
     }
 

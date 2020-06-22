@@ -9,6 +9,7 @@ class Obstaculo {
         this.addAnimation();
         this.obstaculo1.style.setProperty("animation-delay", delay + "s");
         this.obstaculo2.style.setProperty("animation-delay", delay + "s");
+        this.passObs = false;
     }
 
     update() {
@@ -35,10 +36,21 @@ class Obstaculo {
         return this.bodyHeight - parseInt(window.getComputedStyle(this.obstaculo2, null).getPropertyValue("height").split("px")[0]);
     }
 
+    stopAnimation() {
+        this.obstaculo1.style.setProperty("animation-play-state", "paused");
+        this.obstaculo2.style.setProperty("animation-play-state", "paused");
+    }
+
+    runningAnimation() {
+        this.obstaculo1.style.setProperty("animation-play-state", "running");
+        this.obstaculo2.style.setProperty("animation-play-state", "running");
+    }
+
     removeAnimation() {
         this.obstaculo1.classList.remove("moveObstacle");
         this.obstaculo2.classList.remove("moveObstacle");
     }
+
     addAnimation() {
         this.obstaculo1.classList.add("moveObstacle");
         this.obstaculo2.classList.add("moveObstacle");
@@ -51,6 +63,7 @@ class Obstaculo {
         // }
 
         if (this.getPositionLeft_X() <= -61) {
+            this.passObs = false;
             console.log("llegue al final");
             let random = (Math.floor((Math.random() * 80)) + 1);
             let random2 = (100 - random) - 20;
@@ -66,4 +79,11 @@ class Obstaculo {
         }
     }
 
+    getPassObs() {
+        return this.passObs;
+    }
+
+    setPassObs(pass) {
+        this.passObs = pass;
+    }
 }
