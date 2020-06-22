@@ -144,7 +144,11 @@
     background: transparent;
 }
 
-#puntos {
+.puntos :first-child {
+    margin-right: 10px;
+}
+
+.puntos {
     z-index: -1;
     position: absolute;
     font-family: monospace;

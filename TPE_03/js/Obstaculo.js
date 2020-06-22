@@ -67,15 +67,8 @@ class Obstaculo {
             console.log("llegue al final");
             let random = (Math.floor((Math.random() * 80)) + 1);
             let random2 = (100 - random) - 20;
-            console.log(random);
-            console.log(random2);
-
             this.obstaculo1.style.setProperty("height", random + "vh");
             this.obstaculo2.style.setProperty("height", random2 + "vh");
-            // this.obstaculo1.style.setProperty("animation-play-state", "running");
-            // this.obstaculo2.style.setProperty("animation-play-state", "running");
-            // this.removeAnimation();
-            // this.addAnimation();
         }
     }
 

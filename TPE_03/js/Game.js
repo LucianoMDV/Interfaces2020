@@ -8,7 +8,9 @@ class Game {
         this.diferencia = this.bodyHeight - this.height;
         this.player = new Player();
         this.obstacles = [];
+        this.diamond;
         this.score;
+        this.scoreBest = 0;
         this.goUp = false;
         this.interval;
         this.cont = 0;
@@ -26,7 +28,9 @@ class Game {
             num += 2;
         }
 
-        window.addEventListener('keyup', e => {
+        this.diamond = new Diamond();
+
+        window.addEventListener('keydown', e => {
             console.log(e.keyCode);
 
             if (e.keyCode === 38) {
@@ -49,8 +53,8 @@ class Game {
         if (this.goUp) {
             if (this.cont < 18) { //frame para activar turbo es 300ms /16.6 frame
                 //subir
-                if ((top - seCorre - 1) >= 0) {
-                    this.player.goUp(top - seCorre - 1);
+                if ((top - seCorre - 2) >= 0) {
+                    this.player.goUp(top - seCorre - 2);
                 } else {
                     top = 0;
                 }
@@ -86,11 +90,52 @@ class Game {
             } else {
                 if ((this.checkPass(this.obstacles[i])) && (this.obstacles[i].getPassObs() == true)) {
                     this.score++;
+                    if (this.score > this.scoreBest) {
+                        this.scoreBest = this.score;
+                    }
+
                 }
                 this.obstacles[i].checkFinish();
             }
         }
+
         document.querySelector("#point").innerHTML = this.score;
+
+        if (this.checkColitionDiamond()) {
+            // console.log("agarre el diamente");
+            this.diamond.addhidden();
+        }
+        this.diamond.checkFinish();
+    }
+
+    checkColitionDiamond() {
+        let posRightPlayerX = this.player.getPositionRight_X();
+        let posLeftPlayerX = this.player.getPositionLeft_X();
+        let posPlayerBottomY = this.player.getPositionBottomY();
+        let posPlayerY = this.player.getPositionY();
+
+        let posLeftDiamondX = this.diamond.getPositionLeft_X();
+        let posRightDiamondX = this.diamond.getPositionRight_X();
+        let posTopDiamondY = this.diamond.getPositionTop();
+        let posBottomDiamondY = this.diamond.getPositionBottom();
+
+        console.log(posRightDiamondX);
+
+        if (!this.diamond.getTakeDiamond()) {
+            if (posRightPlayerX >= posLeftDiamondX && posLeftPlayerX <= posRightDiamondX) {
+                if (posTopDiamondY <= posPlayerBottomY && posBottomDiamondY >= posPlayerY) {
+                    console.log("pase");
+                    this.diamond.setTakeDiamond(true);
+                    return true;
+                }
+
+                // if (posRightDiamondX <= posLeftPlayerX) {
+                //     console.log("termine de pasar");
+                // }
+                // console.log(posRightPlayerX);
+                // console.log(posLeftDiamondX);
+            }
+        }
 
     }
 
@@ -151,6 +196,7 @@ class Game {
     }
 
     reset() {
+        document.querySelector("#pointBest").innerHTML = this.scoreBest;
         this.player.cambiarAnimacionNormal();
         this.player.setInitialPosition();
         for (let i = 0; i < this.obstacles.length; i++) {
