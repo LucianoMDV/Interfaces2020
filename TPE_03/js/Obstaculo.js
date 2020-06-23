@@ -64,7 +64,7 @@ class Obstaculo {
 
         if (this.getPositionLeft_X() <= -61) {
             this.passObs = false;
-            console.log("llegue al final");
+            // console.log("llegue al final");
             let random = (Math.floor((Math.random() * 80)) + 1);
             let random2 = (100 - random) - 20;
             this.obstaculo1.style.setProperty("height", random + "vh");

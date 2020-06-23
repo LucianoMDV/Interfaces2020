@@ -160,9 +160,24 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-start;
     padding: 0 5vh;
+}
+
+#pointDiamond {
+    margin-right: 10px;
+}
+
+#container-diamanteIco {
+    width: 45px;
+    height: 39px;
+    /* position: absolute; */
+    /* left: 100vw;
+    top: 50vh; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
 
@@ -314,7 +329,7 @@
 /* -----------------------------------------------> ////////// <---------------------------------------------- */
 
 
-/* ------------------------------------------------> JUGADOR <------------------------------------------------ */
+/* ------------------------------------------------> DIAMOND <------------------------------------------------ */
 
 .container-diamante {
     width: 45px;
@@ -343,6 +358,7 @@
 
 .diamondMove {
     animation: gemMove 10s linear infinite;
+    animation-delay: 2s;
 }
 
 @keyframes gemMove {

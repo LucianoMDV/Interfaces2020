@@ -18,7 +18,7 @@
             if (btnHowToPlay.classList.contains("achicar")) {
                 btnHowToPlay.innerHTML = "¿How to play?";
             } else if (btnHowToPlay.classList.contains("agrandar")) {
-                btnHowToPlay.innerHTML = "Solo tienes que usar la tecla flecha arriba ▲, para evitar tocar con los obstaculos! Mucha Suerte!";
+                btnHowToPlay.innerHTML = "Solo tienes que usar la tecla flecha arriba ▲, para evitar tocar los obstaculos! Ten cuidado con el piso! Mucha Suerte!";
             }
         });
 

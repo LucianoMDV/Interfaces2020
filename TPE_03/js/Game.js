@@ -9,14 +9,19 @@ class Game {
         this.player = new Player();
         this.obstacles = [];
         this.diamond;
+        this.scoreDiamond;
         this.score;
         this.scoreBest = 0;
         this.goUp = false;
         this.interval;
         this.cont = 0;
+        this.audioTakeDiamond = new Audio("./audio/Collectable.wav");
+        this.audioAmbient = new Audio("./audio/platformer_level03.mp3");
     }
 
     initGame() {
+        this.scoreDiamond = 0;
+        this.audioAmbient.play();
         this.score = 0;
         this.player.setPosition();
 
@@ -28,10 +33,12 @@ class Game {
             num += 2;
         }
 
-        this.diamond = new Diamond();
+        let delay = 2;
+        this.diamond = new Diamond(delay);
+        this.diamond.runningAnimation();
 
         window.addEventListener('keydown', e => {
-            console.log(e.keyCode);
+            // console.log(e.keyCode);
 
             if (e.keyCode === 38) {
                 // console.log("entre");
@@ -103,7 +110,10 @@ class Game {
 
         if (this.checkColitionDiamond()) {
             // console.log("agarre el diamente");
+            this.audioTakeDiamond.play();
             this.diamond.addhidden();
+            this.scoreDiamond++;
+            document.querySelector("#pointDiamond").innerHTML = this.scoreDiamond;
         }
         this.diamond.checkFinish();
     }
@@ -119,12 +129,12 @@ class Game {
         let posTopDiamondY = this.diamond.getPositionTop();
         let posBottomDiamondY = this.diamond.getPositionBottom();
 
-        console.log(posRightDiamondX);
+        // console.log(posRightDiamondX);
 
         if (!this.diamond.getTakeDiamond()) {
             if (posRightPlayerX >= posLeftDiamondX && posLeftPlayerX <= posRightDiamondX) {
                 if (posTopDiamondY <= posPlayerBottomY && posBottomDiamondY >= posPlayerY) {
-                    console.log("pase");
+                    // console.log("pase");
                     this.diamond.setTakeDiamond(true);
                     return true;
                 }
@@ -191,12 +201,16 @@ class Game {
         }
         this.player.addAnimationCaer();
         this.continuar.classList.remove("hidden");
+        this.diamond.stopAnimation();
         clearInterval(this.interval);
         // alert("Game Over");
     }
 
     reset() {
+        this.audioAmbient.pause();
         document.querySelector("#pointBest").innerHTML = this.scoreBest;
+        this.score = 0;
+        document.querySelector("#point").innerHTML = this.score;
         this.player.cambiarAnimacionNormal();
         this.player.setInitialPosition();
         for (let i = 0; i < this.obstacles.length; i++) {
@@ -206,6 +220,11 @@ class Game {
         // console.log(this.obstacles);
 
         this.player.removeAnimationCaer();
+
+        this.scoreDiamond = 0;
+        document.querySelector("#pointDiamond").innerHTML = this.scoreDiamond;
+        this.diamond.removehidden();
+        this.diamond.removeAnimationMove();
     }
 
 }
