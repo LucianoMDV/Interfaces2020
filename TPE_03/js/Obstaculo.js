@@ -17,12 +17,7 @@ class Obstaculo {
     }
 
     getPositionLeft_X() { //RED
-        // if (this.cont < 20) {
-        // console.log("obst1: " + window.getComputedStyle(this.obstaculo1, null).getPropertyValue("left"));
-        // console.log("obst2: " + window.getComputedStyle(this.obstaculo2, null).getPropertyValue("left"));
         return parseInt(window.getComputedStyle(this.obstaculo1, null).getPropertyValue("left").split("px")[0]);
-        // }
-        // this.cont++;
     }
     getPositionRight_X() { //BLUE
         return this.getPositionLeft_X() + this.width;
@@ -57,14 +52,8 @@ class Obstaculo {
     }
 
     checkFinish() {
-        // if (this.getPositionLeft_X() < 0) {
-        //     console.log(this.getPositionLeft_X());
-
-        // }
-
         if (this.getPositionLeft_X() <= -61) {
             this.passObs = false;
-            // console.log("llegue al final");
             let random = (Math.floor((Math.random() * 80)) + 1);
             let random2 = (100 - random) - 20;
             this.obstaculo1.style.setProperty("height", random + "vh");

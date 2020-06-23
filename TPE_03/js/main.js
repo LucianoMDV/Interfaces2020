@@ -4,12 +4,17 @@
     document.addEventListener("DOMContentLoaded", e => {
         let btnStart = document.querySelector("#start");
         let btnHowToPlay = document.querySelector("#descripcion");
+        let level = document.querySelector("#level");
         let game = new Game();
 
         btnStart.addEventListener("click", e => {
             game.initGame();
             btnStart.classList.toggle("hidden");
             btnHowToPlay.classList.toggle("hidden");
+            level.classList.toggle("hidden");
+            setTimeout(() => {
+                level.classList.toggle("hidden");
+            }, 2000);
         });
 
         btnHowToPlay.addEventListener("click", e => {

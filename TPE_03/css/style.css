@@ -9,7 +9,6 @@
 }
 
 .container {
-    /* background-color: aqua; */
     display: flex;
     justify-content: center;
     align-self: center;
@@ -59,7 +58,6 @@
         text-shadow: 0 0 white;
     }
     to {
-        /* text-shadow: 0 0 rgba(255, 255, 255, 0), -45px -45px 0 red, -30px -30px 0 orange, -15px -15px 0 yellow, 0 0 0 green, 15px 15px 0 blue, 30px 30px 0 indigo, 45px 45px 0 violet; */
         text-shadow: 0 0 rgba(255, 255, 255, 0), -45px -45px 0 #fff7e2, -30px -30px 0 #734049, -15px -15px 0 #b36950, 0 0 0 #f8d200, 15px 15px 0 #b36950, 30px 30px 0 #734049, 45px 45px 0 #fff7e2;
     }
 }
@@ -120,6 +118,51 @@
     }
 }
 
+.mensajes {
+    position: absolute;
+    z-index: -2;
+}
+
+#ganaste {
+    font-family: monospace;
+    font-size: 5em;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: .25em;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    color: white;
+    width: 25vw;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+    animation: text-shadow 1s infinite;
+}
+
+#level {
+    font-family: monospace;
+    font-size: xx-large;
+    background-color: transparent;
+    border-radius: .25em;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    color: white;
+    width: 30vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+}
+
+@keyframes text-shadow {
+    0% {
+        text-shadow: 0 0 black;
+    }
+    100% {
+        text-shadow: 20px 20px 10px rgba(0, 0, 0, .5);
+    }
+}
+
 #continuar {
     font-family: monospace;
     font-size: xx-large;
@@ -160,9 +203,15 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
     padding: 0 5vh;
+}
+
+.agruparColumnas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #pointDiamond {
@@ -172,12 +221,6 @@
 #container-diamanteIco {
     width: 45px;
     height: 39px;
-    /* position: absolute; */
-    /* left: 100vw;
-    top: 50vh; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 
@@ -189,63 +232,41 @@
 .fondoLejos {
     width: 100vw;
     height: 100vh;
-    /* height: 160px; */
-    /* background: url("../image/parallax/parallax-forest-back-trees.png") repeat-x; */
-    /* background: url("../image/parallax2/parallax-mountain-bg.png"); */
     background-size: cover;
-    /* animation: fondoMove 50s linear infinite; */
 }
 
 .fondoCerca3 {
-    /* position: relative; */
     width: 100vw;
-    /* height: 100vh; */
     height: 160px;
-    /* background: url("../image/parallax/parallax-forest-lights.png") repeat-x; */
     background: url("../image/parallax2/parallax-mountain-montain-far.png") repeat-x;
-    /* background-size: contain; */
     animation: fondoMove 40s linear infinite;
 }
 
 .fondoCerca2 {
-    /* position: relative; */
     width: 100vw;
-    /* height: 100vh; */
     height: 160px;
-    /* top: -30px; */
-    /* background: url("../image/parallax/parallax-forest-middle-trees.png") repeat-x; */
     background: url("../image/parallax2/parallax-mountain-mountains.png") repeat-x;
-    /* background-size: cover; */
     animation: fondoMove 30s linear infinite;
 }
 
 .fondoCerca1 {
-    /* position: relative; */
     width: 100vw;
-    /* height: 100vh; */
     height: 160px;
     background: url("../image/parallax2/parallax-mountain-trees.png") repeat-x;
-    /* background-size: cover; */
     animation: fondoMove 20s linear infinite;
 }
 
 .fondoCerca {
     position: relative;
-    /* width: 544px; */
     width: 100vw;
     height: 160px;
-    /* height: 100vh; */
-    /* background: url("../image/parallax/parallax-forest-front-trees.png") repeat-x; */
     background: url("../image/parallax2/parallax-mountain-foreground-trees.png") repeat-x;
-    /* background-size: contain; */
     animation: fondoMove 10s linear infinite;
 }
 
 @keyframes fondoMove {
     0% {
-        /* background-position: 100vw; */
         background-position: 544px;
-        /* background-position: 1229px; */
     }
     100% {
         background-position: 0;
@@ -337,9 +358,6 @@
     position: absolute;
     left: 100vw;
     top: 50vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .animarDiamante {
@@ -373,48 +391,12 @@
 
 /* ------------------------------------------------> JUGADOR <------------------------------------------------ */
 
-
-/* .player {
-    background: url("../image/Player_Bird.png") left center;
-    width: 46px;
-    height: 43px;
-    animation: fly 0.8s steps(10) infinite;
-}
-
-@keyframes fly {
-    from {
-        background-position: 0%;
-    }
-    to {
-        background-position: -487px;
-    }
-} */
-
-
-/* ------------------------------------------------------------------- */
-
-
-/* .container-player:hover {
-    top: 50px;
-    transition: top 3s easeInOutQuint;
-} */
-
 .container-player {
     top: 250px;
     position: absolute;
     width: 46px;
     height: 41.1px;
-    /* background-color: blue; */
-    /* animation: impulso 0.8s linear infinite alternate; */
-    /* animation-play-state: paused; */
-    /* animation-iteration-count: 2; */
-    /* transition: top 3s linear; */
 }
-
-
-/* :root {
-    --my-var: 200px;
-} */
 
 .caer {
     animation: moriryCaer 3s linear;
@@ -433,9 +415,6 @@
     width: 46px;
     height: 41.1px;
     background-image: url("../image/Bird_Sheet3.png");
-    /* animation: playX 0.8s steps(10) infinite; */
-    /* ,  */
-    /* playY 3s steps(10) infinite; */
 }
 
 .subir {

@@ -2,6 +2,7 @@ class Game {
     constructor() {
         this.continuar = document.querySelector("#continuar");
         this.container = document.querySelector(".container-player");
+        this.winner = document.querySelector("#ganaste");
         this.body = document.querySelector('body');
         this.bodyHeight = parseInt(window.getComputedStyle(this.body, null).getPropertyValue("height").split("px")[0]);
         this.height = parseInt(window.getComputedStyle(this.container, null).getPropertyValue("height").split("px")[0]);
@@ -24,8 +25,6 @@ class Game {
         this.audioAmbient.play();
         this.score = 0;
         this.player.setPosition();
-
-        // this.obstacles.push(new Obstaculo());
         let num = 1;
         for (let i = 0; i < 3; i++) {
             this.obstacles.push(new Obstaculo(num, (3.5 * i)));
@@ -38,10 +37,7 @@ class Game {
         this.diamond.runningAnimation();
 
         window.addEventListener('keydown', e => {
-            // console.log(e.keyCode);
-
             if (e.keyCode === 38) {
-                // console.log("entre");
                 this.player.cambiarAnimacionSaltar();
                 this.goUp = true;
             }
@@ -82,11 +78,9 @@ class Game {
             }
         }
 
-        // this.player.update();
-
-        // for (let i = 0; i < this.obstacles.length; i++) {
-        // this.obstacles[0].update();
-        // }
+        if (this.scoreDiamond >= 5) {
+            this.win();
+        }
 
 
         this.updateScreen();
@@ -109,7 +103,6 @@ class Game {
         document.querySelector("#point").innerHTML = this.score;
 
         if (this.checkColitionDiamond()) {
-            // console.log("agarre el diamente");
             this.audioTakeDiamond.play();
             this.diamond.addhidden();
             this.scoreDiamond++;
@@ -129,21 +122,12 @@ class Game {
         let posTopDiamondY = this.diamond.getPositionTop();
         let posBottomDiamondY = this.diamond.getPositionBottom();
 
-        // console.log(posRightDiamondX);
-
         if (!this.diamond.getTakeDiamond()) {
             if (posRightPlayerX >= posLeftDiamondX && posLeftPlayerX <= posRightDiamondX) {
                 if (posTopDiamondY <= posPlayerBottomY && posBottomDiamondY >= posPlayerY) {
-                    // console.log("pase");
                     this.diamond.setTakeDiamond(true);
                     return true;
                 }
-
-                // if (posRightDiamondX <= posLeftPlayerX) {
-                //     console.log("termine de pasar");
-                // }
-                // console.log(posRightPlayerX);
-                // console.log(posLeftDiamondX);
             }
         }
 
@@ -181,17 +165,7 @@ class Game {
     }
 
     updateScreen() {
-
-        //this.playerDiv.style.top = this.player.position;
         this.player.updateScreen();
-
-        // for (let i = 0; i < this.obstacles.length; i++) {
-        //     this.obstacles[i].updateScreen();
-        //     //this.obstacles[i].obstacleDiv.style.left = this.obstacles[i].position;
-        // }
-
-        // this.scoreDiv.innerHTML = this.score;
-
     }
 
     endGame() {
@@ -203,7 +177,6 @@ class Game {
         this.continuar.classList.remove("hidden");
         this.diamond.stopAnimation();
         clearInterval(this.interval);
-        // alert("Game Over");
     }
 
     reset() {
@@ -217,7 +190,6 @@ class Game {
             this.obstacles[i].removeAnimation();
         }
         this.obstacles = [];
-        // console.log(this.obstacles);
 
         this.player.removeAnimationCaer();
 
@@ -225,6 +197,21 @@ class Game {
         document.querySelector("#pointDiamond").innerHTML = this.scoreDiamond;
         this.diamond.removehidden();
         this.diamond.removeAnimationMove();
+        this.winner.classList.add("hidden");
+    }
+
+    win() {
+        this.audioAmbient.pause();
+        this.winner.classList.remove("hidden");
+        this.continuar.classList.remove("hidden");
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].stopAnimation();
+        }
+        this.player.addAnimationCaer();
+        this.continuar.classList.remove("hidden");
+        this.diamond.stopAnimation();
+        this.player.removeAnimationCaer();
+        clearInterval(this.interval);
     }
 
 }

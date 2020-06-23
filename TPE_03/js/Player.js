@@ -32,7 +32,6 @@ class Player {
     }
 
     getPositionY() {
-        // return parseInt(window.getComputedStyle(this.playerDiv, null).getPropertyValue("top").split("px")[0]);
         return this.posicion;
     }
     getPositionBottomY() {
@@ -40,15 +39,11 @@ class Player {
     }
 
     cambiarAnimacionSaltar() {
-        // console.log(this.playerDiv.children[0]);
-
         this.playerDiv.children[0].classList.remove("subir");
         this.playerDiv.children[0].classList.remove("morir");
         this.playerDiv.children[0].classList.add("subirTurbo");
     }
     cambiarAnimacionNormal() {
-        // console.log(this.playerDiv.children[0]);
-
         this.playerDiv.children[0].classList.remove("subirTurbo");
         this.playerDiv.children[0].classList.remove("morir");
         this.playerDiv.children[0].classList.add("subir");

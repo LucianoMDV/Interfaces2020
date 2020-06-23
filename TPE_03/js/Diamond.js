@@ -61,7 +61,6 @@ class Diamond {
         if (this.getPositionLeft_X() <= -42) {
             this.removehidden();
             this.setTakeDiamond(false);
-            // console.log("llegue al final DIAMANTE");
         }
     }
 }
