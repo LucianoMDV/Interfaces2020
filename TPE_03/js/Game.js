@@ -78,7 +78,7 @@ class Game {
             }
         }
 
-        if (this.scoreDiamond >= 5) {
+        if (this.scoreDiamond >= 1) {
             this.win();
         }
 
@@ -104,7 +104,10 @@ class Game {
 
         if (this.checkColitionDiamond()) {
             this.audioTakeDiamond.play();
-            this.diamond.addhidden();
+            this.diamond.removeAnimationMove();
+            this.diamond.addAnimation("taked");
+            // this.diamond.addhidden();
+            debugger;
             this.scoreDiamond++;
             document.querySelector("#pointDiamond").innerHTML = this.scoreDiamond;
         }
@@ -209,7 +212,7 @@ class Game {
         }
         this.player.addAnimationCaer();
         this.continuar.classList.remove("hidden");
-        this.diamond.stopAnimation();
+        // this.diamond.stopAnimation();
         this.player.removeAnimationCaer();
         clearInterval(this.interval);
     }

@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+}
+
+.height-100 {
+    height: 100vh;
+}
+
+.background-login {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background: #7A0018;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+#nameProfile {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    color: #FFFFCE;
+    font-size: 1.5rem;
+}
+
+.IcoProfile {
+    display: inline-block;
+    justify-content: center;
+    align-self: center;
+    height: 30vh;
+    color: #FFFFCE;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    font-size: 3.5rem;
+    text-align: center;
+    margin: 15px;
+}
+
+.background-btnPrimary {
+    background: #86DE5C;
+    border: 1px solid #86DE5C;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+
+/* .btn3ro {
+    background: #FFFFCE;
+} */
+
+.background-nav {
+    height: 8vh;
+    background: #116A83;
+}
+
+
+/* ----------------------------------------> Botones NavBar <---------------------------------------- */
+
+.btn3ro {
+    outline: none;
+    margin: 2vw 5vw;
+    border: 0;
+    border-radius: .25em;
+    background: #FFFFCE;
+    cursor: pointer;
+    padding: .4em 1em;
+    text-rendering: optimizeLegibility;
+    font-size: 18px;
+    font-family: inherit;
+    /* font-weight: 300; */
+    color: #116A83;
+    box-shadow: 0 .2em #888;
+    -webkit-transform: translateY(-.2em);
+    -moz-transform: translateY(-.2em);
+    transform: translateY(-.2em)
+}
+
+.btn3ro:hover {
+    background: #FFFFFF;
+}
+
+.btn3ro:active {
+    box-shadow: none;
+    background: #468EA2;
+    color: #FFFFFF;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0)
+}
+
+
+/* .botones :last-child {
+    justify-self: flex-end;
+    background-color: #86DE5C;
+} */
+
+.btn4ro {
+    background: #FFFFFF;
+    border: 1px solid #C51336;
+    color: #C51336;
+    outline: none;
+    margin: auto auto 2vw auto;
+    border-radius: .25em;
+    box-shadow: 0 .2em #888;
+    cursor: pointer;
+    padding: .4em 1em;
+    text-rendering: optimizeLegibility;
+    font-size: 18px;
+    font-family: inherit;
+    -webkit-transform: translateY(-.2em);
+    -moz-transform: translateY(-.2em);
+    transform: translateY(-.2em)
+}
+
+.btn4ro:hover {
+    background: #e6e6e6
+}
+
+.btn4ro:active {
+    box-shadow: none;
+    background: #e0e0e0;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0)
+}
+
+
+/* ----------------------------------------> ////////////// <---------------------------------------- */
+
+nav {
+    width: auto;
+    padding: 15px;
+    height: 12vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #116A83;
+}
+
+#hamburgesa {
+    width: 45px;
+    height: 45px;
+    border: 1px solid black;
+    text-align: center;
+    z-index: 1;
+    /* background-color: #86DE5C; */
+    /* font-size: 45px;
+    padding: 0 15px;
+    position: relative;
+    z-index: 1; */
+    /* width: 20%; */
+}
+
+.activeHamburgesa {
+    color: #FFFFCE;
+}
+
+.IcoHamburgesa {
+    font-size: 35px;
+    margin: 5px;
+    position: relative;
+}
+
+
+/* .frente {
+    position: relative;
+    z-index: 1;
+} */
+
+
+/* .logoSVG {
+    width: 72px;
+    height: 66px;
+} */
+
+#campana {
+    /* background-color: #7A0018; */
+    font-size: 35px;
+    padding: 0 15px;
+    /* width: 20%; */
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    width: 80vw;
+    background: #116A83;
+    left: -100%;
+    transition: all 0.5s ease-in;
+}
+
+.botones a {
+    /* display: flex;
+    justify-content: center; */
+    text-align: center;
+    text-decoration: none;
+}
+
+.desplegarNavBar {
+    transform: translateX(100vw);
+}

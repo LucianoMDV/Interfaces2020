@@ -1,5 +1,6 @@
 class Diamond {
     constructor(delay) {
+        this.position;
         this.diamondDiv = document.querySelector(".container-diamante");
         this.width = parseInt(window.getComputedStyle(this.diamondDiv, null).getPropertyValue("width").split("px")[0]);
         this.height = parseInt(window.getComputedStyle(this.diamondDiv, null).getPropertyValue("height").split("px")[0]);
@@ -9,7 +10,23 @@ class Diamond {
     }
 
     addAnimationMove() {
+        this.position = this.getPositionLeft_X();
         this.diamondDiv.classList.add("diamondMove");
+    }
+
+    addAnimation(className) {
+        this.diamondDiv.classList.add(className);
+        this.diamondDiv.style.setProperty("animation-play-state", "running");
+        console.log(this.position);
+
+        debugger;
+        let valor = this.getPositionLeft_X();
+        this.diamondDiv.style.setProperty("left", valor + "px");
+        this.diamondDiv.style.setProperty("animation-delay", "0s");
+    }
+    removeAnimation(className) {
+        this.diamondDiv.classList.remove(className);
+        this.diamondDiv.style.setProperty("animation-play-state", "running");
     }
 
     removeAnimationMove() {
