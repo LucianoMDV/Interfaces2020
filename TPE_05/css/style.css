@@ -209,6 +209,7 @@ nav {
     background: #468EA2;
     width: 100vw;
     height: 111px;
+    z-index: -1;
 }
 
 .repro_grid_elements {
