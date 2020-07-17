@@ -144,7 +144,7 @@ body {
 nav {
     width: auto;
     padding: 15px;
-    height: 12vh;
+    height: 75px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -317,7 +317,8 @@ nav {
         height: auto;
     }
     .container_IcoProfile {
-        padding: 15px;
+        width: 200px;
+        padding: 10px;
         margin-left: 15px;
         height: auto;
         flex-direction: row;
@@ -356,7 +357,7 @@ nav {
         justify-content: center;
         align-items: center;
         height: auto;
-        width: 207.86px;
+        width: 200px;
         background: #FFFFFF;
         border-radius: 0 0 5px 5px;
         position: absolute;
@@ -373,7 +374,7 @@ nav {
 }
 
 .moveTop {
-    top: 87px;
+    top: 76px;
 }
 
 @keyframes moving {
