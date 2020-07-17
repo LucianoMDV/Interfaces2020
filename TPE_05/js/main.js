@@ -1,22 +1,25 @@
-"use strick";
+"use strict";
 
 document.addEventListener("DOMContentLoaded", e => {
 
     let fondoBlur = document.querySelector(".fondo-blur");
-    let hamburgesa = document.querySelector("#hamburgesa");
+    let hamburguesa = document.querySelector("#hamburguesa");
     let botones = document.querySelector(".botones");
+    let botonPerfil = document.querySelector(".container_IcoProfile");
+    let container_buttons2 = document.querySelector(".container_buttons2");
+    let containerDropdown = document.querySelector(".container_dropdown");
 
-    hamburgesa.addEventListener("click", e => {
-        efectoHamburgesa();
+    hamburguesa.addEventListener("click", e => {
+        efectoHamburguesa();
     });
 
     fondoBlur.addEventListener("click", e => {
-        efectoHamburgesa();
+        efectoHamburguesa();
     });
 
-    function efectoHamburgesa() {
+    function efectoHamburguesa() {
         botones.classList.toggle("desplegarNavBar");
-        hamburgesa.classList.toggle("activeHamburgesa");
+        hamburguesa.classList.toggle("activeHamburguesa");
         if (botones.classList.contains("desplegarNavBar")) {
             fondoBlur.style.setProperty("opacity", "1");
             fondoBlur.removeAttribute("hidden");
@@ -25,4 +28,9 @@ document.addEventListener("DOMContentLoaded", e => {
             fondoBlur.setAttribute("hidden", true);
         }
     }
+
+    botonPerfil.addEventListener("click", e => {
+        container_buttons2.classList.toggle("moveTop");
+        containerDropdown.firstElementChild.classList.toggle("rotar");
+    });
 });

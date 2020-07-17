@@ -26,16 +26,37 @@ body {
     font-size: 1.5rem;
 }
 
-.IcoProfile {
-    display: inline-block;
+.container_IcoProfile {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-self: center;
-    height: 30vh;
+    height: auto;
+    text-align: center;
+    /* margin: 15px; */
+}
+
+.IcoProfile {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    height: auto; */
     color: #FFFFCE;
     text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     font-size: 3.5rem;
-    text-align: center;
+    /* text-align: center; */
     /* margin: 15px; */
+}
+
+.container_dropdown {
+    display: none;
+    align-self: center;
+    margin-left: 15px;
+}
+
+.icoDropdown {
+    font-size: 30px
 }
 
 .background-btnPrimary {
@@ -131,7 +152,7 @@ nav {
     background: #116A83;
 }
 
-#hamburgesa {
+#hamburguesa {
     width: 45px;
     height: 45px;
     border: 1px solid black;
@@ -139,11 +160,11 @@ nav {
     z-index: 2;
 }
 
-.activeHamburgesa {
+.activeHamburguesa {
     color: #FFFFCE;
 }
 
-.IcoHamburgesa {
+.IcoHamburguesa {
     font-size: 35px;
     margin: 5px;
     position: relative;
@@ -165,7 +186,7 @@ nav {
 .botones {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     height: 100vh;
     padding: 15px;
     position: absolute;
@@ -175,6 +196,16 @@ nav {
     left: -100%;
     transition: all 0.5s ease-in;
     z-index: 1;
+}
+
+.container_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container_buttons2 {
+    align-self: center;
 }
 
 .botones a {
@@ -206,7 +237,7 @@ nav {
     display: flex;
     position: absolute;
     bottom: 0;
-    transition: all 0.5s ease-in;
+    /* transition: all 0.5s ease-in; */
     background: #468EA2;
     width: 100vw;
     height: 111px;
@@ -257,3 +288,96 @@ nav {
 
 
 /* ---------------------------------------> //////////////// <--------------------------------------- */
+
+@media (min-width: 768px) {
+    body {
+        background: red;
+    }
+}
+
+@media (min-width: 1024px) {
+    body {
+        background: green;
+    }
+    nav {
+        padding-right: 0;
+    }
+    .botones {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0;
+        order: 1;
+        align-items: center;
+        flex-direction: row;
+    }
+    .container_buttons {
+        display: inline-block;
+        width: auto;
+        height: auto;
+    }
+    .container_IcoProfile {
+        padding: 15px;
+        margin-left: 15px;
+        height: auto;
+        flex-direction: row;
+        order: 1;
+        background: #7A0018;
+        cursor: pointer;
+    }
+    .container_IcoProfile:hover .container_dropdown {
+        animation: moving 0.4s linear infinite alternate;
+    }
+    .IcoProfile {
+        margin: 0;
+    }
+    #nameProfile {
+        margin: 0 15px;
+    }
+    .container_dropdown {
+        display: flex;
+        margin: 0;
+        color: #FFFFCE;
+    }
+    .icoDropdown {
+        transition: all 0.5s ease-in;
+    }
+    .rotar {
+        transform: rotate(180deg);
+    }
+    /* .container_dropdown:hover {
+        animation: moving 0.4s linear infinite alternate;
+    } */
+    #hamburguesa {
+        display: none;
+    }
+    .container_buttons2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: 207.86px;
+        background: #FFFFFF;
+        border-radius: 0 0 5px 5px;
+        position: absolute;
+        right: 0;
+        /* top: 87px; */
+        z-index: -1;
+        transition: top 1s ease-in;
+        top: 0;
+    }
+    .btn4ro {
+        width: 100%;
+        margin: 15px
+    }
+}
+
+.moveTop {
+    top: 87px;
+}
+
+@keyframes moving {
+    100% {
+        transform: translate(0px, 10px);
+    }
+}
