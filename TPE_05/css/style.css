@@ -6,6 +6,7 @@
 
 body {
     width: 100vw;
+    background: #F2F2F2;
 }
 
 .height-100 {
@@ -297,7 +298,7 @@ nav {
 
 @media (min-width: 1024px) {
     body {
-        background: green;
+        background: #F2F2F2;
     }
     nav {
         padding-right: 0;
@@ -334,6 +335,7 @@ nav {
     }
     #nameProfile {
         margin: 0 15px;
+        text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     }
     .container_dropdown {
         display: flex;
@@ -342,13 +344,11 @@ nav {
     }
     .icoDropdown {
         transition: all 0.5s ease-in;
+        text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     }
     .rotar {
         transform: rotate(180deg);
     }
-    /* .container_dropdown:hover {
-        animation: moving 0.4s linear infinite alternate;
-    } */
     #hamburguesa {
         display: none;
     }
@@ -359,12 +359,13 @@ nav {
         height: auto;
         width: 200px;
         background: #FFFFFF;
+        border: 1px solid #7A0018;
         border-radius: 0 0 5px 5px;
         position: absolute;
         right: 0;
         /* top: 87px; */
         z-index: -1;
-        transition: top 1s ease-in;
+        transition: top 0.5s ease-in;
         top: 0;
     }
     .btn4ro {
@@ -374,7 +375,7 @@ nav {
 }
 
 .moveTop {
-    top: 76px;
+    top: 75px;
 }
 
 @keyframes moving {
