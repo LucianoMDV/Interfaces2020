@@ -285,6 +285,28 @@ nav {
     border-radius: 20px;
 }
 
+.container_filtro_despregable {
+    display: grid;
+    padding: 10px;
+    grid-gap: 10px;
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    background: #468EA2;
+    left: 0;
+    z-index: -1;
+    transition: top 1s ease;
+    top: -60px;
+}
+
+.container_filtro:active,
+.container_filtro:hover,
+.activeFiltro {
+    background: #468EA2;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
 
 /* ---------------------------------------> Reproductor Fijo <--------------------------------------- */
 
@@ -438,6 +460,10 @@ nav {
 
 .moveTop {
     top: 65px;
+}
+
+.moveTopFiltro {
+    top: 50px;
 }
 
 @keyframes moving {
