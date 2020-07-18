@@ -172,16 +172,31 @@ nav {
 }
 
 #campana {
-    width: 40px;
-    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
     border: 1px solid black;
-    text-align: center;
 }
 
 .IcoCampana {
     font-size: 29px;
     color: #FFFFCE;
     margin: 5px;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+#campana:hover {
+    background: rgba(255, 255, 255, 1);
+    animation: moveZ 0.5s ease infinite alternate;
+}
+
+@keyframes moveZ {
+    100% {
+        transform: rotateZ(5deg);
+    }
 }
 
 .botones {
@@ -229,6 +244,15 @@ nav {
     opacity: 0;
     backdrop-filter: blur(5px);
     z-index: 0;
+}
+
+.container_busqueda {
+    width: 100vw;
+    height: 50px;
+    background: yellow;
+    position: absolute;
+    top: 75px;
+    left: 0;
 }
 
 
@@ -304,8 +328,10 @@ nav {
         padding-right: 0;
     }
     .botones {
+        display: flex;
+        justify-content: space-between;
         position: static;
-        width: auto;
+        width: 100%;
         height: auto;
         padding: 0;
         order: 1;
@@ -316,6 +342,7 @@ nav {
         display: inline-block;
         width: auto;
         height: auto;
+        margin: auto;
     }
     .container_IcoProfile {
         width: 200px;
@@ -359,23 +386,28 @@ nav {
         height: auto;
         width: 200px;
         background: #FFFFFF;
-        border: 1px solid #7A0018;
+        border: 10px solid #7A0018;
         border-radius: 0 0 5px 5px;
         position: absolute;
         right: 0;
         /* top: 87px; */
         z-index: -1;
         transition: top 0.5s ease-in;
-        top: 0;
+        top: -18px;
     }
     .btn4ro {
         width: 100%;
         margin: 15px
     }
+    #campana {
+        position: absolute;
+        right: 215px;
+        z-index: 1;
+    }
 }
 
 .moveTop {
-    top: 75px;
+    top: 65px;
 }
 
 @keyframes moving {
