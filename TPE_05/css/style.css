@@ -247,12 +247,42 @@ nav {
 }
 
 .container_busqueda {
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 100vw;
     height: 50px;
-    background: yellow;
+    background: #116A83;
     position: absolute;
     top: 75px;
     left: 0;
+}
+
+.container_filtro,
+.container_btnBusqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5px;
+    background: white;
+    color: #116A83;
+    border: 1px solid #024051;
+}
+
+.icoFiltro,
+.icoBuscar {
+    font-size: 25px;
+}
+
+.container_inputBuscar {
+    width: 100%;
+    margin: 0 15px;
+}
+
+.inputBuscar {
+    border-radius: 20px;
 }
 
 
