@@ -142,7 +142,19 @@ body {
 
 /* ----------------------------------------> ////////////// <---------------------------------------- */
 
-nav {
+
+/* nav {
+    width: auto;
+    padding: 15px;
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #116A83;
+} */
+
+.container_navigation {
     width: auto;
     padding: 15px;
     height: 75px;
@@ -254,9 +266,9 @@ nav {
     width: 100vw;
     height: 50px;
     background: #116A83;
-    position: absolute;
+    /* position: absolute;
     top: 75px;
-    left: 0;
+    left: 0; */
 }
 
 .container_filtro,
@@ -301,7 +313,9 @@ nav {
 
 .container_filtro:active,
 .container_filtro:hover,
-.activeFiltro {
+.activeFiltro,
+.container_btnBusqueda:hover,
+.container_btnBusqueda:active {
     background: #468EA2;
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
@@ -328,13 +342,33 @@ nav {
     grid-template-areas: "nombreBanda menuRepro" "botonesRepro  menuRepro" "barraRepro  menuRepro";
     /* grid-gap: 10px; */
     text-align: center;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 56px 1fr;
     grid-template-columns: 0.9fr 0.1fr;
 }
 
-.repro_grid_elements .nombreBanda {
+.container_nombreBanda {
     grid-area: nombreBanda;
+    overflow: hidden;
+    padding: 0 10px;
+}
+
+.repro_grid_elements .nombreBanda {
+    margin: 0;
+    padding: 0;
     /* background: red; */
+}
+
+.moveText {
+    animation: leftText 10s linear infinite;
+}
+
+@keyframes leftText {
+    0% {
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        -webkit-transform: translateX(100%);
+    }
 }
 
 .repro_grid_elements .botonesRepro {
@@ -342,16 +376,52 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 33px;
-    padding: 15px;
+    /* font-size: 33px; */
+    padding: 0 10px;
     /* background: yellow; */
+}
+
+.container_backward,
+.container_forward {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+
+.icoBackward,
+.icoForward {
+    font-size: 2rem;
+    padding: 5px;
+}
+
+.icoPlay,
+.icoPause {
+    font-size: 3rem;
+}
+
+.icoBackward:hover,
+.icoForward:hover {
+    border: 1px solid black;
+    border-radius: 20px;
+    background: #FFFFFF;
+    /* color: #FFFFCE; */
+    /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
 }
 
 .repro_grid_elements .barraRepro {
     grid-area: barraRepro;
-    align-self: center;
-    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
     /* background: black; */
+}
+
+.barraRepro p {
+    padding: 0;
+    margin: 0;
 }
 
 .repro_grid_elements .menuRepro {
@@ -361,6 +431,23 @@ nav {
     align-items: center;
     font-size: 33px;
     background: #116A83;
+}
+
+.progress {
+    height: 0.5rem;
+    margin: 0 10px;
+}
+
+
+/* ---------------------------------------> //////////////// <--------------------------------------- */
+
+
+/* ---------------------------------------> MAIN AREA <--------------------------------------- */
+
+.container_playList {
+    width: 100vw;
+    height: 213px;
+    background: #FFFFFF;
 }
 
 
@@ -376,7 +463,7 @@ nav {
     body {
         background: #F2F2F2;
     }
-    nav {
+    .container_navigation {
         padding-right: 0;
     }
     .botones {
@@ -456,6 +543,16 @@ nav {
         right: 215px;
         z-index: 1;
     }
+    /* .container_busqueda {
+        position: absolute;
+        top: 19px;
+        z-index: 1;
+        width: 40vh;
+        left: 100px;
+    }
+    .container_filtro_despregable {
+        width: 74vw;
+    } */
 }
 
 .moveTop {
@@ -463,7 +560,7 @@ nav {
 }
 
 .moveTopFiltro {
-    top: 50px;
+    top: 124px;
 }
 
 @keyframes moving {

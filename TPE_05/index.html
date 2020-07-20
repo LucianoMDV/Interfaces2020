@@ -15,30 +15,31 @@
 <body>
     <header>
         <nav>
-            <div id="hamburguesa">
-                <i class="fas fa-bars IcoHamburguesa"></i>
-            </div>
+            <div class="container_navigation">
+                <div id="hamburguesa">
+                    <i class="fas fa-bars IcoHamburguesa"></i>
+                </div>
 
-            <div class="botones">
-                <div class="container_IcoProfile">
-                    <i class="fas fa-user-circle IcoProfile"></i>
-                    <p id="nameProfile">Lucho</p>
-                    <div class="container_dropdown">
-                        <i class="fas fa-chevron-circle-down icoDropdown"></i>
+                <div class="botones">
+                    <div class="container_IcoProfile">
+                        <i class="fas fa-user-circle IcoProfile"></i>
+                        <p id="nameProfile">Lucho</p>
+                        <div class="container_dropdown">
+                            <i class="fas fa-chevron-circle-down icoDropdown"></i>
+                        </div>
+                    </div>
+                    <div class="container_buttons">
+                        <a class="btn3ro " href="# ">Soporte</a>
+                        <a class="btn3ro " href="# ">Planes</a>
+                        <a class="btn3ro " href="# ">Mi PlayList</a>
+                        <a class="btn3ro " href="# ">Perfil</a>
+                        <a class="btn3ro " href="index.html ">Inicio</a>
+                    </div>
+                    <div class="container_buttons2">
+                        <a class="btn4ro " href="# ">Cerrar sesión</a>
                     </div>
                 </div>
-                <div class="container_buttons">
-                    <a class="btn3ro " href="# ">Soporte</a>
-                    <a class="btn3ro " href="# ">Planes</a>
-                    <a class="btn3ro " href="# ">Mi PlayList</a>
-                    <a class="btn3ro " href="# ">Perfil</a>
-                    <a class="btn3ro " href="index.html ">Inicio</a>
-                </div>
-                <div class="container_buttons2">
-                    <a class="btn4ro " href="# ">Cerrar sesión</a>
-                </div>
-            </div>
-            <svg class="logoSVG" width="72" height="66" viewBox="0 0 78 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="logoSVG" width="72" height="66" viewBox="0 0 78 74" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d)">
                 <ellipse cx="46.5" cy="47.5" rx="25.5" ry="18.5" fill="black"/>
                 </g>
@@ -90,8 +91,9 @@
                 </filter>
                 </defs>
             </svg>
-            <div id="campana">
-                <i class="fas fa-bell IcoCampana"></i>
+                <div id="campana">
+                    <i class="fas fa-bell IcoCampana"></i>
+                </div>
             </div>
             <div class="container_busqueda">
                 <div class="container_filtro">
@@ -133,22 +135,38 @@
         </nav>
         <div class="fondo-blur" hidden></div>
     </header>
-    <main>Main area</main>
+    <main>
+        Main area
+        <div class="container_playList">
+            <div class="titlePlayList"></div>
+            <div class="listPlaylist"></div>
+        </div>
+    </main>
     <footer>
         <div id="reproductor">
             <div class="repro_grid_elements">
-                <div class="nombreBanda">
-                    NombreCacion-Banda-Categoria
+                <div class="container_nombreBanda">
+                    <p class="nombreBanda">Disturbed - Evolution - Are You Ready</p>
                 </div>
                 <div class="botonesRepro">
-                    <i class="fas fa-step-backward"></i>
-                    <i class="fas fa-play-circle"></i>
-                    <i class="fas fa-step-forward"></i>
+                    <div class="container_backward">
+                        <i class="fas fa-step-backward icoBackward"></i>
+                    </div>
+                    <!-- <div class="container_play"> -->
+                    <i class="fas fa-play-circle icoPlay"></i>
+                    <!-- <i class="fas fa-pause-circle icoPause" hidden></i> -->
+                    <i class="far fa-pause-circle icoPause" hidden></i>
+                    <!-- </div> -->
+                    <div class="container_forward">
+                        <i class="fas fa-step-forward icoForward"></i>
+                    </div>
                 </div>
                 <div class="barraRepro">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
+                    <p class="tiempoRecorrido">0:00</p>
+                    <div class="progress w-100">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                     </div>
+                    <p>1:40</p>
                 </div>
                 <div class="menuRepro">
                     <i class="fas fa-ellipsis-v"></i>
