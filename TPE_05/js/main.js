@@ -67,10 +67,10 @@ document.addEventListener("DOMContentLoaded", e => {
     });
 
     btnPlay.addEventListener("click", e => {
-        audioDemo.play();
+        // audioDemo.play();
         btnPlay.setAttribute("hidden", true);
         btnPause.removeAttribute("hidden");
-        reproductor.style.setProperty("background", "#FFFFCE");
+        // reproductor.style.setProperty("background", "#FFFFCE");
         nombreBanda.classList.toggle("moveText");
         let time = 0;
         let time2 = 0;
@@ -96,10 +96,10 @@ document.addEventListener("DOMContentLoaded", e => {
         }, 1000);
     });
     btnPause.addEventListener("click", e => {
-        audioDemo.pause();
+        // audioDemo.pause();
         btnPause.setAttribute("hidden", true);
         btnPlay.removeAttribute("hidden");
-        reproductor.style.setProperty("background", "#468EA2");
+        // reproductor.style.setProperty("background", "#468EA2");
         nombreBanda.classList.toggle("moveText");
     });
 });
