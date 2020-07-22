@@ -74,6 +74,11 @@
     }
     /* ----------------------------------------> Botones NavBar <---------------------------------------- */
     
+    header {
+        position: relative;
+        z-index: 1;
+    }
+    
     .btn3ro {
         outline: none;
         margin: 2vw 0vw;
@@ -483,7 +488,7 @@
     
     main {
         position: relative;
-        z-index: -2;
+        z-index: 0;
     }
     
     .container_playList {
@@ -491,7 +496,6 @@
         height: 213px;
         background: #FFFFFF;
         padding: 10px 0;
-        overflow-x: auto;
     }
     
     .lineas {
@@ -518,19 +522,102 @@
     }
     
     .listPlaylist {
-        background: blue;
+        /* background: blue; */
         height: 160px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+        display: grid;
+        /* justify-content: space-around; */
+        /* align-items: center; */
+        overflow-x: scroll;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr;
+        column-gap: 10px;
+        align-items: flex-end;
     }
-    
-    .cancion {
-        width: 130px;
+    /* .cancion {
+        width: 131px;
         height: 153px;
         background: red;
         border: 1px solid black;
-        border-radius: 20px
+        border-radius: 20px;
+    } */
+    
+    .imagen {
+        position: absolute;
+        display: flex;
+        top: 95px;
+        left: 25px;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .cancion {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        width: 131px;
+        height: 155px;
+        /* width: 100%;
+        height: 100%; */
+        background: #FFFFFF;
+        border-radius: 20px;
+        border: 1px solid black;
+        padding: 3px 0;
+        /* background: url("../image/componente_base.png") */
+    }
+    
+    .palanca {
+        width: 100%;
+        height: 100%;
+        background: url("../image/palanca.png");
+        z-index: 1;
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+    
+    .decoracion {
+        width: 100%;
+        height: 100%;
+        background: url("../image/decoracion_base.png");
+        z-index: 1;
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+    
+    .disco {
+        width: 100%;
+        height: 120px;
+        /* background: url("../image/disturbed-evolution\ 2.png") no-repeat;
+        background-position-x: center; */
+        z-index: 0;
+        grid-column-start: 1;
+        grid-row-start: 1;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .moveDiscoPlay {
+        animation: movedisc 8s linear infinite;
+    }
+    
+    .disco img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+    }
+    
+    @keyframes movedisc {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .nombreCancion {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
     }
     /* ---------------------------------------> //////////////// <--------------------------------------- */
     
