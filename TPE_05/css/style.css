@@ -7,6 +7,12 @@
 body {
     width: 100vw;
     background: #F2F2F2;
+    /* overflow: hidden; */
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
 }
 
 .height-100 {
@@ -326,9 +332,14 @@ header {
     /* margin: 0 15px; */
 }
 
-.inputBuscar {
-    /* border-radius: 20px 0 0 20px; */
-}
+
+/* .inputBuscar { */
+
+
+/* border-radius: 20px 0 0 20px; */
+
+
+/* } */
 
 .container_filtro_despregable {
     display: grid;
@@ -509,11 +520,12 @@ main {
     z-index: 0;
     /* height: 513px; */
     height: auto;
-    overflow-y: scroll;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-row-gap: 10px;
     padding: 135px 0 121px 0;
+    flex: 1;
+    overflow-y: auto;
     /* margin-bottom: 111px; */
 }
 
@@ -553,13 +565,29 @@ main {
     display: grid;
     /* justify-content: space-around; */
     /* align-items: center; */
-    overflow-x: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: 1fr;
     column-gap: 10px;
     align-items: flex-end;
     padding: 0 10px;
 }
+
+
+/* .listPlaylist::-webkit-scrollbar {
+    width: 1px;
+    height: 10px;
+}
+
+.listPlaylist::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 20px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid black; */
+
+
+/* } */
 
 .imagen {
     position: absolute;
@@ -674,6 +702,19 @@ main {
     grid-row-start: 1;
     z-index: 0;
     flex-direction: column;
+    border-radius: 20px;
+    overflow: auto;
+}
+
+.nombreCancion p {
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: all 1s ease;
+}
+
+.nombreCancion p:hover {
+    left: 100px;
 }
 
 footer {
