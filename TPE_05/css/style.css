@@ -531,9 +531,11 @@ main {
 
 .container_playList {
     width: 100vw;
-    height: 233px;
+    height: 235px;
     background: #FFFFFF;
     padding: 10px 0;
+    display: grid;
+    gap: 10px;
 }
 
 .lineas {
@@ -571,23 +573,18 @@ main {
     grid-template-rows: 1fr;
     column-gap: 10px;
     align-items: flex-end;
-    padding: 0 10px;
+    padding: 0 10px 10px 10px;
 }
 
-
-/* .listPlaylist::-webkit-scrollbar {
+.listPlaylist::-webkit-scrollbar {
     width: 1px;
-    height: 10px;
+    height: 2px;
 }
 
 .listPlaylist::-webkit-scrollbar-thumb {
     background: #000;
     border-radius: 20px;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid black; */
-
-
-/* } */
+}
 
 .imagen {
     position: absolute;
