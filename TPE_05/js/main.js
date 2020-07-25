@@ -77,19 +77,25 @@ document.addEventListener("DOMContentLoaded", e => {
                 btnPlay[i].removeAttribute("hidden");
                 btnPlay[i].nextElementSibling.setAttribute("hidden", true);
                 btnPlay[i].parentElement.parentElement.previousElementSibling.querySelector(".disco").classList.remove("moveDiscoPlay");
+                btnPlay[i].parentElement.parentElement.previousElementSibling.querySelector(".disco").children[0].removeAttribute("hidden");
+                btnPlay[i].parentElement.parentElement.previousElementSibling.querySelector(".palanca").classList.remove("movePalanca");
             }
             clearInterval(intervalReproductor);
             nombreBanda.classList.remove("moveText");
 
             btn.setAttribute("hidden", true);
             btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").classList.toggle("moveDiscoPlay");
+            setTimeout(() => {
+                console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").children[0].setAttribute("hidden", true));
+            }, 500);
+            console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".palanca").classList.toggle("movePalanca"));
             let nombreCompleto = "";
             let ruta = btn.parentElement.parentElement.previousElementSibling.querySelector(".nombreCancion");
-            console.log(ruta);
+            // console.log(ruta);
             let banda = ruta.children[0].innerHTML;
             let nombre = ruta.children[1].innerHTML;
             nombreCompleto = banda + " - " + nombre;
-            console.log(nombreCompleto);
+            // console.log(nombreCompleto);
             nombreBanda.innerHTML = nombreCompleto;
             btn.nextElementSibling.removeAttribute("hidden");
             // reproductor.style.setProperty("background", "#FFFFCE");
@@ -124,6 +130,8 @@ document.addEventListener("DOMContentLoaded", e => {
             btn.setAttribute("hidden", true);
             btn.previousElementSibling.removeAttribute("hidden");
             btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").classList.toggle("moveDiscoPlay");
+            console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").children[0].removeAttribute("hidden"));
+            console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".palanca").classList.toggle("movePalanca"));
             // reproductor.style.setProperty("background", "#468EA2");
             nombreBanda.classList.toggle("moveText");
             clearInterval(intervalReproductor);
