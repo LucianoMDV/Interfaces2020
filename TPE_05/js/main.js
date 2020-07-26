@@ -152,8 +152,10 @@ document.addEventListener("DOMContentLoaded", e => {
         });
     });
 
-    botones.querySelector(".home").addEventListener("click", e => {
-        fetch("../home.html")
+    cargar();
+
+    botones.querySelector(".home").addEventListener("click", function cargar() {
+        fetch("home.html")
             .then(home => {
                 home.text();
             })
