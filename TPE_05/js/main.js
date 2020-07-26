@@ -1,7 +1,11 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", e => {
+
     let intervalReproductor;
+
+    let cuerpo = document.querySelector("#cuerpo");
+
     let fondoBlur = document.querySelector(".fondo-blur");
     let hamburguesa = document.querySelector("#hamburguesa");
     let botones = document.querySelector(".botones");
@@ -79,21 +83,27 @@ document.addEventListener("DOMContentLoaded", e => {
                 btnPlay[i].parentElement.parentElement.previousElementSibling.querySelector(".disco").classList.remove("moveDiscoPlay");
                 btnPlay[i].parentElement.parentElement.previousElementSibling.querySelector(".disco").children[0].removeAttribute("hidden");
                 btnPlay[i].parentElement.parentElement.previousElementSibling.querySelector(".palanca").classList.remove("movePalanca");
+
+                btnPlay[i].parentElement.parentElement.previousElementSibling.classList.remove("cancionActive");
+                btnPlay[i].parentElement.parentElement.previousElementSibling.querySelector(".decoracion").classList.remove("showDecoracion");
             }
             clearInterval(intervalReproductor);
             nombreBanda.classList.remove("moveText");
 
             btn.setAttribute("hidden", true);
             btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").classList.toggle("moveDiscoPlay");
+            btn.parentElement.parentElement.previousElementSibling.classList.toggle("cancionActive");
             setTimeout(() => {
-                console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").children[0].setAttribute("hidden", true));
+                btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").children[0].setAttribute("hidden", true);
             }, 500);
-            console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".palanca").classList.toggle("movePalanca"));
+            btn.parentElement.parentElement.previousElementSibling.querySelector(".palanca").classList.toggle("movePalanca");
+            btn.parentElement.parentElement.previousElementSibling.querySelector(".decoracion").classList.toggle("showDecoracion");
+
             let nombreCompleto = "";
             let ruta = btn.parentElement.parentElement.previousElementSibling.querySelector(".nombreCancion");
             // console.log(ruta);
             let banda = ruta.children[0].innerHTML;
-            let nombre = ruta.children[1].innerHTML;
+            let nombre = ruta.children[1].children[0].innerHTML;
             nombreCompleto = banda + " - " + nombre;
             // console.log(nombreCompleto);
             nombreBanda.innerHTML = nombreCompleto;
@@ -132,9 +142,23 @@ document.addEventListener("DOMContentLoaded", e => {
             btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").classList.toggle("moveDiscoPlay");
             console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".disco").children[0].removeAttribute("hidden"));
             console.log(btn.parentElement.parentElement.previousElementSibling.querySelector(".palanca").classList.toggle("movePalanca"));
+
+            btn.parentElement.parentElement.previousElementSibling.querySelector(".decoracion").classList.remove("showDecoracion");
+
+            btn.parentElement.parentElement.previousElementSibling.classList.remove("cancionActive");
             // reproductor.style.setProperty("background", "#468EA2");
             nombreBanda.classList.toggle("moveText");
             clearInterval(intervalReproductor);
         });
+    });
+
+    botones.querySelector(".home").addEventListener("click", e => {
+        fetch("../home.html")
+            .then(home => {
+                home.text();
+            })
+            .then(text => {
+                console.log(text);
+            });
     });
 });
