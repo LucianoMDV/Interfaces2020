@@ -152,15 +152,20 @@ document.addEventListener("DOMContentLoaded", e => {
         });
     });
 
-    cargar();
-
     botones.querySelector(".home").addEventListener("click", function cargar() {
         fetch("home.html")
             .then(home => {
                 home.text();
             })
             .then(text => {
-                console.log(text);
+                cuerpo.innerHTML = text;
             });
+
+        // fetch('templates/busqueda/canciones.html')
+        //     .then(html => {
+        //         html.text();
+        //     }).then(text => {
+        //         mainContainer.innerHTML += canciones;
+        //     });
     });
 });
