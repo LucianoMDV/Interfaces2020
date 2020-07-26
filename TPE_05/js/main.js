@@ -152,20 +152,19 @@ document.addEventListener("DOMContentLoaded", e => {
         });
     });
 
-    botones.querySelector(".home").addEventListener("click", function cargar() {
-        fetch("home.html")
-            .then(home => {
-                home.text();
-            })
-            .then(text => {
-                cuerpo.innerHTML = text;
-            });
-
-        // fetch('templates/busqueda/canciones.html')
-        //     .then(html => {
-        //         html.text();
-        //     }).then(text => {
-        //         mainContainer.innerHTML += canciones;
-        //     });
-    });
+    home();
+    botones.querySelector(".home").addEventListener("click", home);
+    async function home() {
+        let home = await fetch('home.html');
+        home = await home.text();
+        cuerpo.innerHTML = home;
+        efectoHamburguesa();
+    }
+    botones.querySelector(".myPlayList").addEventListener("click", playListHTML);
+    async function playListHTML() {
+        let playListHTML = await fetch('myPlayList.html');
+        playListHTML = await playListHTML.text();
+        cuerpo.innerHTML = playListHTML;
+        efectoHamburguesa();
+    }
 });
