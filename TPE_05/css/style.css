@@ -899,9 +899,19 @@
         transition: all 0.5s ease;
     }
     
+    .cabeceraPLayList h3 {
+        white-space: normal;
+    }
+    
     .myplayList:hover {
         background: rgba(255, 255, 255, 0.1);
-        margin: 0 5px;
+        /* margin: 0 5px 0 5px; */
+        /* width: 98%; */
+        /* width: calc(100% - 5px); */
+    }
+    
+    .myplayList:hover .cabeceraPLayList {
+        margin: 0 5px 5px 5px;
     }
     
     .myplayList:hover .container_dropdown2 {
@@ -983,7 +993,7 @@
     }
     
     .ceroAltura {
-        height: 0;
+        height: 0 !important;
     }
     
     .container_dropdown2 {
@@ -996,6 +1006,7 @@
         /* background: red; */
         border-radius: 50%;
         color: var(--secundario1);
+        justify-self: flex-end;
     }
     /* -------------------------------------> ////////////////// <------------------------------------- */
     
@@ -1006,21 +1017,23 @@
         /*  */
         .cuerpoPlayList {
             display: grid;
-            /* flex-direction: column; */
             gap: 5px;
             width: 100%;
-            /* height: 400px; */
-            /* height: auto; */
+            height: 850px;
             grid-template-columns: repeat(3, auto);
+            justify-content: center;
+            align-content: flex-start;
         }
         .tema {
             position: relative;
-            /* max-width: 200px; */
+            /* max-width: 260px; */
+            max-width: 250px;
+            max-height: 250px;
             display: grid;
             height: auto;
             grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
             grid-template-rows: auto auto auto auto;
-            grid-template-areas: "foto foto foto mas" "foto foto foto mas " "foto foto foto btnPlay" "nombre nombre nombre btnPlay";
+            grid-template-areas: "foto foto foto mas" "foto foto foto favorito " "foto foto foto btnPlay" "nombre nombre nombre btnPlay";
             border: 5px solid;
             justify-content: center;
             align-items: center;
@@ -1033,12 +1046,6 @@
             /* background: violet; */
             grid-area: foto;
             justify-self: center;
-        }
-        .favorito {
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin: 10px
         }
         .foto img {
             max-width: 200px;
@@ -1143,6 +1150,10 @@
             right: 215px;
             z-index: 1;
         }
+        .cuerpoPlayList {
+            grid-template-columns: repeat(4, auto);
+            height: 685px;
+        }
         /* .container_busqueda {
         position: absolute;
         top: 19px;
@@ -1153,6 +1164,13 @@
     .container_filtro_despregable {
         width: 74vw;
     } */
+    }
+    
+    @media (min-width: 1440px) {
+        .cuerpoPlayList {
+            grid-template-columns: repeat(5, auto);
+            height: 460px;
+        }
     }
     
     .moveTop {
