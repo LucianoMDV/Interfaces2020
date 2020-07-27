@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", e => {
     let nombreBanda = document.querySelector(".nombreBanda ");
     let progress = document.querySelector(".progress ");
     let tiempoRecorrido = document.querySelector(".tiempoRecorrido");
+
     home();
 
     function efectoHamburguesa() {
@@ -48,14 +49,30 @@ document.addEventListener("DOMContentLoaded", e => {
         containerDropdown.firstElementChild.classList.toggle("rotar");
     });
 
-    // home();
+    containerFiltro.addEventListener("click", e => {
+        filtroDespregable.classList.toggle("moveTopFiltro");
+        containerFiltro.classList.toggle("activeFiltro");
+        // if (filtroDespregable.classList.contains("moveTopFiltro")) {
+        //     filtroDespregable.removeAttribute("hidden");
+        //     fondoBlur.style.setProperty("opacity", "1");
+        //     fondoBlur.removeAttribute("hidden");
+        // } else {
+        //     filtroDespregable.setAttribute("hidden", true);
+        //     fondoBlur.style.setProperty("opacity", "0");
+        //     fondoBlur.setAttribute("hidden", true);
+        // }
+    });
+
     botones.querySelector(".home").addEventListener("click", home);
     async function home() {
         let home = await fetch('home.html');
         home = await home.text();
         cuerpo.innerHTML = home;
-        // efectoHamburguesa();
-        // 
+        // cerrar hamburguesa
+        fondoBlur.style.setProperty("opacity", "0");
+        fondoBlur.setAttribute("hidden", true);
+        botones.classList.remove("desplegarNavBar");
+        hamburguesa.classList.remove("activeHamburguesa");
 
         let btnPause = document.querySelectorAll(".icoPause ");
         let btnPlay = document.querySelectorAll(".icoPlay ");
@@ -71,25 +88,6 @@ document.addEventListener("DOMContentLoaded", e => {
         let audioDemo = new Audio("./music/videoplayback.mp4");
         audioDemo.addEventListener("onload", e => {
             console.log(audioDemo.duration);
-        });
-
-
-
-
-
-
-        containerFiltro.addEventListener("click", e => {
-            filtroDespregable.classList.toggle("moveTopFiltro");
-            containerFiltro.classList.toggle("activeFiltro");
-            // if (filtroDespregable.classList.contains("moveTopFiltro")) {
-            //     filtroDespregable.removeAttribute("hidden");
-            //     fondoBlur.style.setProperty("opacity", "1");
-            //     fondoBlur.removeAttribute("hidden");
-            // } else {
-            //     filtroDespregable.setAttribute("hidden", true);
-            //     fondoBlur.style.setProperty("opacity", "0");
-            //     fondoBlur.setAttribute("hidden", true);
-            // }
         });
 
         btnPlay.forEach(btn => {
@@ -177,6 +175,22 @@ document.addEventListener("DOMContentLoaded", e => {
         let playListHTML = await fetch('myPlayList.html');
         playListHTML = await playListHTML.text();
         cuerpo.innerHTML = playListHTML;
-        // efectoHamburguesa();
+
+        // cerrar hamburguesa
+        fondoBlur.style.setProperty("opacity", "0");
+        fondoBlur.setAttribute("hidden", true);
+        botones.classList.remove("desplegarNavBar");
+        hamburguesa.classList.remove("activeHamburguesa");
+
+        let dropList = document.querySelectorAll(".container_dropdown2");
+        dropList.forEach(btn => {
+            btn.addEventListener("click", e => {
+                // for (let i = 0; i < dropList.length; i++) {
+                //     dropList[i].parentElement.nextElementSibling.classList.add("ceroAltura");
+                // }
+                btn.parentElement.nextElementSibling.classList.toggle("ceroAltura");
+            });
+
+        });
     }
 });
