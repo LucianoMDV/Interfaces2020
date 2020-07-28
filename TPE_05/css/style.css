@@ -2,6 +2,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: helvetica, arial, sans-serif;
     }
     
      :root {
@@ -1009,6 +1010,90 @@
         justify-self: flex-end;
     }
     /* -------------------------------------> ////////////////// <------------------------------------- */
+    /* --------------------------------------> MAIN AREA Buscar <-------------------------------------- */
+    
+    .templateBuscar {
+        width: 100vw;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .templateBuscar h1 {
+        align-self: self-end;
+    }
+    
+    .carta {
+        grid-area: carta;
+        width: 100%;
+        height: 100%;
+        max-width: 1000px;
+    }
+    
+    .cartaBody {
+        grid-area: cardBody;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        margin: auto;
+        grid-template-areas: "portada portada" "texto texto" "estrellas favoritos";
+        grid-template-rows: 1fr 0.3fr 0.3fr;
+        grid-template-columns: 1fr 0.1fr;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .portada {
+        max-width: 1000px;
+        grid-area: portada;
+        width: 100vw;
+        height: 40vh;
+        background: url(../image/disturbed-evolution.jpg) no-repeat center;
+        background-size: cover;
+    }
+    
+    .portada img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .texto {
+        grid-area: texto;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        color: white;
+    }
+    
+    .estrellas {
+        grid-area: estrellas;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .favoritos {
+        grid-area: favoritos;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px
+    }
+    
+    .pastilla {
+        border: 1px solid;
+        border-radius: 20px;
+        height: auto;
+        width: 50px;
+        text-align: center;
+        background: white;
+    }
+    /* --------------------------------------> //////////////// <-------------------------------------- */
     
     @media (min-width: 768px) {
         /* body {
@@ -1195,3 +1280,39 @@
             transform: translate(0px, 5px);
         }
     }
+    /* ESTRELLAS */
+    
+    #imagenVoto div {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #imagenVoto label {
+        font-size: 50px;
+    }
+    
+    #imagenVoto input[type="radio"] {
+        display: none;
+    }
+    
+    #imagenVoto label {
+        justify-self: center;
+        color: white;
+    }
+    
+    .clasificacion {
+        direction: rtl;
+        unicode-bidi: bidi-override;
+    }
+    
+    #imagenVoto label:hover,
+    #imagenVoto label:hover~label {
+        color: orange;
+    }
+    
+    #imagenVoto input[type="radio"]:checked~label {
+        color: orange;
+    }
+    /*  */

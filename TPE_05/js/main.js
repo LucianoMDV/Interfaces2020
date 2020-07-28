@@ -168,8 +168,32 @@ document.addEventListener("DOMContentLoaded", e => {
             });
         });
 
+        document.querySelector(".infoDisturbed").addEventListener("click", busquedaHTML);
+        async function busquedaHTML() {
+            let busquedaHTML = await fetch('buscar.html');
+            busquedaHTML = await busquedaHTML.text();
+            cuerpo.innerHTML = busquedaHTML;
+
+            // cerrar hamburguesa
+            fondoBlur.style.setProperty("opacity", "0");
+            fondoBlur.setAttribute("hidden", true);
+            botones.classList.remove("desplegarNavBar");
+            hamburguesa.classList.remove("activeHamburguesa");
+
+            let dropList = document.querySelectorAll(".container_dropdown2");
+            dropList.forEach(btn => {
+                btn.addEventListener("click", e => {
+                    // for (let i = 0; i < dropList.length; i++) {
+                    //     dropList[i].parentElement.nextElementSibling.classList.add("ceroAltura");
+                    // }
+                    btn.parentElement.nextElementSibling.classList.toggle("ceroAltura");
+                });
+
+            });
+        }
         // 
     }
+
     botones.querySelector(".myPlayList").addEventListener("click", playListHTML);
     async function playListHTML() {
         let playListHTML = await fetch('myPlayList.html');
@@ -192,5 +216,9 @@ document.addEventListener("DOMContentLoaded", e => {
             });
 
         });
+
+
     }
+
+
 });
