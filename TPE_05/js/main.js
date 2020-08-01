@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", e => {
 
 
 
+    let menuRepro = document.querySelector(".menuRepro");
+    let reproDesple = document.querySelector(".reproductorDesplegable");
+
     let reproductor = document.querySelector("#reproductor ");
     let nombreBanda = document.querySelector(".nombreBanda ");
     let progress = document.querySelector(".progress ");
@@ -36,6 +39,9 @@ document.addEventListener("DOMContentLoaded", e => {
         }
     }
 
+    menuRepro.addEventListener("click", e => {
+        reproDesple.classList.toggle("ceroAltura");
+    });
     hamburguesa.addEventListener("click", e => {
         efectoHamburguesa();
     });
@@ -213,6 +219,8 @@ document.addEventListener("DOMContentLoaded", e => {
                 //     dropList[i].parentElement.nextElementSibling.classList.add("ceroAltura");
                 // }
                 btn.parentElement.nextElementSibling.classList.toggle("ceroAltura");
+                // console.log(btn);
+                btn.firstElementChild.classList.toggle("rotar");
             });
 
         });
