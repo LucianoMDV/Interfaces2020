@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", e => {
     }
 
     menuRepro.addEventListener("click", e => {
-        reproDesple.classList.toggle("ceroAltura");
+        reproDesple.classList.toggle("verMenuDesple");
     });
     hamburguesa.addEventListener("click", e => {
         efectoHamburguesa();

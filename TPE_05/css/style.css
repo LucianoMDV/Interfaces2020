@@ -509,11 +509,47 @@ header {
 
 .reproductorDesplegable {
     width: 100vw;
-    height: 100px;
-    background: white;
+    height: 150px;
+    background: rgba(7, 26, 32, 1);
     transition: all 1s ease;
     border-bottom: 2px solid #16c5e3;
     border-radius: 10px;
+    display: grid;
+    grid-template-rows: 75px 75px;
+    grid-template-areas: "shared addPlayList info" "estrellas estrellas estrellas";
+    position: absolute;
+    z-index: -1;
+    bottom: -46px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.verMenuDesple {
+    bottom: 104px;
+}
+
+.container_compartir {
+    text-align: center;
+    grid-area: shared;
+    font-size: 28px;
+    /* width: 50px;
+    height: 50px; */
+}
+
+.container_info {
+    text-align: center;
+    grid-area: info;
+    font-size: 28px;
+    /* width: 50px;
+    height: 50px; */
+}
+
+.container_addPlayList {
+    text-align: center;
+    grid-area: addPlayList;
+    font-size: 28px;
+    /* width: 50px;
+    height: 50px; */
 }
 
 #reproductor {
@@ -521,7 +557,7 @@ header {
     position: fixed;
     bottom: 0;
     /* transition: all 0.5s ease-in; */
-    background: var(--reproductor);
+    /* background: var(--reproductor); */
     backdrop-filter: blur(5px);
     /* border-top: 2px solid #16c5e3; */
     color: white;
@@ -541,6 +577,7 @@ header {
     grid-template-rows: 1fr 56px 1fr;
     /* grid-template-columns: 0.9fr 0.1fr; */
     grid-template-columns: auto 30px;
+    background: var(--reproductor);
 }
 
 .container_nombreBanda {
