@@ -114,6 +114,10 @@ header {
     z-index: 1;
 }
 
+.logo1 {
+    height: 75px;
+}
+
 .btnMio1 {
     display: flex;
     justify-content: center;
@@ -513,9 +517,12 @@ header {
     background: rgba(7, 26, 32, 1);
     transition: all 1s ease;
     border-bottom: 2px solid #16c5e3;
+    border-top: 2px solid #16c5e3;
     border-radius: 10px;
     display: grid;
-    grid-template-rows: 75px 75px;
+    /* grid-template-rows: 75px 75px; */
+    grid-template-rows: auto 50%;
+    grid-template-columns: 50px 50px 50px;
     grid-template-areas: "shared addPlayList info" "estrellas estrellas estrellas";
     position: absolute;
     z-index: -1;
@@ -532,8 +539,12 @@ header {
     text-align: center;
     grid-area: shared;
     font-size: 28px;
-    /* width: 50px;
-    height: 50px; */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container_info {
@@ -548,8 +559,12 @@ header {
     text-align: center;
     grid-area: addPlayList;
     font-size: 28px;
-    /* width: 50px;
-    height: 50px; */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
 }
 
 #reproductor {
@@ -571,12 +586,14 @@ header {
     display: grid;
     width: 100vw;
     height: auto;
-    grid-template-areas: "nombreBanda menuRepro" "botonesRepro  menuRepro" "barraRepro  menuRepro";
+    grid-template-areas: "nombreBanda  nombreBanda nombreBanda  menuRepro" "favorito botonesRepro volumen  menuRepro" "barraRepro  barraRepro barraRepro   menuRepro";
     /* grid-gap: 10px; */
     text-align: center;
     grid-template-rows: 1fr 56px 1fr;
+    grid-auto-columns: 1fr 1fr 1fr 25px;
+    /* grid-auto-columns: auto auto auto 25px; */
     /* grid-template-columns: 0.9fr 0.1fr; */
-    grid-template-columns: auto 30px;
+    /* grid-template-columns: auto 30px; */
     background: var(--reproductor);
 }
 
@@ -584,6 +601,15 @@ header {
     grid-area: nombreBanda;
     overflow: hidden;
     padding: 0 10px;
+}
+
+.container_favorito {
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
 }
 
 .repro_grid_elements .nombreBanda {
@@ -612,6 +638,8 @@ header {
     align-items: center;
     font-size: 2rem;
     padding: 0 10px;
+    width: 100%;
+    margin: auto;
     /* background: yellow; */
 }
 
@@ -628,6 +656,16 @@ header {
     border-radius: 50%;
     color: var(--secundario1);
     /* border: 1px solid black; */
+}
+
+.container_info {
+    border-radius: 50%;
+    color: var(--secundario1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .icoBackward {
@@ -661,12 +699,13 @@ header {
 }
 
 .icoInfo {
-    color: var(--secundario1);
-    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    /* color: var(--secundario1); */
+    /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
     font-size: 30px;
 }
 
 .container_volumen2 {
+    grid-area: volumen;
     position: relative;
     display: flex;
     /* width: 100px; */
@@ -686,23 +725,19 @@ header {
 }
 
 .container_volumen2:hover .volumen {
-    /* width: 60px;
-    position: absolute;
-    transform: rotate(90deg);
-    right: -12px;
-    display: unset; */
     width: 80px;
     position: absolute;
     transform: rotate(90deg);
-    top: -65px;
+    top: -50px;
     display: unset;
-    /* background: rgba(130, 130, 130, 1); */
-    /* border-radius: 10px; */
-    /* padding: 0 10px; */
     background: rgba(7, 26, 32, 1);
     border-right: 2px solid rgba(22, 197, 227, 1);
+    border-left: 2px solid rgba(22, 197, 227, 1);
     border-radius: 10px;
-    padding: 0 10px;
+    padding: 10px;
+    justify-self: center;
+    align-self: center;
+    display: flex;
 }
 
 .volumen input::-webkit-slider-thumb {
@@ -717,6 +752,10 @@ header {
 .container_backward:hover,
 .container_forward:hover,
 .container_play:hover,
+.container_info:hover,
+.container_addPlayList:hover,
+.container_compartir:hover,
+.container_favorito:hover,
 .container_volumen2:hover .container_volumen {
     background: rgba(130, 130, 130, 0.5);
     color: var(--activeIco);
@@ -752,6 +791,7 @@ header {
 .progress {
     height: 0.5rem;
     margin: 0 10px;
+    width: 100%;
 }
 
 
@@ -852,14 +892,18 @@ main {
 
 .opciones {
     height: 175px;
-    width: 133px;
+    /* width: 133px; */
+    width: 137px;
     background: var(--primario1_1);
+    background: var(--primario1);
     transition: width 0.5s linear;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    border-right: 3px solid;
+    /* border-right: 3px solid; */
+    border-left: 3px solid var(--activeIco);
+    border-right: 3px solid var(--activeIco);
     /* box-shadow: inset 5px 5px 2px #000000, inset 5px -5px 2px #000000, inset -5px -5px 0px #000000, inset -5px 5px 2px #000000; */
 }
 
@@ -872,10 +916,11 @@ main {
     /* width: 100%;
         height: 100%; */
     /* background: #FFFFFF; */
-    background: transparent;
+    /* background: transparent; */
+    background: var(--primario1);
     color: #FFFFFF;
     /* background: url("../image/disturbed-evolution.jpg") no-repeat center; */
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
     border-radius: 20px;
     border: 1px solid black;
     padding: 3px 0;
@@ -885,10 +930,11 @@ main {
     /* background: url("../image/componente_base.png") */
 }
 
-.cancionActive {
+
+/* .cancionActive {
     background: rgba(255, 255, 255, 1);
     color: black;
-}
+} */
 
 .opciones:hover {
     width: 197px;
@@ -1083,6 +1129,11 @@ footer {
     max-width: 228px;
 }
 
+.container_card {
+    gap: 5px;
+    display: grid;
+}
+
 .container_plus {
     transition: all 0.5s ease-in;
     /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
@@ -1105,14 +1156,21 @@ footer {
 }
 
 .myplayList {
-    /* background: red; */
+    background: rgba(7, 26, 32, 1);
     width: 100%;
     /* height: 500px; */
     height: auto;
     padding: 10px;
     transition: all 0.5s ease;
     /* margin: 0 5px; */
-    border: 1px solid rgba(7, 26, 32, 0.1);
+    /* border: 1px solid rgba(7, 26, 32, 0.1); */
+    border-top: 3px solid var( --activeIco);
+    border-bottom: 3px solid var( --activeIco);
+    border-radius: 10px;
+    gap: 10px;
+    display: grid;
+    max-width: 800px;
+    margin: auto;
 }
 
 .cabeceraPLayList {
@@ -1123,8 +1181,8 @@ footer {
     width: 100%;
     height: auto;
     margin: 5px 0;
-    /* border-bottom: 1px solid white; */
-    border-bottom: 1px solid rgba(7, 26, 32, 1);
+    border-bottom: 1px solid white;
+    /* border-bottom: 1px solid rgba(7, 26, 32, 1); */
     transition: all 0.5s ease;
 }
 
@@ -1132,15 +1190,17 @@ footer {
     white-space: normal;
 }
 
-.myplayList:hover {
+
+/* .myplayList:hover {
     background: rgba(7, 26, 32, 0.1);
-    /* margin: 0 5px 0 5px; */
-    /* width: 98%; */
-    /* width: calc(100% - 5px); */
-}
+    margin: 0 5px 0 5px;
+    width: 98%;
+    width: calc(100% - 5px);
+} */
 
 .myplayList:hover .cabeceraPLayList {
-    margin: 0 5px 5px 5px;
+    /* margin: 0 5px 5px 5px; */
+    margin: 5px;
 }
 
 .myplayList:hover .container_dropdown2 {
@@ -1160,6 +1220,10 @@ footer {
     overflow: hidden;
 }
 
+.tema:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .tema {
     display: grid;
     grid-template-areas: "btnPlay nombre favorito mas";
@@ -1168,11 +1232,13 @@ footer {
     width: 100%;
     height: 60px;
     border-radius: 10px;
-    border: 5px solid;
+    /* border: 5px solid; */
+    border-left: 3px solid var( --activeIco);
+    border-right: 3px solid var( --activeIco);
     justify-content: center;
     align-items: center;
     padding: 0 5px;
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
 }
 
 .foto {
@@ -1211,8 +1277,9 @@ footer {
 
 .icoHeart {
     font-size: 29px;
-    color: #FFFFFF;
-    margin: 5px;
+    /* color: #FFFFFF; */
+    /* margin: 5px; */
+    margin: auto;
     /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
 }
 
@@ -1306,7 +1373,7 @@ footer {
 .estrellas {
     grid-area: estrellas;
     width: 100%;
-    height: 100%;
+    height: 50%;
 }
 
 .favoritos {
@@ -1359,13 +1426,17 @@ footer {
 
 /* --------------------------------------> //////////////// <-------------------------------------- */
 
+.rotar {
+    transform: rotate(180deg);
+}
+
 @media (min-width: 768px) {
     /* body {
             background: red;
         } */
     /*  */
     .volumen {
-        display: unset;
+        display: flex;
         width: 80px;
     }
     .container_volumen2:hover .volumen {
@@ -1378,7 +1449,7 @@ footer {
         padding: 0;
         /* display: unset; */
     }
-    .cuerpoPlayList {
+    /* .cuerpoPlayList {
         display: grid;
         gap: 5px;
         width: 100%;
@@ -1386,10 +1457,9 @@ footer {
         grid-template-columns: repeat(3, auto);
         justify-content: center;
         align-content: flex-start;
-    }
-    .tema {
+    } */
+    /* .tema {
         position: relative;
-        /* max-width: 260px; */
         max-width: 250px;
         max-height: 250px;
         display: grid;
@@ -1401,7 +1471,7 @@ footer {
         justify-content: center;
         align-items: center;
         padding: 5px;
-    }
+    } */
     .foto {
         display: flex;
         width: 100%;
@@ -1415,6 +1485,17 @@ footer {
         width: 100%;
         padding: 0 5px 0 0;
         border-radius: 10px;
+    }
+    .reproductorDesplegable {
+        height: auto;
+        grid-template-rows: auto;
+        grid-template-columns: auto 50px 50px 50px;
+        grid-template-areas: "estrellas shared addPlayList info";
+        width: 60%;
+        gap: 10px;
+        padding: 0 10px;
+        /* margin: 0 50%; */
+        justify-self: flex-end;
     }
     /*  */
 }
@@ -1448,9 +1529,10 @@ footer {
             height: auto;
             margin: auto; */
         display: flex;
-        width: 65vw;
+        width: auto;
         height: auto;
         flex-direction: row;
+        margin: auto 75px auto auto;
         gap: 10px;
     }
     .container_IcoProfile {
@@ -1493,9 +1575,6 @@ footer {
         transition: all 0.5s ease-in;
         /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
     }
-    .rotar {
-        transform: rotate(180deg);
-    }
     #hamburguesa {
         display: none;
     }
@@ -1507,8 +1586,11 @@ footer {
         width: 200px;
         background: rgba(7, 26, 32, 1);
         /* border: 10px solid rgba(7, 26, 32, 1); */
-        border-bottom: 2px solid rgba(22, 197, 227, 1);
-        border-radius: 0 0 5px 5px;
+        /* border-bottom: 2px solid rgba(22, 197, 227, 1); */
+        border-bottom: 2px solid #16c5e3;
+        border-top: 2px solid #16c5e3;
+        /* border-radius: 0 0 5px 5px; */
+        border-radius: 10px;
         position: absolute;
         right: 0;
         /* top: 87px; */
@@ -1530,10 +1612,10 @@ footer {
         right: 215px;
         z-index: 1;
     }
-    .cuerpoPlayList {
+    /* .cuerpoPlayList {
         grid-template-columns: repeat(4, auto);
         height: 685px;
-    }
+    } */
     /* .container_busqueda {
         position: absolute;
         top: 19px;
@@ -1544,14 +1626,18 @@ footer {
     .container_filtro_despregable {
         width: 74vw;
     } */
+    /* .progress {
+        width: 35%;
+    } */
 }
 
-@media (min-width: 1440px) {
+
+/* @media (min-width: 1440px) {
     .cuerpoPlayList {
         grid-template-columns: repeat(5, auto);
         height: 460px;
     }
-}
+} */
 
 .moveTop {
     top: 75px;
@@ -1560,7 +1646,8 @@ footer {
 .moveTopFiltro {
     top: 125px;
     opacity: 1;
-    border: 1px solid;
+    border-bottom: 2px solid #16c5e3;
+    border-top: 2px solid #16c5e3;
     border-radius: 10px;
 }
 
@@ -1582,6 +1669,7 @@ footer {
 #imagenVoto div {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 50%;
     justify-content: center;
     align-items: center;
 }
