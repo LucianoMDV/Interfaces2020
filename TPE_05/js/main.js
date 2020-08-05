@@ -50,10 +50,10 @@ document.addEventListener("DOMContentLoaded", e => {
         efectoHamburguesa();
     });
 
-    botonPerfil.addEventListener("click", e => {
-        container_buttons2.classList.toggle("moveTop");
-        containerDropdown.firstElementChild.classList.toggle("rotar");
-    });
+    // botonPerfil.addEventListener("click", e => {
+    // container_buttons2.classList.toggle("moveTop");
+    // containerDropdown.firstElementChild.classList.toggle("rotar");
+    // });
 
     containerFiltro.addEventListener("click", e => {
         filtroDespregable.classList.toggle("moveTopFiltro");

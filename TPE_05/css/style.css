@@ -90,6 +90,7 @@ body::-webkit-scrollbar {
 }
 
 .icoDropdown {
+    transition: all 0.5s ease-in;
     font-size: 30px
 }
 
@@ -383,8 +384,8 @@ header {
     font-size: 29px;
 }
 
-.container_buttons2 {
-    align-self: center;
+.icoCerrar {
+    font-size: 24px;
 }
 
 .botones a {
@@ -590,7 +591,7 @@ header {
     /* grid-gap: 10px; */
     text-align: center;
     grid-template-rows: 1fr 56px 1fr;
-    grid-auto-columns: 1fr 1fr 1fr 25px;
+    grid-auto-columns: 1fr 1fr 1fr 45px;
     /* grid-auto-columns: auto auto auto 25px; */
     /* grid-template-columns: 0.9fr 0.1fr; */
     /* grid-template-columns: auto 30px; */
@@ -604,6 +605,7 @@ header {
 }
 
 .container_favorito {
+    grid-area: favorito;
     justify-self: center;
     align-self: center;
     display: flex;
@@ -616,10 +618,12 @@ header {
     margin: 0;
     padding: 0;
     /* background: red; */
+    white-space: nowrap;
 }
 
 .moveText {
-    animation: leftText 10s linear infinite;
+    animation: leftText linear infinite;
+    animation-duration: 10s;
 }
 
 @keyframes leftText {
@@ -756,6 +760,7 @@ header {
 .container_addPlayList:hover,
 .container_compartir:hover,
 .container_favorito:hover,
+.container_masOpciones:hover,
 .container_volumen2:hover .container_volumen {
     background: rgba(130, 130, 130, 0.5);
     color: var(--activeIco);
@@ -784,6 +789,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: auto;
     /* font-size: 33px; */
     /* background: var(--primario1); */
 }
@@ -816,28 +822,34 @@ main {
     /* grid-template-rows: repeat(3, 1fr); */
     grid-template-rows: 0.2fr 1fr 1fr;
     grid-row-gap: 10px;
+    max-width: 1024px;
+    margin: auto;
 }
 
 .container_playList {
-    width: 100vw;
-    height: 235px;
+    width: 100%;
+    height: 245px;
     /* background: #FFFFFF; */
     background: transparent;
     padding: 10px 0;
     display: grid;
     gap: 10px;
+    border-top: 2px solid rgba(22, 197, 227, 1);
+    border-bottom: 2px solid rgba(22, 197, 227, 1);
+    border-radius: 10px;
+    background: rgba(7, 26, 32, 1);
 }
 
 .lineas {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-image: url("../image/Lineas.png");
-    background-size: cover;
+    /* background-image: url("../image/Lineas.png");
+    background-size: cover; */
 }
 
 .title {
-    background: var(--secundario1);
+    /* background: var(--secundario1); */
     /* border: 1px solid #000000; */
     border-radius: 20px 0 0 20px;
     /* width: 50%; */
@@ -871,12 +883,12 @@ main {
 }
 
 .listPlaylist::-webkit-scrollbar {
-    width: 1px;
-    height: 2px;
+    width: 5px;
+    height: 5px;
 }
 
 .listPlaylist::-webkit-scrollbar-thumb {
-    background: #000;
+    background: #16c5e3;
     border-radius: 20px;
 }
 
@@ -1117,6 +1129,8 @@ footer {
     width: 100vw;
     height: auto;
     padding: 10px;
+    max-width: 1024px;
+    margin: auto;
 }
 
 .newPlayList {
@@ -1175,7 +1189,9 @@ footer {
 
 .cabeceraPLayList {
     display: grid;
-    grid-template-columns: 1fr 0.1fr;
+    /* grid-template-columns: 1fr 0.1fr; */
+    grid-template-columns: 1fr 0.1fr 45px;
+    grid-template-areas: "nombre dropdown mas";
     align-items: center;
     white-space: nowrap;
     width: 100%;
@@ -1184,6 +1200,7 @@ footer {
     border-bottom: 1px solid white;
     /* border-bottom: 1px solid rgba(7, 26, 32, 1); */
     transition: all 0.5s ease;
+    gap: 5px;
 }
 
 .cabeceraPLayList h3 {
@@ -1265,7 +1282,7 @@ footer {
     height: 45px;
 }
 
-.masOpciones {
+.container_masOpciones {
     width: 45px;
     height: 45px;
     grid-area: mas;
@@ -1273,6 +1290,7 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    border-radius: 50%;
 }
 
 .icoHeart {
@@ -1285,7 +1303,7 @@ footer {
 
 .icoMasOpciones {
     font-size: 26px;
-    color: var(--secundario1);
+    /* color: var(--secundario1); */
     margin: 5px;
     /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
 }
@@ -1321,6 +1339,9 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 20px;
+    max-width: 1024px;
+    margin: auto;
 }
 
 .templateBuscar h1 {
@@ -1331,7 +1352,6 @@ footer {
     grid-area: carta;
     width: 100%;
     height: 100%;
-    max-width: 1000px;
 }
 
 .cartaBody {
@@ -1339,13 +1359,16 @@ footer {
     width: 100%;
     height: 100%;
     display: grid;
-    margin: auto;
-    grid-template-areas: "portada portada" "texto texto" "estrellas favoritos";
-    grid-template-rows: 1fr 0.3fr 0.3fr;
-    grid-template-columns: 1fr 0.1fr;
+    /* margin: auto; */
+    grid-template-areas: "portada" "detalle";
+    grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.1);
+    /* background: rgba(255, 255, 255, 0.1); */
+    border-top: 2px solid rgba(22, 197, 227, 1);
+    background: rgba(7, 26, 32, 1);
+    border-bottom: 2px solid rgba(22, 197, 227, 1);
+    border-radius: 10px;
 }
 
 .portada {
@@ -1362,11 +1385,34 @@ footer {
     height: 100%;
 }
 
+.cartaDetalle {
+    /* grid-template-areas: "texto texto btnPlay" "shared addPlayList favorito" "estrellas estrellas star"; */
+    grid-template-areas: "texto texto btnPlay" "mas mas mas" "estrellas estrellas star";
+    /* grid-template-rows: auto auto auto; */
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    display: grid;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartaDetalle .container_play {
+    justify-self: flex-end;
+}
+
+.masOpciones {
+    display: flex;
+    grid-area: mas;
+    justify-content: space-between;
+}
+
 .texto {
     grid-area: texto;
     width: 100%;
     height: 100%;
-    padding: 10px;
+    /* padding: 10px; */
     color: white;
 }
 
@@ -1374,6 +1420,21 @@ footer {
     grid-area: estrellas;
     width: 100%;
     height: 50%;
+    max-width: 350px;
+}
+
+.icoStar {
+    font-size: 29px;
+}
+
+.container_estrella {
+    grid-area: star;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    color: #FF9D40;
 }
 
 .favoritos {
@@ -1388,12 +1449,84 @@ footer {
 }
 
 .pastilla {
-    border: 1px solid;
     border-radius: 20px;
     height: auto;
     width: 50px;
     text-align: center;
-    background: white;
+    color: #FFFFFF;
+    background: rgba(7, 26, 32, 1);
+    border-left: 2px solid rgba(22, 197, 227, 1);
+    border-right: 2px solid rgba(22, 197, 227, 1);
+}
+
+.container_comentarios {
+    border-top: 2px solid #16c5e3;
+    border-bottom: 2px solid #16c5e3;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.comentariosBody {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.comentariosBody img {
+    width: 70px;
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+}
+
+.title_comentarios {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+.title_comentarios h5 {
+    align-self: flex-end;
+}
+
+.comentario {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
+    background: rgba(7, 26, 32, 1);
+    border-left: 2px solid #16c5e3;
+    border-right: 2px solid #16c5e3;
+    border-radius: 10px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.comentario p {
+    height: 70px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.enlaces {
+    outline: none;
+}
+
+.verMas {
+    margin-left: auto;
+}
+
+.verMas a {
+    color: #FFFFFF;
+    padding: 5px;
+    text-decoration: underline;
+    transition: text-decoration 0.5s ease;
+}
+
+.verMas a:hover {
+    text-decoration-color: #16c5e3
 }
 
 
@@ -1449,6 +1582,9 @@ footer {
         padding: 0;
         /* display: unset; */
     }
+    .moveText {
+        animation-duration: 15s;
+    }
     /* .cuerpoPlayList {
         display: grid;
         gap: 5px;
@@ -1497,6 +1633,15 @@ footer {
         /* margin: 0 50%; */
         justify-self: flex-end;
     }
+    .comentario a {
+        display: none;
+    }
+    .cartaDetalle {
+        grid-template-areas: "texto texto btnPlay" "estrellas star mas";
+    }
+    .masOpciones {
+        justify-content: flex-end;
+    }
     /*  */
 }
 
@@ -1504,6 +1649,9 @@ footer {
     /* body {
             background: #F2F2F2;
         } */
+    .moveText {
+        animation-duration: 20s;
+    }
     .btn3ro {
         margin: 0;
         padding: 10px;
@@ -1546,12 +1694,11 @@ footer {
         cursor: pointer;
         margin: 0px;
     }
-    .container_IcoProfile:hover .container_dropdown {
+    /* .container_IcoProfile:hover .container_dropdown {
         animation: moving 0.4s linear infinite alternate;
         background: rgba(130, 130, 130, 0.5);
         color: var(--activeIco);
-        /* padding: 10px; */
-    }
+    } */
     .IcoProfile {
         margin: 0;
         width: 55px;
@@ -1571,34 +1718,40 @@ footer {
         align-items: center;
         margin: auto;
     }
-    .icoDropdown {
-        transition: all 0.5s ease-in;
-        /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
-    }
     #hamburguesa {
         display: none;
     }
-    .container_buttons2 {
+    /* .container_buttons2 {
         display: flex;
         justify-content: center;
         align-items: center;
         height: auto;
         width: 200px;
         background: rgba(7, 26, 32, 1);
-        /* border: 10px solid rgba(7, 26, 32, 1); */
-        /* border-bottom: 2px solid rgba(22, 197, 227, 1); */
         border-bottom: 2px solid #16c5e3;
         border-top: 2px solid #16c5e3;
-        /* border-radius: 0 0 5px 5px; */
         border-radius: 10px;
         position: absolute;
         right: 0;
-        /* top: 87px; */
         z-index: -1;
         transition: top 0.5s ease-in;
         top: -18px;
         margin: auto;
         padding: 10px;
+    } */
+    .container_buttons2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(7, 26, 32, 1);
+        border-radius: 10px;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+        margin: 10px;
+    }
+    .container_buttons2 p {
+        display: none;
     }
     .btn4ro {
         width: 100%;
@@ -1628,6 +1781,12 @@ footer {
     } */
     /* .progress {
         width: 35%;
+    } */
+    /* .cartaDetalle {
+        grid-template-areas: "texto texto btnPlay" "estrellas star mas";
+    }
+    .masOpciones {
+        justify-content: flex-end;
     } */
 }
 
@@ -1694,11 +1853,11 @@ footer {
 
 #imagenVoto label:hover,
 #imagenVoto label:hover~label {
-    color: orange;
+    color: #FF9D40;
 }
 
 #imagenVoto input[type="radio"]:checked~label {
-    color: orange;
+    color: #FF9D40;
 }
 
 
