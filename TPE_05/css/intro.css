@@ -1,0 +1,6 @@
+.nav {
+    display: flex;
+    background: rgba(7, 26, 32, 1);
+    border-bottom: 2px solid #16c5e3;
+    flex-direction: column;
+}
