@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", e => {
     let containerDropdown = document.querySelector(".container_dropdown");
     let containerFiltro = document.querySelector(".container_filtro ");
     let filtroDespregable = document.querySelector(".container_filtro_despregable ");
+    let btnBuscar = document.querySelector(".icoBuscar");
 
 
 
@@ -225,6 +226,19 @@ document.addEventListener("DOMContentLoaded", e => {
 
         });
 
+
+    }
+    btnBuscar.addEventListener("click", buscarHTML);
+    async function buscarHTML() {
+        let buscarHTML = await fetch('busqueda.html');
+        buscarHTML = await buscarHTML.text();
+        cuerpo.innerHTML = buscarHTML;
+
+        // cerrar hamburguesa
+        fondoBlur.style.setProperty("opacity", "0");
+        fondoBlur.setAttribute("hidden", true);
+        botones.classList.remove("desplegarNavBar");
+        hamburguesa.classList.remove("activeHamburguesa");
 
     }
 
